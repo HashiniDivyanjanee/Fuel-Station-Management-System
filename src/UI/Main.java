@@ -23,7 +23,7 @@ public class Main extends javax.swing.JFrame {
     private Animator animator;
     private boolean menuShow;
     private static final int COLLAPSED_WIDTH = 50;
-    private static final int EXPANDED_WIDTH = 260; 
+    private static final int EXPANDED_WIDTH = 260;
 
     public Main() {
         initComponents();
@@ -52,6 +52,14 @@ public class Main extends javax.swing.JFrame {
                     showForm(new Tank());
                 } else if (index == 1) {
                     showForm(new CustomerInterface());
+                } else if (index == 2) {
+                    showForm(new Employee_Interface());
+                } else if (index == 3) {
+                    showForm(new Supplier_Interface());
+                } else if (index == 4) {
+                    showForm(new Tank());
+                } else if (index == 4) {
+//                    showForm(new Mechine_Interface());
                 }
 
             }
@@ -63,6 +71,7 @@ public class Main extends javax.swing.JFrame {
         menu.addMenu(new ModelMenu("EMPLOYEE", new ImageIcon(getClass().getResource("/Icon/employee.png"))));
         menu.addMenu(new ModelMenu("SUPPLIER", new ImageIcon(getClass().getResource("/Icon/supplier.png"))));
         menu.addMenu(new ModelMenu("TANK", new ImageIcon(getClass().getResource("/Icon/oil-barrel.png"))));
+        menu.addMenu(new ModelMenu("FUEL MACHINE", new ImageIcon(getClass().getResource("/Icon/oil-barrel.png"))));
 //        screen1.add(menu, "w 50!");
         screen1.add(menu, "w " + COLLAPSED_WIDTH + "!");
         screen1.add(main, "w 100%");

@@ -1,9 +1,9 @@
 
 package UI;
 
-public class CustomerInterface extends javax.swing.JPanel {
+public class Machine_Interface extends javax.swing.JPanel {
 
-    public CustomerInterface() {
+    public Machine_Interface() {
         initComponents();
         setOpaque(false);
     }
@@ -27,37 +27,31 @@ public class CustomerInterface extends javax.swing.JPanel {
         jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         txtCusname = new javax.swing.JTextField();
         txtNic = new javax.swing.JTextField();
         txtAddress = new javax.swing.JTextField();
         txtMobile = new javax.swing.JTextField();
         txtFax = new javax.swing.JTextField();
         txtLand = new javax.swing.JTextField();
-        txtEmail = new javax.swing.JTextField();
         details_Box4 = new Components.Details_Box();
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
-        jLabel35 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
         cmbFuelType = new javax.swing.JComboBox<>();
-        cmbVehicleType = new javax.swing.JComboBox<>();
-        txtVehicleRegi = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         details_Box2 = new Components.Details_Box();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
         cmbCardType = new javax.swing.JComboBox<>();
         txtExpire = new javax.swing.JTextField();
         txtCardNo = new javax.swing.JTextField();
-        txtCvv = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -77,44 +71,41 @@ public class CustomerInterface extends javax.swing.JPanel {
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(12, 89, 118));
-        jLabel14.setText("PERSONAL INFORMATION");
+        jLabel14.setText("FUEL MACHINE INFORMATION");
 
         jLabel15.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel15.setText("You can enter the Customer Personal details here");
+        jLabel15.setText("You can enter the Fuel Machine details here");
 
         jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        jLabel16.setText("CUSTOMER PREFIX");
+        jLabel16.setText("MACHINE ID");
 
         jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        jLabel17.setText("CUSTOMER NAME");
+        jLabel17.setText("FUEL TYPE");
 
         jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        jLabel18.setText("NIC");
+        jLabel18.setText("MACHINE TYPE");
 
         jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        jLabel19.setText("ADDRESS");
+        jLabel19.setText("MACHINE LOCATION");
 
         cmbPrefix.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cmbPrefix.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mr.", "Miss.", "Mrs.", "Ms.", "Prof.", "Rev." }));
 
         jLabel37.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel37.setForeground(new java.awt.Color(12, 89, 118));
-        jLabel37.setText("CONTACT INFORMATION");
+        jLabel37.setText("OPERATIONAL INFORMATION");
 
         jLabel38.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel38.setText("You can enter the Customer Contact details here");
+        jLabel38.setText("You can enter the Operational details here");
 
         jLabel28.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        jLabel28.setText("MOBILE NUMBER");
+        jLabel28.setText("INSTALLATION DATE");
 
         jLabel29.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        jLabel29.setText("LANDLINE NUMBER");
+        jLabel29.setText("MODEL NUMBER");
 
         jLabel30.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        jLabel30.setText("FAX NUMBER");
-
-        jLabel31.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        jLabel31.setText("EMAIL");
+        jLabel30.setText("MAINTENANCE SCHEDULE");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 0, 0));
@@ -123,10 +114,6 @@ public class CustomerInterface extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 0, 0));
         jLabel3.setText("*");
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel4.setText("*");
 
         txtCusname.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
@@ -139,8 +126,6 @@ public class CustomerInterface extends javax.swing.JPanel {
         txtFax.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         txtLand.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
-        txtEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout details_Box1Layout = new javax.swing.GroupLayout(details_Box1);
         details_Box1.setLayout(details_Box1Layout);
@@ -162,10 +147,7 @@ public class CustomerInterface extends javax.swing.JPanel {
                     .addComponent(jLabel14)
                     .addComponent(jLabel38)
                     .addComponent(jLabel37)
-                    .addGroup(details_Box1Layout.createSequentialGroup()
-                        .addComponent(jLabel28)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4))
+                    .addComponent(jLabel28)
                     .addComponent(jLabel30)
                     .addComponent(txtCusname)
                     .addComponent(txtMobile)
@@ -176,13 +158,11 @@ public class CustomerInterface extends javax.swing.JPanel {
                         .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel29)
                             .addComponent(jLabel18)
-                            .addComponent(jLabel19)
-                            .addComponent(jLabel31))
+                            .addComponent(jLabel19))
                         .addGap(0, 151, Short.MAX_VALUE))
                     .addComponent(txtNic)
                     .addComponent(txtAddress)
-                    .addComponent(txtLand)
-                    .addComponent(txtEmail))
+                    .addComponent(txtLand))
                 .addGap(60, 60, 60))
         );
         details_Box1Layout.setVerticalGroup(
@@ -218,20 +198,15 @@ public class CustomerInterface extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel28)
-                    .addComponent(jLabel4)
                     .addComponent(jLabel29))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtMobile, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtLand, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel30)
-                    .addComponent(jLabel31))
+                .addComponent(jLabel30)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtFax, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtFax, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(148, 148, 148))
         );
 
@@ -239,27 +214,23 @@ public class CustomerInterface extends javax.swing.JPanel {
 
         jLabel32.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel32.setForeground(new java.awt.Color(12, 89, 118));
-        jLabel32.setText("VEHICLE INFORMATION");
+        jLabel32.setText("ADDITIONAL INFORMATION");
 
         jLabel33.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel33.setText("You can enter the Customer Vehicle details here");
+        jLabel33.setText("You can enter theAdditional details here");
 
         jLabel34.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        jLabel34.setText("VEHICLE REGISTRATION NUMBER");
-
-        jLabel35.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        jLabel35.setText("VEHICLE TYPE");
+        jLabel34.setText("NOTE");
 
         jLabel36.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        jLabel36.setText("FUEL TYPE");
+        jLabel36.setText("DOCUMENT");
 
         cmbFuelType.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cmbFuelType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Petrol", "Diesel" }));
 
-        cmbVehicleType.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cmbVehicleType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Car", "Truck", "Motorcycle", "Bus", "Van", "SUV (Sport Utility Vehicle)", "Pickup Truck", "Tractor", "Trailer", "RV (Recreational Vehicle)", "Electric Car", "Hybrid Car" }));
-
-        txtVehicleRegi.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane2.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout details_Box4Layout = new javax.swing.GroupLayout(details_Box4);
         details_Box4.setLayout(details_Box4Layout);
@@ -268,19 +239,20 @@ public class CustomerInterface extends javax.swing.JPanel {
             .addGroup(details_Box4Layout.createSequentialGroup()
                 .addGap(60, 60, 60)
                 .addGroup(details_Box4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel36)
-                    .addComponent(jLabel33)
-                    .addComponent(jLabel32)
                     .addGroup(details_Box4Layout.createSequentialGroup()
-                        .addGroup(details_Box4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel34, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbFuelType, 0, 295, Short.MAX_VALUE)
-                            .addComponent(txtVehicleRegi))
-                        .addGap(50, 50, 50)
                         .addGroup(details_Box4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel35)
-                            .addComponent(cmbVehicleType, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(60, Short.MAX_VALUE))
+                            .addComponent(jLabel32)
+                            .addComponent(jLabel33))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(details_Box4Layout.createSequentialGroup()
+                        .addGroup(details_Box4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel34)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(details_Box4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cmbFuelType, 0, 295, Short.MAX_VALUE)
+                            .addComponent(jLabel36))
+                        .addGap(45, 45, 45))))
         );
         details_Box4Layout.setVerticalGroup(
             details_Box4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -290,38 +262,33 @@ public class CustomerInterface extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel33)
                 .addGap(18, 18, 18)
-                .addGroup(details_Box4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel34)
-                    .addComponent(jLabel35))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(details_Box4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtVehicleRegi, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbVehicleType, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel36)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbFuelType, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(details_Box4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(details_Box4Layout.createSequentialGroup()
+                        .addComponent(jLabel34)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(details_Box4Layout.createSequentialGroup()
+                        .addComponent(jLabel36)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbFuelType, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(12, 89, 118));
-        jLabel20.setText("PAYMENT INFORMATION");
+        jLabel20.setText("MONITORING & CONNECTIVITY");
 
         jLabel21.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel21.setText("You can enter the Customer Payment details here");
+        jLabel21.setText("You can enter the Monitoring and Connectivity details here");
 
         jLabel22.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        jLabel22.setText("CARD TYPE");
+        jLabel22.setText("CURRENT STATUS");
 
         jLabel23.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        jLabel23.setText("CARD NUMBER");
+        jLabel23.setText("CONNECTIVITY DETAILS");
 
         jLabel24.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        jLabel24.setText("EXPIRY DATE");
-
-        jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        jLabel25.setText("CVV");
+        jLabel24.setText("FLOW RATE");
 
         cmbCardType.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cmbCardType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Credit Card", "Debit Card", "Fuel Station Loyalty Card" }));
@@ -334,8 +301,6 @@ public class CustomerInterface extends javax.swing.JPanel {
         });
 
         txtCardNo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
-        txtCvv.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout details_Box2Layout = new javax.swing.GroupLayout(details_Box2);
         details_Box2.setLayout(details_Box2Layout);
@@ -350,14 +315,12 @@ public class CustomerInterface extends javax.swing.JPanel {
                             .addComponent(jLabel24)
                             .addComponent(jLabel22)
                             .addComponent(jLabel21)
-                            .addComponent(cmbCardType, 0, 295, Short.MAX_VALUE)
+                            .addComponent(cmbCardType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtExpire))
                         .addGap(50, 50, 50)
                         .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCvv, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel23)
-                            .addComponent(txtCardNo, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel25))))
+                            .addComponent(txtCardNo, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(60, Short.MAX_VALUE))
         );
         details_Box2Layout.setVerticalGroup(
@@ -376,13 +339,9 @@ public class CustomerInterface extends javax.swing.JPanel {
                     .addComponent(txtCardNo, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbCardType, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel24)
-                    .addComponent(jLabel25))
+                .addComponent(jLabel24)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtExpire, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCvv, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtExpire, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(65, Short.MAX_VALUE))
         );
 
@@ -396,8 +355,8 @@ public class CustomerInterface extends javax.swing.JPanel {
                 .addGap(5, 5, 5)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(details_Box2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(details_Box4, javax.swing.GroupLayout.DEFAULT_SIZE, 760, Short.MAX_VALUE))
-                .addContainerGap(103, Short.MAX_VALUE))
+                    .addComponent(details_Box4, javax.swing.GroupLayout.DEFAULT_SIZE, 777, Short.MAX_VALUE))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -456,7 +415,7 @@ public class CustomerInterface extends javax.swing.JPanel {
         );
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText("CUSTOMER");
+        jLabel1.setText("FUEL MACHINE");
 
         line7.setPreferredSize(new java.awt.Dimension(1110, 4));
 
@@ -520,7 +479,6 @@ public class CustomerInterface extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cmbCardType;
     private javax.swing.JComboBox<String> cmbFuelType;
     private javax.swing.JComboBox<String> cmbPrefix;
-    private javax.swing.JComboBox<String> cmbVehicleType;
     private Components.Details_Box details_Box1;
     private Components.Details_Box details_Box2;
     private Components.Details_Box details_Box4;
@@ -540,35 +498,30 @@ public class CustomerInterface extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextArea1;
     private Components.Line line7;
     private Components.Screen screen1;
     private javax.swing.JTextField txtAddress;
     private javax.swing.JTextField txtCardNo;
     private javax.swing.JTextField txtCusname;
-    private javax.swing.JTextField txtCvv;
-    private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtExpire;
     private javax.swing.JTextField txtFax;
     private javax.swing.JTextField txtLand;
     private javax.swing.JTextField txtMobile;
     private javax.swing.JTextField txtNic;
-    private javax.swing.JTextField txtVehicleRegi;
     // End of variables declaration//GEN-END:variables
 }
