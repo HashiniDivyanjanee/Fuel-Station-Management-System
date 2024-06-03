@@ -27,6 +27,14 @@ public class Tank extends javax.swing.JPanel {
         txtCusname = new javax.swing.JTextField();
         txtNic = new javax.swing.JTextField();
         txtAddress = new javax.swing.JTextField();
+        details_Box2 = new Components.Details_Box();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        cmbVehicleType1 = new javax.swing.JComboBox<>();
+        jButton5 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel25 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -65,7 +73,7 @@ public class Tank extends javax.swing.JPanel {
 
         cmbPrefix.setEditable(true);
         cmbPrefix.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cmbPrefix.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mr.", "Miss.", "Mrs.", "Ms.", "Prof.", "Rev." }));
+        cmbPrefix.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Petrol", "Diesel" }));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 0, 0));
@@ -118,7 +126,7 @@ public class Tank extends javax.swing.JPanel {
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel15)
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel16)
@@ -137,7 +145,75 @@ public class Tank extends javax.swing.JPanel {
                 .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCusname, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(411, 411, 411))
+                .addGap(174, 174, 174))
+        );
+
+        jLabel21.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(12, 89, 118));
+        jLabel21.setText("ADD PUMP");
+
+        jLabel22.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel22.setText("You can Select the Pump details here");
+
+        cmbVehicleType1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cmbVehicleType1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Amana Bank", "Bank of Ceylon", "Cargills Bank", "Commercial Bank of Ceylon", "DFCC Bank", "Hatton National Bank", "National Development Bank (NDB)", "Nations Trust Bank", "Pan Asia Bank", "People's Bank", "Public Bank Berhad", "Sampath Bank", "Seylan Bank", "Hong Kong and Shanghai Banking Corporation (HSBC)", "Union Bank of Colombo" }));
+
+        jButton5.setBackground(new java.awt.Color(8, 114, 146));
+        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(255, 255, 255));
+        jButton5.setText("ADD");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
+
+        jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        jLabel25.setText("PUMP");
+
+        javax.swing.GroupLayout details_Box2Layout = new javax.swing.GroupLayout(details_Box2);
+        details_Box2.setLayout(details_Box2Layout);
+        details_Box2Layout.setHorizontalGroup(
+            details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(details_Box2Layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel21)
+                    .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(details_Box2Layout.createSequentialGroup()
+                            .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel22)
+                                .addComponent(cmbVehicleType1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel25))
+                            .addGap(345, 345, 345))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)))
+                .addContainerGap(60, Short.MAX_VALUE))
+        );
+        details_Box2Layout.setVerticalGroup(
+            details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(details_Box2Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(jLabel21)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel22)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel25)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmbVehicleType1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -147,14 +223,18 @@ public class Tank extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(details_Box1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(868, 868, 868))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(details_Box2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
-                .addComponent(details_Box1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(500, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(details_Box2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(details_Box1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(363, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -259,10 +339,13 @@ public class Tank extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cmbPrefix;
+    private javax.swing.JComboBox<String> cmbVehicleType1;
     private Components.Details_Box details_Box1;
+    private Components.Details_Box details_Box2;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -271,10 +354,15 @@ public class Tank extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private Components.Line line7;
     private Components.Screen screen1;
     private javax.swing.JTextField txtAddress;
