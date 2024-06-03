@@ -1,11 +1,21 @@
-
 package UI;
+
+import java.sql.SQLException;
+import DBConnection.Mysql_Connection;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 public class Employee_Interface extends javax.swing.JPanel {
 
+    String lname, fname, dob, address, nic, gender, email, bank, branch, holder, position, hire, schedule, empType;
+    Double salary;
+    int mobile, land, acc;
+
     public Employee_Interface() {
         initComponents();
-   
+
     }
 
     @SuppressWarnings("unchecked")
@@ -29,51 +39,51 @@ public class Employee_Interface extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtCusname = new javax.swing.JTextField();
-        txtNic = new javax.swing.JTextField();
+        txtLname = new javax.swing.JTextField();
         txtAddress = new javax.swing.JTextField();
         txtMobile = new javax.swing.JTextField();
-        txtFax = new javax.swing.JTextField();
-        txtLand = new javax.swing.JTextField();
-        txtNic1 = new javax.swing.JTextField();
+        txtLandline = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
+        txtFName = new javax.swing.JTextField();
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
-        txtAddress1 = new javax.swing.JTextField();
+        txtNic = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        cmbCardType = new javax.swing.JComboBox<>();
+        cmbGender = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        DateBod = new com.toedter.calendar.JDateChooser();
         details_Box4 = new Components.Details_Box();
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
-        cmbFuelType = new javax.swing.JComboBox<>();
-        cmbVehicleType = new javax.swing.JComboBox<>();
-        txtVehicleRegi = new javax.swing.JTextField();
+        cmbEmpType = new javax.swing.JComboBox<>();
+        txtPosition = new javax.swing.JTextField();
         jLabel42 = new javax.swing.JLabel();
-        cmbFuelType1 = new javax.swing.JComboBox<>();
+        cmbSchedule = new javax.swing.JComboBox<>();
+        DateHire = new com.toedter.calendar.JDateChooser();
         details_Box2 = new Components.Details_Box();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
-        txtExpire = new javax.swing.JTextField();
-        txtCvv = new javax.swing.JTextField();
-        txtCardNo1 = new javax.swing.JTextField();
+        txtAccNo = new javax.swing.JTextField();
+        txtHolder = new javax.swing.JTextField();
+        txtBranch = new javax.swing.JTextField();
         jLabel30 = new javax.swing.JLabel();
         jLabel41 = new javax.swing.JLabel();
-        txtExpire1 = new javax.swing.JTextField();
-        cmbVehicleType1 = new javax.swing.JComboBox<>();
+        txtSalary = new javax.swing.JTextField();
+        cmbBank = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
         screen1 = new Components.Screen();
         jLabel1 = new javax.swing.JLabel();
         line7 = new Components.Line();
@@ -134,19 +144,17 @@ public class Employee_Interface extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(255, 0, 0));
         jLabel4.setText("*");
 
-        txtCusname.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
-        txtNic.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtLname.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         txtAddress.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         txtMobile.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        txtFax.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtLandline.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        txtLand.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        txtNic1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtFName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jLabel26.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel26.setText("GENDER");
@@ -154,14 +162,14 @@ public class Employee_Interface extends javax.swing.JPanel {
         jLabel27.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel27.setText("NIC NUMBER");
 
-        txtAddress1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtNic.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 0, 0));
         jLabel5.setText("*");
 
-        cmbCardType.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cmbCardType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female" }));
+        cmbGender.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cmbGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female" }));
 
         jLabel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -184,6 +192,8 @@ public class Employee_Interface extends javax.swing.JPanel {
         jButton5.setText("REMOVE");
         jButton5.setToolTipText("");
 
+        DateBod.setDateFormatString("y-m-d");
+
         javax.swing.GroupLayout details_Box1Layout = new javax.swing.GroupLayout(details_Box1);
         details_Box1.setLayout(details_Box1Layout);
         details_Box1Layout.setHorizontalGroup(
@@ -192,26 +202,22 @@ public class Employee_Interface extends javax.swing.JPanel {
                 .addGap(60, 60, 60)
                 .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(details_Box1Layout.createSequentialGroup()
-                        .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel31)
-                            .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel29)
-                                    .addComponent(txtLand, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel38)
-                                    .addComponent(jLabel37)
-                                    .addGroup(details_Box1Layout.createSequentialGroup()
-                                        .addComponent(jLabel28)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel4))
-                                    .addComponent(txtMobile)
-                                    .addComponent(txtFax, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel38)
+                                .addComponent(jLabel37)
+                                .addGroup(details_Box1Layout.createSequentialGroup()
+                                    .addComponent(jLabel28)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel4))
+                                .addComponent(txtMobile)
+                                .addComponent(txtLandline, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(details_Box1Layout.createSequentialGroup()
                         .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(details_Box1Layout.createSequentialGroup()
-                                .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel17)
                                     .addGroup(details_Box1Layout.createSequentialGroup()
                                         .addComponent(jLabel16)
@@ -219,8 +225,8 @@ public class Employee_Interface extends javax.swing.JPanel {
                                         .addComponent(jLabel2))
                                     .addComponent(jLabel15)
                                     .addComponent(jLabel14)
-                                    .addComponent(txtCusname, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
-                                    .addComponent(txtNic1))
+                                    .addComponent(txtFName, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(DateBod, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(50, 50, 50)
                                 .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel18)
@@ -229,17 +235,22 @@ public class Employee_Interface extends javax.swing.JPanel {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel5))
                                     .addComponent(txtAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
-                                    .addComponent(txtNic)))
+                                    .addComponent(txtLname)))
                             .addGroup(details_Box1Layout.createSequentialGroup()
                                 .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(details_Box1Layout.createSequentialGroup()
-                                        .addComponent(jLabel26)
-                                        .addGap(285, 285, 285))
+                                        .addComponent(cmbGender, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(50, 50, 50))
                                     .addGroup(details_Box1Layout.createSequentialGroup()
-                                        .addComponent(cmbCardType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(50, 50, 50)))
+                                        .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel29)
+                                            .addComponent(jLabel31))
+                                        .addGap(201, 201, 201))
+                                    .addGroup(details_Box1Layout.createSequentialGroup()
+                                        .addComponent(jLabel26)
+                                        .addGap(62, 62, 62)))
                                 .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtAddress1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtNic, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(details_Box1Layout.createSequentialGroup()
                                         .addComponent(jLabel27)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -268,17 +279,17 @@ public class Employee_Interface extends javax.swing.JPanel {
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNic, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNic1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtLname, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFName, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
                     .addComponent(jLabel19)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCusname, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                    .addComponent(DateBod, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel26)
@@ -286,8 +297,8 @@ public class Employee_Interface extends javax.swing.JPanel {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtAddress1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbCardType, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNic, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbGender, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50)
                 .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(details_Box1Layout.createSequentialGroup()
@@ -301,13 +312,13 @@ public class Employee_Interface extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtMobile, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel31)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtFax, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
                         .addComponent(jLabel29)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtLand, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtLandline, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel31)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(details_Box1Layout.createSequentialGroup()
                         .addComponent(jLabel39)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -339,19 +350,16 @@ public class Employee_Interface extends javax.swing.JPanel {
         jLabel36.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel36.setText("EMPLOYMENT TYPE");
 
-        cmbFuelType.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cmbFuelType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Full-time", "Part-time", "Contract" }));
+        cmbEmpType.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cmbEmpType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Full-time", "Part-time", "Contract" }));
 
-        cmbVehicleType.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cmbVehicleType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Car", "Truck", "Motorcycle", "Bus", "Van", "SUV (Sport Utility Vehicle)", "Pickup Truck", "Tractor", "Trailer", "RV (Recreational Vehicle)", "Electric Car", "Hybrid Car" }));
-
-        txtVehicleRegi.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtPosition.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jLabel42.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel42.setText("WORK SCHEDULE");
 
-        cmbFuelType1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cmbFuelType1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Shift", "Working hours" }));
+        cmbSchedule.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cmbSchedule.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Shift", "Working hours" }));
 
         javax.swing.GroupLayout details_Box4Layout = new javax.swing.GroupLayout(details_Box4);
         details_Box4.setLayout(details_Box4Layout);
@@ -366,17 +374,19 @@ public class Employee_Interface extends javax.swing.JPanel {
                         .addGroup(details_Box4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(details_Box4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jLabel34, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(cmbFuelType, 0, 295, Short.MAX_VALUE)
-                                .addComponent(txtVehicleRegi))
+                                .addComponent(cmbEmpType, 0, 295, Short.MAX_VALUE)
+                                .addComponent(txtPosition))
                             .addComponent(jLabel36))
                         .addGap(50, 50, 50)
                         .addGroup(details_Box4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel35)
-                            .addComponent(cmbVehicleType, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(details_Box4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel42)
-                                .addComponent(cmbFuelType1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addContainerGap(60, Short.MAX_VALUE))
+                            .addComponent(cmbSchedule, 0, 295, Short.MAX_VALUE)
+                            .addGroup(details_Box4Layout.createSequentialGroup()
+                                .addGroup(details_Box4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel35)
+                                    .addComponent(jLabel42))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(DateHire, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(60, 60, 60))
         );
         details_Box4Layout.setVerticalGroup(
             details_Box4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -390,19 +400,19 @@ public class Employee_Interface extends javax.swing.JPanel {
                     .addComponent(jLabel34)
                     .addComponent(jLabel35))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(details_Box4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtVehicleRegi, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbVehicleType, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(details_Box4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(DateHire, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtPosition, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(details_Box4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(details_Box4Layout.createSequentialGroup()
                         .addComponent(jLabel36)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbFuelType, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cmbEmpType, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(details_Box4Layout.createSequentialGroup()
                         .addComponent(jLabel42)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbFuelType1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cmbSchedule, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -422,16 +432,16 @@ public class Employee_Interface extends javax.swing.JPanel {
         jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel25.setText("HOLDER NAME");
 
-        txtExpire.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtExpire.addActionListener(new java.awt.event.ActionListener() {
+        txtAccNo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtAccNo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtExpireActionPerformed(evt);
+                txtAccNoActionPerformed(evt);
             }
         });
 
-        txtCvv.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtHolder.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        txtCardNo1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtBranch.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jLabel30.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel30.setText("ACCOUNT NUMBER");
@@ -439,15 +449,15 @@ public class Employee_Interface extends javax.swing.JPanel {
         jLabel41.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel41.setText("SALARY");
 
-        txtExpire1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtExpire1.addActionListener(new java.awt.event.ActionListener() {
+        txtSalary.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtSalary.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtExpire1ActionPerformed(evt);
+                txtSalaryActionPerformed(evt);
             }
         });
 
-        cmbVehicleType1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cmbVehicleType1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Amana Bank", "Bank of Ceylon", "Cargills Bank", "Commercial Bank of Ceylon", "DFCC Bank", "Hatton National Bank", "National Development Bank (NDB)", "Nations Trust Bank", "Pan Asia Bank", "People's Bank", "Public Bank Berhad", "Sampath Bank", "Seylan Bank", "Hong Kong and Shanghai Banking Corporation (HSBC)", "Union Bank of Colombo" }));
+        cmbBank.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cmbBank.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Amana Bank", "Bank of Ceylon", "Cargills Bank", "Commercial Bank of Ceylon", "DFCC Bank", "Hatton National Bank", "National Development Bank (NDB)", "Nations Trust Bank", "Pan Asia Bank", "People's Bank", "Public Bank Berhad", "Sampath Bank", "Seylan Bank", "Hong Kong and Shanghai Banking Corporation (HSBC)", "Union Bank of Colombo" }));
 
         javax.swing.GroupLayout details_Box2Layout = new javax.swing.GroupLayout(details_Box2);
         details_Box2.setLayout(details_Box2Layout);
@@ -456,22 +466,22 @@ public class Employee_Interface extends javax.swing.JPanel {
             .addGroup(details_Box2Layout.createSequentialGroup()
                 .addGap(60, 60, 60)
                 .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtExpire1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel41)
                     .addComponent(jLabel20)
                     .addGroup(details_Box2Layout.createSequentialGroup()
                         .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel21)
-                            .addComponent(txtExpire, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtAccNo, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel23)
                             .addComponent(jLabel30)
-                            .addComponent(cmbVehicleType1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cmbBank, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(50, 50, 50)
                         .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel24)
-                            .addComponent(txtCvv, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtHolder, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel25)
-                            .addComponent(txtCardNo1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtBranch, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(60, Short.MAX_VALUE))
         );
         details_Box2Layout.setVerticalGroup(
@@ -487,20 +497,20 @@ public class Employee_Interface extends javax.swing.JPanel {
                     .addComponent(jLabel24))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCardNo1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbVehicleType1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtBranch, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbBank, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel25)
                     .addComponent(jLabel30))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtExpire, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCvv, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtAccNo, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtHolder, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel41)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtExpire1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -544,10 +554,15 @@ public class Employee_Interface extends javax.swing.JPanel {
         jButton3.setText("CANCEL");
         jButton3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jButton4.setBackground(new java.awt.Color(8, 114, 146));
-        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("SAVE");
+        btnSave.setBackground(new java.awt.Color(8, 114, 146));
+        btnSave.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnSave.setForeground(new java.awt.Color(255, 255, 255));
+        btnSave.setText("SAVE");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -555,7 +570,7 @@ public class Employee_Interface extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -569,7 +584,7 @@ public class Employee_Interface extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
+                    .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
                 .addGap(10, 10, 10))
         );
 
@@ -630,28 +645,89 @@ public class Employee_Interface extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtExpireActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtExpireActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtExpireActionPerformed
 
-    private void txtExpire1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtExpire1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtExpire1ActionPerformed
+    private void txtAccNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAccNoActionPerformed
+
+    }//GEN-LAST:event_txtAccNoActionPerformed
+
+    private void txtSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSalaryActionPerformed
+
+    }//GEN-LAST:event_txtSalaryActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        fname = txtFName.getText();
+        lname = txtLname.getText();
+        address = txtAddress.getText();
+        nic = txtNic.getText();
+        email = txtEmail.getText();
+        branch = txtBranch.getText();
+        holder = txtHolder.getText();
+        position = txtPosition.getText();
+        empType = cmbEmpType.getSelectedItem().toString();
+        schedule = cmbSchedule.getSelectedItem().toString();
+        gender = cmbGender.getSelectedItem().toString();
+        bank = cmbBank.getSelectedItem().toString();
+        mobile = Integer.valueOf(txtMobile.getText());
+        land = Integer.valueOf(txtLandline.getText());
+        acc = Integer.valueOf(txtAccNo.getText());
+        salary = Double.valueOf(txtSalary.getText());
+        dob = ((JTextField) DateBod.getDateEditor().getUiComponent()).getText();
+        hire = ((JTextField) DateHire.getDateEditor().getUiComponent()).getText();
+
+        String sql = "INSERT INTO employee (FirstName, LastName, Address, Nic, Gender, Dob, Mobile, LandlineNumber, Email, Bank, Branch, AccNumber, holderName, Salary, Position, HireDate, EmployeeType, Schedule) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+        try (Connection conn = Mysql_Connection.getInstance().getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, fname);
+            pstmt.setString(2, lname);
+            pstmt.setString(3, address);
+            pstmt.setString(4, nic);
+            pstmt.setString(5, gender);
+            pstmt.setString(6, dob);
+            pstmt.setInt(7, mobile);
+            pstmt.setInt(8, land);
+            pstmt.setString(9, email);
+            pstmt.setString(10, bank);
+            pstmt.setString(11, branch);
+            pstmt.setInt(12, acc);
+            pstmt.setString(13, holder);
+            pstmt.setDouble(14, salary);
+            pstmt.setString(15, position);
+            pstmt.setString(16, hire);
+            pstmt.setString(17, empType);
+            pstmt.setString(18, schedule);
+
+
+            int rowsInserted = pstmt.executeUpdate();
+
+            if (rowsInserted > 0) {
+                JOptionPane.showMessageDialog(this, "A new employee was inserted successfully!");
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "A new employee was inserted Failed!");
+            System.out.println("Error saving employee data: " + e.getMessage());
+        }
+
+
+    }//GEN-LAST:event_btnSaveActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cmbCardType;
-    private javax.swing.JComboBox<String> cmbFuelType;
-    private javax.swing.JComboBox<String> cmbFuelType1;
-    private javax.swing.JComboBox<String> cmbVehicleType;
-    private javax.swing.JComboBox<String> cmbVehicleType1;
+    private com.toedter.calendar.JDateChooser DateBod;
+    private com.toedter.calendar.JDateChooser DateHire;
+    private javax.swing.JButton btnSave;
+    private javax.swing.JComboBox<String> cmbBank;
+    private javax.swing.JComboBox<String> cmbEmpType;
+    private javax.swing.JComboBox<String> cmbGender;
+    private javax.swing.JComboBox<String> cmbSchedule;
     private Components.Details_Box details_Box1;
     private Components.Details_Box details_Box2;
     private Components.Details_Box details_Box4;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
@@ -692,18 +768,17 @@ public class Employee_Interface extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private Components.Line line7;
     private Components.Screen screen1;
+    private javax.swing.JTextField txtAccNo;
     private javax.swing.JTextField txtAddress;
-    private javax.swing.JTextField txtAddress1;
-    private javax.swing.JTextField txtCardNo1;
-    private javax.swing.JTextField txtCusname;
-    private javax.swing.JTextField txtCvv;
-    private javax.swing.JTextField txtExpire;
-    private javax.swing.JTextField txtExpire1;
-    private javax.swing.JTextField txtFax;
-    private javax.swing.JTextField txtLand;
+    private javax.swing.JTextField txtBranch;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtFName;
+    private javax.swing.JTextField txtHolder;
+    private javax.swing.JTextField txtLandline;
+    private javax.swing.JTextField txtLname;
     private javax.swing.JTextField txtMobile;
     private javax.swing.JTextField txtNic;
-    private javax.swing.JTextField txtNic1;
-    private javax.swing.JTextField txtVehicleRegi;
+    private javax.swing.JTextField txtPosition;
+    private javax.swing.JTextField txtSalary;
     // End of variables declaration//GEN-END:variables
 }
