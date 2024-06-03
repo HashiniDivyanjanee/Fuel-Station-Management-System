@@ -81,7 +81,7 @@ public class Employee_Interface extends javax.swing.JPanel {
         txtSalary = new javax.swing.JTextField();
         cmbBank = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        btnClear = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
         screen1 = new Components.Screen();
@@ -191,8 +191,6 @@ public class Employee_Interface extends javax.swing.JPanel {
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
         jButton5.setText("REMOVE");
         jButton5.setToolTipText("");
-
-        DateBod.setDateFormatString("y-m-d");
 
         javax.swing.GroupLayout details_Box1Layout = new javax.swing.GroupLayout(details_Box1);
         details_Box1.setLayout(details_Box1Layout);
@@ -544,10 +542,15 @@ public class Employee_Interface extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(8, 114, 146));
 
-        jButton2.setBackground(new java.awt.Color(9, 161, 207));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("CLEAR");
+        btnClear.setBackground(new java.awt.Color(9, 161, 207));
+        btnClear.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnClear.setForeground(new java.awt.Color(255, 255, 255));
+        btnClear.setText("CLEAR");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
 
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton3.setForeground(new java.awt.Color(51, 51, 51));
@@ -572,7 +575,7 @@ public class Employee_Interface extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47))
@@ -582,7 +585,7 @@ public class Employee_Interface extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                    .addComponent(btnClear, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
                     .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
                 .addGap(10, 10, 10))
@@ -645,7 +648,28 @@ public class Employee_Interface extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void clear() {
 
+        txtFName.setText("");
+        txtLname.setText("");
+        txtAddress.setText("");
+        txtNic.setText("");
+        txtEmail.setText("");
+        txtBranch.setText("");
+        txtHolder.setText("");
+        txtPosition.setText("");
+        cmbEmpType.setSelectedIndex(0);
+        cmbSchedule.setSelectedIndex(0);
+        cmbGender.setSelectedIndex(0);
+        cmbBank.setSelectedIndex(0);
+        txtMobile.setText("");
+        txtLandline.setText("");
+        txtAccNo.setText("");
+        txtSalary.setText("");
+        DateBod.setDate(null);
+        DateHire.setDate(null);
+
+    }
     private void txtAccNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAccNoActionPerformed
 
     }//GEN-LAST:event_txtAccNoActionPerformed
@@ -697,12 +721,11 @@ public class Employee_Interface extends javax.swing.JPanel {
             pstmt.setString(17, empType);
             pstmt.setString(18, schedule);
 
-
             int rowsInserted = pstmt.executeUpdate();
 
             if (rowsInserted > 0) {
                 JOptionPane.showMessageDialog(this, "A new employee was inserted successfully!");
-
+                clear();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -713,10 +736,16 @@ public class Employee_Interface extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnSaveActionPerformed
 
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        clear();
+
+    }//GEN-LAST:event_btnClearActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser DateBod;
     private com.toedter.calendar.JDateChooser DateHire;
+    private javax.swing.JButton btnClear;
     private javax.swing.JButton btnSave;
     private javax.swing.JComboBox<String> cmbBank;
     private javax.swing.JComboBox<String> cmbEmpType;
@@ -726,7 +755,6 @@ public class Employee_Interface extends javax.swing.JPanel {
     private Components.Details_Box details_Box2;
     private Components.Details_Box details_Box4;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
