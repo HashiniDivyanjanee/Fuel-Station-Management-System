@@ -51,27 +51,32 @@ public class Main extends javax.swing.JFrame {
                 if (index == 0) {
                     showForm(new Tank());
                 } else if (index == 1) {
-                    showForm(new CustomerInterface());
+                    showForm(new CustomerInterface1());
                 } else if (index == 2) {
                     showForm(new Employee_Interface());
                 } else if (index == 3) {
                     showForm(new Supplier_Interface());
                 } else if (index == 4) {
                     showForm(new Tank());
-                } else if (index == 4) {
-//                    showForm(new Mechine_Interface());
+                } else if (index == 5) {
+                    showForm(new Machine_Interface());
+                } else if (index == 6) {
+                    showForm(new Daily_Sheet());
+                } else if (index == 7) {
+                    showForm(new Start_Job_Interface());
                 }
-
             }
 
         });
 
         menu.addMenu(new ModelMenu("DASHBOARD", new ImageIcon(getClass().getResource("/Icon/dashboard.png"))));
-        menu.addMenu(new ModelMenu("CUSTOMER", new ImageIcon(getClass().getResource("/Icon/costumer.png"))));
+        menu.addMenu(new ModelMenu("CUSTOMER", new ImageIcon(getClass().getResource("/Icon/customer.png"))));
         menu.addMenu(new ModelMenu("EMPLOYEE", new ImageIcon(getClass().getResource("/Icon/employee.png"))));
-        menu.addMenu(new ModelMenu("SUPPLIER", new ImageIcon(getClass().getResource("/Icon/supplier.png"))));
-        menu.addMenu(new ModelMenu("TANK", new ImageIcon(getClass().getResource("/Icon/oil-barrel.png"))));
-        menu.addMenu(new ModelMenu("FUEL MACHINE", new ImageIcon(getClass().getResource("/Icon/oil-barrel.png"))));
+        menu.addMenu(new ModelMenu("SUPPLIER", new ImageIcon(getClass().getResource("/Icon/truck.png"))));
+        menu.addMenu(new ModelMenu("TANK", new ImageIcon(getClass().getResource("/Icon/tank.png"))));
+        menu.addMenu(new ModelMenu("FUEL MACHINE", new ImageIcon(getClass().getResource("/Icon/machine.png"))));
+        menu.addMenu(new ModelMenu("DAILY SHEET", new ImageIcon(getClass().getResource("/Icon/shift.png"))));
+         menu.addMenu(new ModelMenu("SHIFT", new ImageIcon(getClass().getResource("/Icon/pump.png"))));
 //        screen1.add(menu, "w 50!");
         screen1.add(menu, "w " + COLLAPSED_WIDTH + "!");
         screen1.add(main, "w 100%");
@@ -102,7 +107,7 @@ public class Main extends javax.swing.JFrame {
         animator.setResolution(0);
         animator.setAcceleration(0.5f);
         animator.setDeceleration(0.5f);
-        showForm(new CustomerInterface());
+        showForm(new CustomerInterface1());
 
     }
 

@@ -1,11 +1,11 @@
 
 package UI;
 
-public class Tank extends javax.swing.JPanel {
+public class Start_Job_Interface extends javax.swing.JPanel {
 
-    public Tank() {
+    public Start_Job_Interface() {
         initComponents();
-        setOpaque(false);
+   
     }
 
     @SuppressWarnings("unchecked")
@@ -21,12 +21,12 @@ public class Tank extends javax.swing.JPanel {
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        cmbPrefix = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        txtCusname = new javax.swing.JTextField();
         txtNic = new javax.swing.JTextField();
-        txtAddress = new javax.swing.JTextField();
+        txtNic1 = new javax.swing.JTextField();
+        cmbCardType1 = new javax.swing.JComboBox<>();
+        txtAddress2 = new javax.swing.JTextField();
+        jLabel43 = new javax.swing.JLabel();
+        cmbVehicleType2 = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -46,40 +46,31 @@ public class Tank extends javax.swing.JPanel {
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(12, 89, 118));
-        jLabel14.setText("TANK INFORMATION");
+        jLabel14.setText("PUMP INFORMATION");
 
         jLabel15.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel15.setText("You can enter the Tank details here");
+        jLabel15.setText("You can enter the Pump details here");
 
         jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        jLabel16.setText("TANK NUMBER");
+        jLabel16.setText("MACHINE ID");
 
         jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        jLabel17.setText("CAPACITY");
+        jLabel17.setText("PUMPER");
 
         jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel18.setText("FUEL TYPE");
 
         jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        jLabel19.setText("TANK LOCATION");
-
-        cmbPrefix.setEditable(true);
-        cmbPrefix.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cmbPrefix.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mr.", "Miss.", "Mrs.", "Ms.", "Prof.", "Rev." }));
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel2.setText("*");
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel3.setText("*");
-
-        txtCusname.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel19.setText("START METER");
 
         txtNic.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        txtAddress.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtNic1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        cmbCardType1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cmbCardType1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female" }));
+
+        txtAddress2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout details_Box1Layout = new javax.swing.GroupLayout(details_Box1);
         details_Box1.setLayout(details_Box1Layout);
@@ -87,58 +78,52 @@ public class Tank extends javax.swing.JPanel {
             details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(details_Box1Layout.createSequentialGroup()
                 .addGap(60, 60, 60)
-                .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(details_Box1Layout.createSequentialGroup()
-                        .addComponent(jLabel17)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3))
-                    .addGroup(details_Box1Layout.createSequentialGroup()
-                        .addComponent(jLabel16)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2))
+                .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel16)
                     .addComponent(jLabel15)
                     .addComponent(jLabel14)
-                    .addComponent(txtCusname, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
-                    .addComponent(txtNic))
-                .addGap(50, 50, 50)
+                    .addComponent(txtNic1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel19)
+                    .addComponent(txtAddress2, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtAddress)
-                    .addGroup(details_Box1Layout.createSequentialGroup()
-                        .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel18)
-                            .addComponent(jLabel19)
-                            .addComponent(cmbPrefix, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(60, 60, 60))
+                    .addComponent(jLabel18)
+                    .addComponent(jLabel17)
+                    .addComponent(txtNic, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbCardType1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36))
         );
         details_Box1Layout.setVerticalGroup(
             details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, details_Box1Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addGap(40, 40, 40)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel15)
                 .addGap(18, 18, Short.MAX_VALUE)
-                .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel16)
-                        .addComponent(jLabel18))
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(jLabel18))
+                .addGap(10, 10, 10)
+                .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNic, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbPrefix, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNic1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
-                    .addComponent(jLabel19)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel19))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCusname, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(411, 411, 411))
+                    .addComponent(cmbCardType1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAddress2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(82, 82, 82))
         );
+
+        jLabel43.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        jLabel43.setText("SELECT PUMP");
+
+        cmbVehicleType2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cmbVehicleType2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Amana Bank", "Bank of Ceylon", "Cargills Bank", "Commercial Bank of Ceylon", "DFCC Bank", "Hatton National Bank", "National Development Bank (NDB)", "Nations Trust Bank", "Pan Asia Bank", "People's Bank", "Public Bank Berhad", "Sampath Bank", "Seylan Bank", "Hong Kong and Shanghai Banking Corporation (HSBC)", "Union Bank of Colombo" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -146,15 +131,22 @@ public class Tank extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(details_Box1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(868, 868, 868))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel43)
+                    .addComponent(cmbVehicleType2, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(details_Box1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(892, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(details_Box1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(500, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLabel43)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmbVehicleType2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(details_Box1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(438, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -201,7 +193,8 @@ public class Tank extends javax.swing.JPanel {
         );
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText("TANK & PUMP");
+        jLabel1.setText("JOB DETAILS");
+        jLabel1.setToolTipText("");
 
         line7.setPreferredSize(new java.awt.Dimension(1110, 4));
 
@@ -234,7 +227,7 @@ public class Tank extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(line7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(18, 18, 18))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -250,7 +243,7 @@ public class Tank extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(screen1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 736, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 767, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -258,7 +251,8 @@ public class Tank extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cmbPrefix;
+    private javax.swing.JComboBox<String> cmbCardType1;
+    private javax.swing.JComboBox<String> cmbVehicleType2;
     private Components.Details_Box details_Box1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -270,15 +264,14 @@ public class Tank extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel43;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private Components.Line line7;
     private Components.Screen screen1;
-    private javax.swing.JTextField txtAddress;
-    private javax.swing.JTextField txtCusname;
+    private javax.swing.JTextField txtAddress2;
     private javax.swing.JTextField txtNic;
+    private javax.swing.JTextField txtNic1;
     // End of variables declaration//GEN-END:variables
 }
