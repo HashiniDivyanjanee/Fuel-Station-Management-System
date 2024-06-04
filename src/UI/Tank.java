@@ -1,11 +1,18 @@
-
 package UI;
+
+import DBConnection.Mysql_Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class Tank extends javax.swing.JPanel {
 
     public Tank() {
         initComponents();
         setOpaque(false);
+        showPumpDropDown();
     }
 
     @SuppressWarnings("unchecked")
@@ -30,11 +37,14 @@ public class Tank extends javax.swing.JPanel {
         details_Box2 = new Components.Details_Box();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
-        cmbVehicleType1 = new javax.swing.JComboBox<>();
-        jButton5 = new javax.swing.JButton();
+        cmbPump = new javax.swing.JComboBox<>();
+        btnAddPump = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel25 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        btnNewPump = new javax.swing.JButton();
+        btnPumbRemove = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -155,29 +165,54 @@ public class Tank extends javax.swing.JPanel {
         jLabel22.setForeground(new java.awt.Color(153, 153, 153));
         jLabel22.setText("You can Select the Pump details here");
 
-        cmbVehicleType1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cmbVehicleType1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Amana Bank", "Bank of Ceylon", "Cargills Bank", "Commercial Bank of Ceylon", "DFCC Bank", "Hatton National Bank", "National Development Bank (NDB)", "Nations Trust Bank", "Pan Asia Bank", "People's Bank", "Public Bank Berhad", "Sampath Bank", "Seylan Bank", "Hong Kong and Shanghai Banking Corporation (HSBC)", "Union Bank of Colombo" }));
+        cmbPump.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jButton5.setBackground(new java.awt.Color(8, 114, 146));
-        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setText("ADD");
+        btnAddPump.setBackground(new java.awt.Color(8, 114, 146));
+        btnAddPump.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnAddPump.setForeground(new java.awt.Color(255, 255, 255));
+        btnAddPump.setText("ADD");
+        btnAddPump.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddPumpActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "PUMP"
             }
         ));
         jScrollPane2.setViewportView(jTable1);
 
         jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel25.setText("PUMP");
+
+        jLabel23.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel23.setText("If you want to add new Pump, Click New Pump Button");
+
+        btnNewPump.setBackground(new java.awt.Color(153, 153, 153));
+        btnNewPump.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnNewPump.setForeground(new java.awt.Color(255, 255, 255));
+        btnNewPump.setText("NEW PUMP");
+        btnNewPump.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewPumpActionPerformed(evt);
+            }
+        });
+
+        btnPumbRemove.setBackground(new java.awt.Color(153, 153, 153));
+        btnPumbRemove.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnPumbRemove.setForeground(new java.awt.Color(255, 255, 255));
+        btnPumbRemove.setText("REMOVE");
+        btnPumbRemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPumbRemoveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout details_Box2Layout = new javax.swing.GroupLayout(details_Box2);
         details_Box2.setLayout(details_Box2Layout);
@@ -186,17 +221,21 @@ public class Tank extends javax.swing.JPanel {
             .addGroup(details_Box2Layout.createSequentialGroup()
                 .addGap(60, 60, 60)
                 .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel22)
+                    .addComponent(jLabel25)
+                    .addGroup(details_Box2Layout.createSequentialGroup()
+                        .addComponent(cmbPump, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAddPump, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPumbRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel21)
-                    .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(details_Box2Layout.createSequentialGroup()
-                            .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel22)
-                                .addComponent(cmbVehicleType1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel25))
-                            .addGap(345, 345, 345))
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)))
-                .addContainerGap(60, Short.MAX_VALUE))
+                    .addGroup(details_Box2Layout.createSequentialGroup()
+                        .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnNewPump)))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
         details_Box2Layout.setVerticalGroup(
             details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,12 +247,17 @@ public class Tank extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel25)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbVehicleType1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbPump, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAddPump, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPumbRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44))
+                .addGap(29, 29, 29)
+                .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnNewPump, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -234,7 +278,7 @@ public class Tank extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(details_Box2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(details_Box1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(363, Short.MAX_VALUE))
+                .addContainerGap(330, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -281,7 +325,7 @@ public class Tank extends javax.swing.JPanel {
         );
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText("TANK & PUMP");
+        jLabel1.setText("TANK");
 
         line7.setPreferredSize(new java.awt.Dimension(1110, 4));
 
@@ -336,16 +380,69 @@ public class Tank extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnNewPumpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewPumpActionPerformed
+        NewPump pump = new NewPump();
+        pump.show();
+    }//GEN-LAST:event_btnNewPumpActionPerformed
+
+    
+    // Started to code Add Pump Table
+    private void btnAddPumpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPumpActionPerformed
+        if (cmbPump.getSelectedItem().equals("")) {
+            JOptionPane.showMessageDialog(this, "Select");
+        } else {
+            String selectedItem = (String) cmbPump.getSelectedItem();
+            String[] data = {selectedItem};
+            DefaultTableModel tblModel = (DefaultTableModel) jTable1.getModel();
+            tblModel.addRow(data);
+        }
+    }//GEN-LAST:event_btnAddPumpActionPerformed
+
+    private void btnPumbRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPumbRemoveActionPerformed
+        DefaultTableModel tblModel = (DefaultTableModel) jTable1.getModel();
+        
+        if (jTable1.getSelectedRowCount()==1){
+            tblModel.removeRow(jTable1.getSelectedRow());
+        }else{
+            if(jTable1.getRowCount()==0){
+                JOptionPane.showMessageDialog(this, "Table is Empty");
+            }else{
+                  JOptionPane.showMessageDialog(this, "Please Select Single Row for Delete");
+            }
+        }
+    }//GEN-LAST:event_btnPumbRemoveActionPerformed
+  // Ended to code Add Pump Table
+    
+    // Start Show Pumb name show Drop down list
+    private void showPumpDropDown() {
+        try {
+            PreparedStatement p = Mysql_Connection.getInstance().getConnection().prepareStatement("SELECT DISTINCT `PumpID` FROM `pump`;");
+            ResultSet r = p.executeQuery();
+
+            while (r.next()) {
+                String pumpdis = r.getString("PumpID");
+
+                cmbPump.addItem(pumpdis);
+            }
+            r.close();
+            p.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+  // End Show Pumb name show Drop down list
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddPump;
+    private javax.swing.JButton btnNewPump;
+    private javax.swing.JButton btnPumbRemove;
     private javax.swing.JComboBox<String> cmbPrefix;
-    private javax.swing.JComboBox<String> cmbVehicleType1;
+    private javax.swing.JComboBox<String> cmbPump;
     private Components.Details_Box details_Box1;
     private Components.Details_Box details_Box2;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -356,6 +453,7 @@ public class Tank extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
