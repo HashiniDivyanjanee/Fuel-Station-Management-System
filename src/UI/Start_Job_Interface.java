@@ -1,8 +1,6 @@
 package UI;
 
 import DBConnection.Mysql_Connection;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,19 +9,13 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.Timer;
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class Start_Job_Interface extends javax.swing.JPanel {
 
     String pumper, pump, tankId, fuel, status;
     Double startMeter;
-
-    public void time() {
-
-    }
 
     // Start Current Date
     Date date = new Date();
@@ -41,7 +33,7 @@ public class Start_Job_Interface extends javax.swing.JPanel {
         initComponents();
         showPumpDropDown();
         showPumperDropDown();
-        show();
+        showPumpDetails();
 
     }
 
@@ -295,7 +287,7 @@ public class Start_Job_Interface extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmbPumpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPumpActionPerformed
-        show();
+        showPumpDetails();
     }//GEN-LAST:event_cmbPumpActionPerformed
 
     private void clear() {
@@ -310,18 +302,18 @@ public class Start_Job_Interface extends javax.swing.JPanel {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         try {
             if (txtMeter.getText().isEmpty()) {
-                throw new IllegalArgumentException("Start meter field cannot be empty. Please enter a valid number.");
+                throw new IllegalArgumentException("Start meter field cannot be empty. Please enter a valid Value.");
             }
 
             startMeter = Double.valueOf(txtMeter.getText());
         } catch (NumberFormatException e) {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/Icon/red_warning.png"));
-            JOptionPane.showMessageDialog(null, "Please check the start meter field. It should be a valid number.", "Warning", JOptionPane.INFORMATION_MESSAGE, icon);
-            return; 
+            JOptionPane.showMessageDialog(null, "Please check the Start Meter field. It should be a Valid Value.", "Warning", JOptionPane.INFORMATION_MESSAGE, icon);
+            return;
         } catch (IllegalArgumentException e) {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/Icon/red_warning.png"));
             JOptionPane.showMessageDialog(null, e.getMessage(), "Warning", JOptionPane.INFORMATION_MESSAGE, icon);
-            return; 
+            return;
         }
         startMeter = Double.valueOf(txtMeter.getText());
         fuel = txtFuel.getText();
@@ -419,7 +411,8 @@ public class Start_Job_Interface extends javax.swing.JPanel {
     }
     // End Show Pumb name show Drop down list
 
-    public void show() {
+    // Start Capture Pump Details
+    public void showPumpDetails() {
         String selectedName = (String) cmbPump.getSelectedItem();
         if (selectedName != null) {
             try {
@@ -429,6 +422,8 @@ public class Start_Job_Interface extends javax.swing.JPanel {
                 if (r.next()) {
                     txtTank.setText(r.getString("TankID"));
                     txtFuel.setText(r.getString("FuelType"));
+                    txtTank.setEditable(false);
+                    txtFuel.setEditable(false);
                 } else {
                     txtTank.setText("No matching Tank found.");
                     txtFuel.setText(r.getString("No matching Fuel found."));
@@ -440,7 +435,7 @@ public class Start_Job_Interface extends javax.swing.JPanel {
             }
         }
     }
-
+    // End Capture Pump Details
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSave;
