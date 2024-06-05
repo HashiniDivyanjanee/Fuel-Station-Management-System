@@ -95,8 +95,6 @@ public class Menu extends javax.swing.JPanel {
         g2.fillRect(0, 0, getWidth(), getHeight());
         super.paintComponent(grphcs);
         
-//        #56CCF2
-//        #2F80ED
     }
     
     
