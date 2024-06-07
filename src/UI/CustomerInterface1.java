@@ -33,7 +33,7 @@ public class CustomerInterface1 extends javax.swing.JPanel {
         txtCvv.setText("");
         txtFax.setText("");
         txtCardNo.setText("");
-        // DateEx.setDate(null);
+        DateEx.setDate(null);
     }
 
     @SuppressWarnings("unchecked")
