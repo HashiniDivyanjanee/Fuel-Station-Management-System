@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import Calculate.Final_Cash_Amount;
+import java.sql.Connection;
 import javax.swing.Icon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -49,13 +50,14 @@ public class Daily_Sheet extends javax.swing.JPanel {
     // Start Show Customer name show Drop down list
     private void showCustomerDropDown() {
         try {
-            PreparedStatement p = Mysql_Connection.getInstance().getConnection().prepareStatement("SELECT DISTINCT `Name` FROM `customer`;");
+            PreparedStatement p = Mysql_Connection.getInstance().getConnection().prepareStatement("SELECT DISTINCT `Name`, `CustID` FROM `customer`;");
             ResultSet r = p.executeQuery();
 
             while (r.next()) {
-                String pumpdis = r.getString("Name");
-
-                cmbCustomer.addItem(pumpdis);
+                String cus = r.getString("Name");
+                String cusID = r.getString("CustID");
+                cmbCustomer.addItem(cus);
+                lblCusID.setText(cusID);
             }
             r.close();
             p.close();
@@ -139,13 +141,15 @@ public class Daily_Sheet extends javax.swing.JPanel {
         tblOutStanding = new javax.swing.JTable();
         jLabel25 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtNote = new javax.swing.JTextArea();
+        lblCusID = new javax.swing.JLabel();
+        btncusRemove = new javax.swing.JButton();
         cmbPumper = new javax.swing.JComboBox<>();
         jLabel22 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
         screen1 = new Components.Screen();
         jLabel1 = new javax.swing.JLabel();
         line7 = new Components.Line();
@@ -381,9 +385,21 @@ public class Daily_Sheet extends javax.swing.JPanel {
         jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel25.setText("NOTE");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane3.setViewportView(jTextArea1);
+        txtNote.setColumns(20);
+        txtNote.setRows(5);
+        jScrollPane3.setViewportView(txtNote);
+
+        lblCusID.setForeground(new java.awt.Color(255, 255, 255));
+
+        btncusRemove.setBackground(new java.awt.Color(153, 153, 153));
+        btncusRemove.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btncusRemove.setForeground(new java.awt.Color(255, 255, 255));
+        btncusRemove.setText("REMOVE");
+        btncusRemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncusRemoveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout details_Box2Layout = new javax.swing.GroupLayout(details_Box2);
         details_Box2.setLayout(details_Box2Layout);
@@ -402,25 +418,34 @@ public class Daily_Sheet extends javax.swing.JPanel {
                                 .addComponent(jLabel24)
                                 .addComponent(txtCusAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, details_Box2Layout.createSequentialGroup()
-                                    .addGap(255, 255, 255)
-                                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(details_Box2Layout.createSequentialGroup()
                                     .addGap(50, 50, 50)
                                     .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel25)))))
+                                        .addComponent(jLabel25)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, details_Box2Layout.createSequentialGroup()
+                                    .addGap(38, 38, 38)
+                                    .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, details_Box2Layout.createSequentialGroup()
+                                            .addComponent(lblCusID, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(255, 255, 255))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, details_Box2Layout.createSequentialGroup()
+                                            .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(btncusRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)))
                 .addContainerGap(60, Short.MAX_VALUE))
         );
         details_Box2Layout.setVerticalGroup(
             details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(details_Box2Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(36, 36, 36)
                 .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(details_Box2Layout.createSequentialGroup()
-                        .addComponent(jLabel20)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel20)
+                    .addComponent(lblCusID, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, details_Box2Layout.createSequentialGroup()
                         .addComponent(jLabel21)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel23)
@@ -431,15 +456,17 @@ public class Daily_Sheet extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtCusAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(19, 19, 19))
-                    .addGroup(details_Box2Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, details_Box2Layout.createSequentialGroup()
                         .addComponent(jLabel25)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)))
-                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btncusRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(112, 112, 112))
+                .addGap(124, 124, 124))
         );
 
         cmbPumper.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -479,7 +506,7 @@ public class Daily_Sheet extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(details_Box1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(details_Box2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -496,10 +523,15 @@ public class Daily_Sheet extends javax.swing.JPanel {
         jButton3.setText("CANCEL");
         jButton3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jButton4.setBackground(new java.awt.Color(8, 114, 146));
-        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("SAVE");
+        btnSave.setBackground(new java.awt.Color(8, 114, 146));
+        btnSave.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnSave.setForeground(new java.awt.Color(255, 255, 255));
+        btnSave.setText("SAVE");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -507,7 +539,7 @@ public class Daily_Sheet extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -521,7 +553,7 @@ public class Daily_Sheet extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
+                    .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
                 .addGap(10, 10, 10))
         );
 
@@ -591,12 +623,11 @@ public class Daily_Sheet extends javax.swing.JPanel {
     }//GEN-LAST:event_txtEndMeterActionPerformed
     public void cal() {
         try {
-            if (txtStartMeter != null && txtEndMeter != null) {
+            if (txtStartMeter != null && txtEndMeter != null && txtCash != null) {
                 String startMeterText = txtStartMeter.getText().trim();
                 String endMeterText = txtEndMeter.getText().trim();
                 String cashText = txtCash.getText().trim();
                 String tank = txtTank.getText().trim();
-              
 
                 if (!startMeterText.isEmpty() && !endMeterText.isEmpty() && !tank.isEmpty()) {
                     startMeter = Double.parseDouble(startMeterText);
@@ -615,13 +646,17 @@ public class Daily_Sheet extends javax.swing.JPanel {
                     }
 
                 } else {
-                    System.out.println("Meter text fields or tank value are empty.");
+                    Icon icon = new javax.swing.ImageIcon(getClass().getResource("/Icon/warning.png"));
+                    JOptionPane.showMessageDialog(null, "Same Text Field are Empty. Please try again", "Warning", JOptionPane.INFORMATION_MESSAGE, icon);
+
                 }
             } else {
                 System.out.println("Meter text fields are not initialized.");
             }
         } catch (NumberFormatException e) {
-            System.out.println("Invalid number format: " + e.getMessage());
+            Icon icon = new javax.swing.ImageIcon(getClass().getResource("/Icon/error.png"));
+            JOptionPane.showMessageDialog(null, "Invalid number format. Try again", "Error", JOptionPane.INFORMATION_MESSAGE, icon);
+
         }
     }
 
@@ -641,30 +676,98 @@ public class Daily_Sheet extends javax.swing.JPanel {
         } else {
             String selectedItem = (String) cmbCustomer.getSelectedItem();
             String amount = txtCusAmount.getText();
-            String[] data = {selectedItem, amount};
+            String note = txtNote.getText();
+            String id = lblCusID.getText();
+            String[] data = {id, selectedItem, amount, note};
 
             DefaultTableModel tblModel = (DefaultTableModel) tblOutStanding.getModel();
             tblModel.addRow(data);
 
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/Icon/success.png"));
             JOptionPane.showMessageDialog(null, "Otstanding Added Successsfully!", "Success", JOptionPane.INFORMATION_MESSAGE, icon);
-            
+
             txtCusAmount.setText("");
+            txtNote.setText("");
 
         };
 
     }//GEN-LAST:event_btnAddActionPerformed
 
+    private void btncusRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncusRemoveActionPerformed
+        DefaultTableModel tblModel = (DefaultTableModel) tblOutStanding.getModel();
+
+        if (tblOutStanding.getSelectedRowCount() == 1) {
+            tblModel.removeRow(tblOutStanding.getSelectedRow());
+        } else {
+            if (tblOutStanding.getRowCount() == 0) {
+                JOptionPane.showMessageDialog(this, "Table is Empty");
+            } else {
+                JOptionPane.showMessageDialog(this, "Please Select Single Row for Delete");
+            }
+        }
+    }//GEN-LAST:event_btncusRemoveActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        String customer = cmbCustomer.getSelectedItem().toString();
+        String amountStr = txtCusAmount.getText();
+        String note = txtNote.getText();
+        String idStr = lblCusID.getText();
+
+        if (amountStr.isEmpty() || idStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Amount and ID fields cannot be empty!");
+            return;
+        }
+
+        Double amount;
+        int id;
+
+        try {
+            amount = Double.valueOf(amountStr);
+            id = Integer.valueOf(idStr);
+            System.out.println("ID"+id);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Amount and ID must be valid numbers!");
+            return;
+        }
+
+        String sql = "INSERT INTO customer_account (CusID, CustomerName, Amount, Note) VALUES (?,?,?,?)";
+        try (Connection conn = Mysql_Connection.getInstance().getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            for (int i = 0; i < tblOutStanding.getRowCount(); i++) {
+                customer = tblOutStanding.getValueAt(i, 0).toString();
+
+                pstmt.setInt(1, id);
+                pstmt.setString(2, customer);
+                pstmt.setDouble(3, amount);
+                pstmt.setString(4, note);
+
+                pstmt.addBatch();
+            }
+
+            pstmt.executeBatch();
+
+            int rowsInserted = pstmt.getUpdateCount();
+            if (rowsInserted > 0) {
+                JOptionPane.showMessageDialog(this, "Tank Details and Pumps saved successfully!");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Failed to save Tank Details and Pumps!");
+            System.out.println("Error saving Tank Details: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnSaveActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnFinalize;
+    private javax.swing.JButton btnSave;
+    private javax.swing.JButton btncusRemove;
     private javax.swing.JComboBox<String> cmbCustomer;
     private javax.swing.JComboBox<String> cmbPumper;
     private Components.Details_Box details_Box1;
     private Components.Details_Box details_Box2;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -690,7 +793,7 @@ public class Daily_Sheet extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel lblCusID;
     private Components.Line line7;
     private Components.Screen screen1;
     private javax.swing.JTable tblOutStanding;
@@ -700,6 +803,7 @@ public class Daily_Sheet extends javax.swing.JPanel {
     public javax.swing.JTextField txtEndMeter;
     private javax.swing.JTextField txtFuel;
     private javax.swing.JTextField txtLiter;
+    private javax.swing.JTextArea txtNote;
     private javax.swing.JTextField txtOutstanding;
     private javax.swing.JTextField txtPump;
     private javax.swing.JTextField txtStartMeter;
