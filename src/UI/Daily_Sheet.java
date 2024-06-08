@@ -708,52 +708,40 @@ public class Daily_Sheet extends javax.swing.JPanel {
     }//GEN-LAST:event_btncusRemoveActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        String customer = cmbCustomer.getSelectedItem().toString();
-        String amountStr = txtCusAmount.getText();
-        String note = txtNote.getText();
-        String idStr = lblCusID.getText();
-
-        if (amountStr.isEmpty() || idStr.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Amount and ID fields cannot be empty!");
-            return;
-        }
-
+        String customer;
         Double amount;
+        String note;
         int id;
 
-        try {
-            amount = Double.valueOf(amountStr);
-            id = Integer.valueOf(idStr);
-            System.out.println("ID"+id);
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Amount and ID must be valid numbers!");
-            return;
-        }
+        DefaultTableModel tblModel = (DefaultTableModel) tblOutStanding.getModel();
+        if (tblModel.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(this, "Table is Empty");
+        } else {
+            String sql = "INSERT INTO customer_account (CusID, CustomerName, Amount, Note) VALUES (?,?,?,?)";
+            try (Connection conn = Mysql_Connection.getInstance().getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-        String sql = "INSERT INTO customer_account (CusID, CustomerName, Amount, Note) VALUES (?,?,?,?)";
-        try (Connection conn = Mysql_Connection.getInstance().getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                conn.setAutoCommit(false);
+                for (int i = 0; i < tblModel.getRowCount(); i++) {
+                    id = Integer.parseInt(tblModel.getValueAt(i, 0).toString());
+                    customer = tblModel.getValueAt(i, 1).toString();
+                    amount = Double.parseDouble(tblModel.getValueAt(i, 2).toString());
+                    note = tblModel.getValueAt(i, 3).toString();
 
-            for (int i = 0; i < tblOutStanding.getRowCount(); i++) {
-                customer = tblOutStanding.getValueAt(i, 0).toString();
+                    pstmt.setInt(1, id);
+                    pstmt.setString(2, customer);
+                    pstmt.setDouble(3, amount);
+                    pstmt.setString(4, note);
 
-                pstmt.setInt(1, id);
-                pstmt.setString(2, customer);
-                pstmt.setDouble(3, amount);
-                pstmt.setString(4, note);
+                    pstmt.executeUpdate();
+                }
 
-                pstmt.addBatch();
+                conn.commit();
+                JOptionPane.showMessageDialog(this, "Data Inserted Successfully");
+                tblModel.setRowCount(0);
+            } catch (Exception e) {
+                e.printStackTrace();
+
             }
-
-            pstmt.executeBatch();
-
-            int rowsInserted = pstmt.getUpdateCount();
-            if (rowsInserted > 0) {
-                JOptionPane.showMessageDialog(this, "Tank Details and Pumps saved successfully!");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Failed to save Tank Details and Pumps!");
-            System.out.println("Error saving Tank Details: " + e.getMessage());
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
