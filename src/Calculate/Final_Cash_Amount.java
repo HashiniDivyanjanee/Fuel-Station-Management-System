@@ -9,11 +9,12 @@ import java.sql.SQLException;
 public class Final_Cash_Amount {
 
     public static double[] calc(double start, double end, double price, double cash) {
-        double[] literAmount = new double[3];
+        double[] literAmount = new double[4];
 
         literAmount[0] = end - start;
         literAmount[1] = (end - start) * price;
-        literAmount[2] = literAmount[1]-cash;
+        literAmount[2] = literAmount[1] - cash;
+        literAmount[3] = literAmount[2] / price;
         return literAmount;
     }
 

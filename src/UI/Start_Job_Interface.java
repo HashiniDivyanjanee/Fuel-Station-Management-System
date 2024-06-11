@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 public class Start_Job_Interface extends javax.swing.JPanel {
 
     String pumper, pump, tankId, fuel, status;
-    Double startMeter;
+    Double startMeter, endmeter;
 
     // Start Current Date
     Date date = new Date();
@@ -164,10 +164,14 @@ public class Start_Job_Interface extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel43)
-                    .addComponent(cmbPump, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(details_Box1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(868, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel43)
+                            .addComponent(details_Box1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(868, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(cmbPump, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,7 +302,7 @@ public class Start_Job_Interface extends javax.swing.JPanel {
         cmbPumper.setSelectedIndex(0);
     }
 
-
+    // Save Button
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         try {
             if (txtMeter.getText().isEmpty()) {
@@ -321,7 +325,8 @@ public class Start_Job_Interface extends javax.swing.JPanel {
         pump = cmbPump.getSelectedItem().toString();
         pumper = cmbPumper.getSelectedItem().toString();
         status = "Active";
-        String sql = "INSERT INTO schedule(pumper, pump, fueltype,StartMeter, TankID, Date, Time, Status) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+        endmeter = 0.00;
+        String sql = "INSERT INTO schedule(pumper, pump, fueltype,StartMeter, TankID, Date, Time, Status, EndMeter) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
         String sqlCheckPump = "SELECT COUNT(*) FROM schedule WHERE pump = ? AND Status = 'Active'";
         String sqlCheckPumper = "SELECT COUNT(*) FROM schedule WHERE pumper = ? AND Status = 'Active'";
 
@@ -354,6 +359,7 @@ public class Start_Job_Interface extends javax.swing.JPanel {
                 pstmt.setString(6, dt);
                 pstmt.setString(7, tm);
                 pstmt.setString(8, status);
+                pstmt.setDouble(9, endmeter);
                 int rowsInserted = pstmt.executeUpdate();
 
                 if (rowsInserted > 0) {
