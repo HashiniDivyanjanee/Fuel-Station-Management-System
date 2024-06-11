@@ -129,6 +129,7 @@ public class Daily_Sheet extends javax.swing.JPanel {
         jLabel29 = new javax.swing.JLabel();
         txtFuel = new javax.swing.JTextField();
         btnFinalize = new javax.swing.JButton();
+        lblliter = new javax.swing.JLabel();
         details_Box2 = new Components.Details_Box();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
@@ -251,7 +252,6 @@ public class Daily_Sheet extends javax.swing.JPanel {
                     .addGroup(details_Box1Layout.createSequentialGroup()
                         .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnFinalize, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel47)
                             .addGroup(details_Box1Layout.createSequentialGroup()
                                 .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtPump, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -272,22 +272,28 @@ public class Daily_Sheet extends javax.swing.JPanel {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel5))
                                     .addComponent(txtEndMeter, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtOutstanding, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(49, 49, 49)
+                                    .addComponent(txtOutstanding, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel47))
                                 .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(details_Box1Layout.createSequentialGroup()
-                                            .addGap(1, 1, 1)
-                                            .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(txtStartMeter, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jLabel16)
+                                    .addGroup(details_Box1Layout.createSequentialGroup()
+                                        .addGap(49, 49, 49)
+                                        .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                 .addGroup(details_Box1Layout.createSequentialGroup()
-                                                    .addComponent(jLabel46)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(jLabel7))))
-                                        .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.LEADING))
-                                    .addComponent(txtCash, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                    .addGap(1, 1, 1)
+                                                    .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(txtStartMeter, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jLabel16)
+                                                        .addGroup(details_Box1Layout.createSequentialGroup()
+                                                            .addComponent(jLabel46)
+                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                            .addComponent(jLabel7))))
+                                                .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.LEADING))
+                                            .addComponent(txtCash, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(details_Box1Layout.createSequentialGroup()
+                                        .addGap(38, 38, 38)
+                                        .addComponent(lblliter, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(0, 60, Short.MAX_VALUE))))
         );
         details_Box1Layout.setVerticalGroup(
@@ -323,20 +329,25 @@ public class Daily_Sheet extends javax.swing.JPanel {
                 .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtEndMeter, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCash, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btnFinalize, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
-                .addGap(30, 30, 30)
-                .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(jLabel19))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtLiter, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel47)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtOutstanding, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(details_Box1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(btnFinalize, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(30, 30, 30)
+                        .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel17)
+                            .addComponent(jLabel19))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtLiter, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel47)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtOutstanding, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, details_Box1Layout.createSequentialGroup()
+                        .addGap(186, 186, 186)
+                        .addComponent(lblliter, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(87, 87, 87))
         );
 
@@ -493,7 +504,7 @@ public class Daily_Sheet extends javax.swing.JPanel {
                         .addComponent(details_Box1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(5, 5, 5)
                         .addComponent(details_Box2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(103, Short.MAX_VALUE))
+                .addGap(103, 103, 103))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -639,8 +650,9 @@ public class Daily_Sheet extends javax.swing.JPanel {
                     txtLiter.setText(String.valueOf(x[0]));
                     txtAmount.setText(String.valueOf(x[1]));
                     txtOutstanding.setText(String.valueOf(x[2]));
+                    lblliter.setText(String.valueOf(x[3]));
 
-                    if (x[2] >= 0) {
+                    if (x[3] >= 0) {
                         txtCusAmount.setEditable(true);
                         cmbCustomer.setEditable(true);
                     }
@@ -682,15 +694,9 @@ public class Daily_Sheet extends javax.swing.JPanel {
 
             DefaultTableModel tblModel = (DefaultTableModel) tblOutStanding.getModel();
             tblModel.addRow(data);
-
-            Icon icon = new javax.swing.ImageIcon(getClass().getResource("/Icon/success.png"));
-            JOptionPane.showMessageDialog(null, "Otstanding Added Successsfully!", "Success", JOptionPane.INFORMATION_MESSAGE, icon);
-
             txtCusAmount.setText("");
             txtNote.setText("");
-
         };
-
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btncusRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncusRemoveActionPerformed
@@ -713,12 +719,17 @@ public class Daily_Sheet extends javax.swing.JPanel {
         String note;
         int id;
 
+        String endMeterValue = txtEndMeter.getText(); // assuming you have a text field for EndMeter value
+        String selectedPumper = cmbPumper.getSelectedItem().toString();
+
         DefaultTableModel tblModel = (DefaultTableModel) tblOutStanding.getModel();
         if (tblModel.getRowCount() == 0) {
             JOptionPane.showMessageDialog(this, "Table is Empty");
         } else {
             String sql = "INSERT INTO customer_account (CusID, CustomerName, Amount, Note) VALUES (?,?,?,?)";
-            try (Connection conn = Mysql_Connection.getInstance().getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            String sql1 = "UPDATE schedule SET EndMeter = ?, Status = 'Inactive' where pumper = ?";
+
+            try (Connection conn = Mysql_Connection.getInstance().getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql); PreparedStatement pstmt1 = conn.prepareStatement(sql1)) {
 
                 conn.setAutoCommit(false);
                 for (int i = 0; i < tblModel.getRowCount(); i++) {
@@ -731,8 +742,11 @@ public class Daily_Sheet extends javax.swing.JPanel {
                     pstmt.setString(2, customer);
                     pstmt.setDouble(3, amount);
                     pstmt.setString(4, note);
-
                     pstmt.executeUpdate();
+
+                    pstmt1.setString(1, endMeterValue);
+                    pstmt1.setString(2, selectedPumper);
+                    pstmt1.executeUpdate();
                 }
 
                 conn.commit();
@@ -782,6 +796,7 @@ public class Daily_Sheet extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblCusID;
+    private javax.swing.JLabel lblliter;
     private Components.Line line7;
     private Components.Screen screen1;
     private javax.swing.JTable tblOutStanding;
