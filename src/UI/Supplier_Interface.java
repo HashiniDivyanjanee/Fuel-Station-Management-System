@@ -305,8 +305,6 @@ public class Supplier_Interface extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel32.getAccessibleContext().setAccessibleName("ACCOUNT INFORMATION");
-
         jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(12, 89, 118));
         jLabel20.setText("BANK INFORMATION");
@@ -388,8 +386,6 @@ public class Supplier_Interface extends javax.swing.JPanel {
                     .addComponent(txtCvv, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(55, Short.MAX_VALUE))
         );
-
-        jLabel20.getAccessibleContext().setAccessibleName("BANK INFORMATION");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

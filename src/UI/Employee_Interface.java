@@ -1,7 +1,7 @@
 package UI;
 
 import java.sql.SQLException;
-import DBConnection.Mysql_Connection;
+import Model.Mysql_Connection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;

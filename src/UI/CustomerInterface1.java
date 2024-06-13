@@ -1,6 +1,6 @@
 package UI;
 
-import DBConnection.Mysql_Connection;
+import Model.Mysql_Connection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

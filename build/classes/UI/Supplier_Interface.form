@@ -495,9 +495,6 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="ACCOUNT INFORMATION"/>
                   </Properties>
-                  <AccessibilityProperties>
-                    <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="ACCOUNT INFORMATION"/>
-                  </AccessibilityProperties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel33">
                   <Properties>
@@ -612,9 +609,6 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="BANK INFORMATION"/>
                   </Properties>
-                  <AccessibilityProperties>
-                    <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="BANK INFORMATION"/>
-                  </AccessibilityProperties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel21">
                   <Properties>

@@ -64,6 +64,8 @@ public class Main extends javax.swing.JFrame {
                     showForm(new Daily_Sheet());
                 } else if (index == 7) {
                     showForm(new Start_Job_Interface());
+                }else if (index == 8) {
+                    showForm(new Fuel_Interface());
                 }
             }
 
@@ -76,7 +78,8 @@ public class Main extends javax.swing.JFrame {
         menu.addMenu(new ModelMenu("TANK", new ImageIcon(getClass().getResource("/Icon/tank.png"))));
         menu.addMenu(new ModelMenu("FUEL MACHINE", new ImageIcon(getClass().getResource("/Icon/machine.png"))));
         menu.addMenu(new ModelMenu("DAILY SHEET", new ImageIcon(getClass().getResource("/Icon/shift.png"))));
-         menu.addMenu(new ModelMenu("SHIFT", new ImageIcon(getClass().getResource("/Icon/pump.png"))));
+        menu.addMenu(new ModelMenu("SHIFT", new ImageIcon(getClass().getResource("/Icon/pump.png"))));
+        menu.addMenu(new ModelMenu("STOCK", new ImageIcon(getClass().getResource("/Icon/employee.png"))));
 //        screen1.add(menu, "w 50!");
         screen1.add(menu, "w " + COLLAPSED_WIDTH + "!");
         screen1.add(main, "w 100%");

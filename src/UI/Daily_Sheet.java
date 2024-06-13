@@ -1,11 +1,15 @@
 package UI;
 
-import DBConnection.Mysql_Connection;
+import Model.Mysql_Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import Calculate.Final_Cash_Amount;
 import java.sql.Connection;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import javax.swing.Icon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -14,6 +18,18 @@ public class Daily_Sheet extends javax.swing.JPanel {
 
     double startMeter, endMeter, salesPrice, cash;
     String startMeterText, endMeterText, Tank_ID;
+
+    // Start Current Date
+    Date date = new Date();
+    SimpleDateFormat formatDate = new SimpleDateFormat("YYYY-MMM-dd");
+    String dt = formatDate.format(date);
+    // End Current Date
+
+    // Start Current Time
+    DateTimeFormatter times = DateTimeFormatter.ofPattern("hh : mm a");
+    LocalDateTime now = LocalDateTime.now();
+    String tm = times.format(now);
+    // End Current Time
 
     public Daily_Sheet() {
         initComponents();
@@ -721,15 +737,17 @@ public class Daily_Sheet extends javax.swing.JPanel {
 
         String endMeterValue = txtEndMeter.getText(); // assuming you have a text field for EndMeter value
         String selectedPumper = cmbPumper.getSelectedItem().toString();
+        Double cash = Double.valueOf(txtCash.getText());
 
         DefaultTableModel tblModel = (DefaultTableModel) tblOutStanding.getModel();
         if (tblModel.getRowCount() == 0) {
             JOptionPane.showMessageDialog(this, "Table is Empty");
         } else {
-            String sql = "INSERT INTO customer_account (CusID, CustomerName, Amount, Note) VALUES (?,?,?,?)";
-            String sql1 = "UPDATE schedule SET EndMeter = ?, Status = 'Inactive' where pumper = ?";
+            String sqlInsert = "INSERT INTO customer_account (CusID, CustomerName, Amount, Note) VALUES (?,?,?,?)";
+            String sqlUpdate = "UPDATE schedule SET EndMeter = ?, Status = 'Inactive' where pumper = ?";
+            String sqlInsertInvoice = "INSERT INTO invoice (pumper, Date, Time, Total, Paid) VALUES (?, ?, ?, ?, ?)";
 
-            try (Connection conn = Mysql_Connection.getInstance().getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql); PreparedStatement pstmt1 = conn.prepareStatement(sql1)) {
+            try (Connection conn = Mysql_Connection.getInstance().getConnection(); PreparedStatement pstmt = conn.prepareStatement(sqlInsert); PreparedStatement pstmt1 = conn.prepareStatement(sqlUpdate); PreparedStatement pstmt2 = conn.prepareStatement(sqlInsertInvoice)) {
 
                 conn.setAutoCommit(false);
                 for (int i = 0; i < tblModel.getRowCount(); i++) {
@@ -744,10 +762,17 @@ public class Daily_Sheet extends javax.swing.JPanel {
                     pstmt.setString(4, note);
                     pstmt.executeUpdate();
 
-                    pstmt1.setString(1, endMeterValue);
-                    pstmt1.setString(2, selectedPumper);
-                    pstmt1.executeUpdate();
                 }
+                pstmt2.setString(1, selectedPumper);
+                pstmt2.setString(2, dt);
+                pstmt2.setString(3, tm);
+                pstmt2.setDouble(4, cash);
+                pstmt2.setDouble(5, cash);
+                pstmt2.executeUpdate();
+
+                pstmt1.setString(1, endMeterValue);
+                pstmt1.setString(2, selectedPumper);
+                pstmt1.executeUpdate();
 
                 conn.commit();
                 JOptionPane.showMessageDialog(this, "Data Inserted Successfully");
