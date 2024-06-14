@@ -1,11 +1,9 @@
 package UI;
 
-import java.sql.SQLException;
-import Model.Mysql_Connection;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import Controller.EmployeeController;
+import Model.Employee;
+
 
 public class Employee_Interface extends javax.swing.JPanel {
 
@@ -13,6 +11,9 @@ public class Employee_Interface extends javax.swing.JPanel {
     Double salary;
     int mobile, land, acc;
 
+    EmployeeController EmployeeController = new EmployeeController();
+    
+    
     public Employee_Interface() {
         initComponents();
 
@@ -696,44 +697,16 @@ public class Employee_Interface extends javax.swing.JPanel {
         acc = Integer.valueOf(txtAccNo.getText());
         salary = Double.valueOf(txtSalary.getText());
         dob = ((JTextField) DateBod.getDateEditor().getUiComponent()).getText();
-        hire = ((JTextField) DateHire.getDateEditor().getUiComponent()).getText();
-
-        String sql = "INSERT INTO employee (FirstName, LastName, Address, Nic, Gender, Dob, Mobile, LandlineNumber, Email, Bank, Branch, AccNumber, holderName, Salary, Position, HireDate, EmployeeType, Schedule) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-
-        try (Connection conn = Mysql_Connection.getInstance().getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setString(1, fname);
-            pstmt.setString(2, lname);
-            pstmt.setString(3, address);
-            pstmt.setString(4, nic);
-            pstmt.setString(5, gender);
-            pstmt.setString(6, dob);
-            pstmt.setInt(7, mobile);
-            pstmt.setInt(8, land);
-            pstmt.setString(9, email);
-            pstmt.setString(10, bank);
-            pstmt.setString(11, branch);
-            pstmt.setInt(12, acc);
-            pstmt.setString(13, holder);
-            pstmt.setDouble(14, salary);
-            pstmt.setString(15, position);
-            pstmt.setString(16, hire);
-            pstmt.setString(17, empType);
-            pstmt.setString(18, schedule);
-
-            int rowsInserted = pstmt.executeUpdate();
-
-            if (rowsInserted > 0) {
-                JOptionPane.showMessageDialog(this, "A new employee was inserted successfully!");
-                clear();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "A new employee was inserted Failed!");
-            System.out.println("Error saving employee data: " + e.getMessage());
+        hire = ((JTextField) DateHire.getDateEditor().getUiComponent()).getText();   
+        
+        try {
+            Employee employee = new Employee(fname, lname, address, nic, gender, dob, mobile, land, email, bank, branch, acc, holder, salary, position, hire, empType, schedule);
+            
+            EmployeeController.saveEmployee(employee);
+            
+        } catch (Exception e) {
+             e.printStackTrace();
         }
-
-
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
