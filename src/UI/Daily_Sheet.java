@@ -735,21 +735,29 @@ public class Daily_Sheet extends javax.swing.JPanel {
         String note;
         int id;
 
-        String endMeterValue = txtEndMeter.getText(); // assuming you have a text field for EndMeter value
+        String endMeterValue = txtEndMeter.getText();
         String selectedPumper = cmbPumper.getSelectedItem().toString();
         Double cash = Double.valueOf(txtCash.getText());
+        Double liter_qty = Double.valueOf(txtLiter.getText());
+        String fuelType = txtFuel.getText();
 
         DefaultTableModel tblModel = (DefaultTableModel) tblOutStanding.getModel();
         if (tblModel.getRowCount() == 0) {
             JOptionPane.showMessageDialog(this, "Table is Empty");
-        } else {
-            String sqlInsert = "INSERT INTO customer_account (CusID, CustomerName, Amount, Note) VALUES (?,?,?,?)";
-            String sqlUpdate = "UPDATE schedule SET EndMeter = ?, Status = 'Inactive' where pumper = ?";
-            String sqlInsertInvoice = "INSERT INTO invoice (pumper, Date, Time, Total, Paid) VALUES (?, ?, ?, ?, ?)";
+            return;
+        }
 
-            try (Connection conn = Mysql_Connection.getInstance().getConnection(); PreparedStatement pstmt = conn.prepareStatement(sqlInsert); PreparedStatement pstmt1 = conn.prepareStatement(sqlUpdate); PreparedStatement pstmt2 = conn.prepareStatement(sqlInsertInvoice)) {
+        String sqlInsert = "INSERT INTO customer_account (CusID, CustomerName, Amount, Note) VALUES (?,?,?,?)";
+        String sqlUpdate = "UPDATE schedule SET EndMeter = ?, Status = 'Inactive' WHERE pumper = ?";
+        String selectSql = "SELECT Liter FROM fuel WHERE FuelName = ?";
+        String sqlFuelUpdate = "UPDATE fuel SET Liter = ? WHERE FuelName = ?";
+        String sqlInsertInvoice = "INSERT INTO invoice (pumper, Date, Time, Total, Paid) VALUES (?, ?, ?, ?, ?)";
 
-                conn.setAutoCommit(false);
+        try (Connection conn = Mysql_Connection.getInstance().getConnection()) {
+            conn.setAutoCommit(false);
+
+            try (PreparedStatement pstmt = conn.prepareStatement(sqlInsert); PreparedStatement pstmt1 = conn.prepareStatement(sqlUpdate); PreparedStatement pstmt2 = conn.prepareStatement(sqlInsertInvoice); PreparedStatement pstmt3 = conn.prepareStatement(selectSql)) {
+
                 for (int i = 0; i < tblModel.getRowCount(); i++) {
                     id = Integer.parseInt(tblModel.getValueAt(i, 0).toString());
                     customer = tblModel.getValueAt(i, 1).toString();
@@ -761,8 +769,8 @@ public class Daily_Sheet extends javax.swing.JPanel {
                     pstmt.setDouble(3, amount);
                     pstmt.setString(4, note);
                     pstmt.executeUpdate();
-
                 }
+
                 pstmt2.setString(1, selectedPumper);
                 pstmt2.setString(2, dt);
                 pstmt2.setString(3, tm);
@@ -774,13 +782,35 @@ public class Daily_Sheet extends javax.swing.JPanel {
                 pstmt1.setString(2, selectedPumper);
                 pstmt1.executeUpdate();
 
+                pstmt3.setString(1, fuelType);
+                try (ResultSet resultSet = pstmt3.executeQuery()) {
+                    if (resultSet.next()) {
+                        double currentQty = resultSet.getDouble("Liter");
+                        double newQty = currentQty - liter_qty;
+
+                        try (PreparedStatement updateStmt = conn.prepareStatement(sqlFuelUpdate)) {
+                            updateStmt.setDouble(1, newQty);
+                            updateStmt.setString(2, fuelType);
+                            updateStmt.executeUpdate();
+                        }
+
+                        System.out.println("Fuel quantity updated successfully.");
+                    } else {
+                        System.out.println("Fuel not found.");
+                    }
+                }
+
                 conn.commit();
                 JOptionPane.showMessageDialog(this, "Data Inserted Successfully");
                 tblModel.setRowCount(0);
-            } catch (Exception e) {
+            } catch (SQLException e) {
+                conn.rollback();
                 e.printStackTrace();
-
+                JOptionPane.showMessageDialog(this, "An error occurred. Transaction is rolled back.");
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Database connection error.");
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
