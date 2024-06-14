@@ -1,12 +1,8 @@
 package UI;
 
-import Model.Mysql_Connection;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-
+import Controller.CustomerController;
+import Model.Customer;
 public class CustomerInterface1 extends javax.swing.JPanel {
 
     String name, prefix, address, nic, email, cardType, ExDate, vehicleNo, vehicleType, fuel;
@@ -17,6 +13,8 @@ public class CustomerInterface1 extends javax.swing.JPanel {
         setOpaque(false);
     }
 
+    CustomerController customerController = new CustomerController();
+    
     private void clear() {
         txtName.setText("");
         cmbPrefix.setSelectedIndex(0);
@@ -559,7 +557,6 @@ public class CustomerInterface1 extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-
         name = txtName.getText();
         prefix = cmbPrefix.getSelectedItem().toString();
         address = txtAddress.getText();
@@ -575,39 +572,15 @@ public class CustomerInterface1 extends javax.swing.JPanel {
         fax = Integer.valueOf(txtFax.getText());
         cardNo = Integer.valueOf(txtCardNo.getText());
         ExDate = ((JTextField) DateEx.getDateEditor().getUiComponent()).getText();
-
-        String sql = "INSERT INTO customer (Name, Nic, Address, Mobile, Landline, Fax, Email, CardType, CardNo, ExpireDate, Cvv, VehicleNo, VehicleType, FuelType) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-
-        try (Connection conn = Mysql_Connection.getInstance().getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setString(1, name);
-            pstmt.setString(2, nic);
-            pstmt.setString(3, address);
-            pstmt.setInt(4, mobile);
-            pstmt.setInt(5, land);
-            pstmt.setInt(6, fax);
-            pstmt.setString(7, email);
-            pstmt.setString(8, cardType);
-            pstmt.setInt(9, cardNo);
-            pstmt.setString(10, ExDate);
-            pstmt.setInt(11, cvv);
-            pstmt.setString(12, vehicleNo);
-            pstmt.setString(13, vehicleType);
-            pstmt.setString(14, fuel);
-
-            int rowsInserted = pstmt.executeUpdate();
-
-            if (rowsInserted > 0) {
-                JOptionPane.showMessageDialog(this, "A new Customer was inserted successfully!");
-                clear();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "A new Customer was inserted Failed!");
-            System.out.println("Error saving Customer data: " + e.getMessage());
+            
+        try {
+            
+            Customer customer = new Customer(name, nic, address, mobile, land, fax, email, cardType, cardNo, ExDate, cvv, vehicleNo, vehicleType,fuel);
+            customerController.saveCustomer(customer);
+            
+        } catch (Exception e) {
         }
-
-
+        
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
@@ -671,7 +644,5 @@ public class CustomerInterface1 extends javax.swing.JPanel {
     private javax.swing.JTextField txtVehicleRegi;
     // End of variables declaration//GEN-END:variables
 
-    private void dispose() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+
 }
