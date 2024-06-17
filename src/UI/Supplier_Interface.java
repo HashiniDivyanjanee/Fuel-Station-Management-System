@@ -1,12 +1,20 @@
-
 package UI;
 
+import Controller.SupplierController;
+import Model.Supplier;
+
 public class Supplier_Interface extends javax.swing.JPanel {
+
+    String Company, Supplier_Name, Title, Address, Email, Website, Bank, Branch, Holder;
+    int Mobile, Landline, Fax, Acc;
+    Double Opening_Amount, Limit_Amount;
 
     public Supplier_Interface() {
         initComponents();
 
     }
+
+    SupplierController supplierController = new SupplierController();
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -30,38 +38,38 @@ public class Supplier_Interface extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtCusname = new javax.swing.JTextField();
-        txtNic = new javax.swing.JTextField();
+        txtTitle = new javax.swing.JTextField();
+        txtSupplier = new javax.swing.JTextField();
         txtAddress = new javax.swing.JTextField();
         txtMobile = new javax.swing.JTextField();
         txtFax = new javax.swing.JTextField();
         txtLand = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
-        txtNic1 = new javax.swing.JTextField();
+        txtCompany = new javax.swing.JTextField();
         jLabel39 = new javax.swing.JLabel();
-        txtFax1 = new javax.swing.JTextField();
+        txtWebsie = new javax.swing.JTextField();
         details_Box4 = new Components.Details_Box();
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
-        txtVehicleRegi = new javax.swing.JTextField();
-        txtVehicleRegi1 = new javax.swing.JTextField();
+        txtOpening = new javax.swing.JTextField();
+        txtLimit = new javax.swing.JTextField();
         details_Box2 = new Components.Details_Box();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
-        txtExpire = new javax.swing.JTextField();
-        txtCvv = new javax.swing.JTextField();
-        txtCardNo1 = new javax.swing.JTextField();
+        txtAcc = new javax.swing.JTextField();
+        txtHolder = new javax.swing.JTextField();
+        txtBranch = new javax.swing.JTextField();
         jLabel40 = new javax.swing.JLabel();
-        cmbVehicleType1 = new javax.swing.JComboBox<>();
+        cmbBank = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
         screen1 = new Components.Screen();
         jLabel1 = new javax.swing.JLabel();
         line7 = new Components.Line();
@@ -125,9 +133,9 @@ public class Supplier_Interface extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(255, 0, 0));
         jLabel4.setText("*");
 
-        txtCusname.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtTitle.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        txtNic.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtSupplier.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         txtAddress.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
@@ -139,12 +147,12 @@ public class Supplier_Interface extends javax.swing.JPanel {
 
         txtEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        txtNic1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtCompany.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jLabel39.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel39.setText("WEBSITE");
 
-        txtFax1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtWebsie.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout details_Box1Layout = new javax.swing.GroupLayout(details_Box1);
         details_Box1.setLayout(details_Box1Layout);
@@ -158,7 +166,7 @@ public class Supplier_Interface extends javax.swing.JPanel {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(details_Box1Layout.createSequentialGroup()
                         .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtFax1)
+                            .addComponent(txtWebsie)
                             .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, details_Box1Layout.createSequentialGroup()
                                 .addComponent(jLabel16)
@@ -173,13 +181,13 @@ public class Supplier_Interface extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel4))
                             .addComponent(jLabel30, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCusname, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+                            .addComponent(txtTitle, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
                             .addComponent(txtMobile, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtFax, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNic1, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(txtCompany, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(50, 50, 50)
                         .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNic)
+                            .addComponent(txtSupplier)
                             .addComponent(txtAddress)
                             .addComponent(txtLand)
                             .addComponent(txtEmail)
@@ -211,15 +219,15 @@ public class Supplier_Interface extends javax.swing.JPanel {
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNic, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNic1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
                     .addComponent(jLabel19))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCusname, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(46, 46, 46)
                 .addComponent(jLabel37)
@@ -245,7 +253,7 @@ public class Supplier_Interface extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel39)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtFax1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtWebsie, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(65, 65, 65))
         );
 
@@ -264,9 +272,9 @@ public class Supplier_Interface extends javax.swing.JPanel {
         jLabel35.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel35.setText("LIMIT AMOUNT");
 
-        txtVehicleRegi.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtOpening.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        txtVehicleRegi1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtLimit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout details_Box4Layout = new javax.swing.GroupLayout(details_Box4);
         details_Box4.setLayout(details_Box4Layout);
@@ -280,11 +288,11 @@ public class Supplier_Interface extends javax.swing.JPanel {
                     .addGroup(details_Box4Layout.createSequentialGroup()
                         .addGroup(details_Box4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel34, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtVehicleRegi, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtOpening, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(50, 50, 50)
                         .addGroup(details_Box4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel35)
-                            .addComponent(txtVehicleRegi1, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE))))
+                            .addComponent(txtLimit, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE))))
                 .addGap(60, 60, 60))
         );
         details_Box4Layout.setVerticalGroup(
@@ -300,8 +308,8 @@ public class Supplier_Interface extends javax.swing.JPanel {
                     .addComponent(jLabel35))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(details_Box4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtVehicleRegi, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtVehicleRegi1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtOpening, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -321,22 +329,22 @@ public class Supplier_Interface extends javax.swing.JPanel {
         jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel25.setText("HOLDER NAME");
 
-        txtExpire.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtExpire.addActionListener(new java.awt.event.ActionListener() {
+        txtAcc.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtAcc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtExpireActionPerformed(evt);
+                txtAccActionPerformed(evt);
             }
         });
 
-        txtCvv.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtHolder.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        txtCardNo1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtBranch.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jLabel40.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel40.setText("ACCOUNT NUMBER");
 
-        cmbVehicleType1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cmbVehicleType1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Amana Bank", "Bank of Ceylon", "Cargills Bank", "Commercial Bank of Ceylon", "DFCC Bank", "Hatton National Bank", "National Development Bank (NDB)", "Nations Trust Bank", "Pan Asia Bank", "People's Bank", "Public Bank Berhad", "Sampath Bank", "Seylan Bank", "Hong Kong and Shanghai Banking Corporation (HSBC)", "Union Bank of Colombo" }));
+        cmbBank.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cmbBank.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Amana Bank", "Bank of Ceylon", "Cargills Bank", "Commercial Bank of Ceylon", "DFCC Bank", "Hatton National Bank", "National Development Bank (NDB)", "Nations Trust Bank", "Pan Asia Bank", "People's Bank", "Public Bank Berhad", "Sampath Bank", "Seylan Bank", "Hong Kong and Shanghai Banking Corporation (HSBC)", "Union Bank of Colombo" }));
 
         javax.swing.GroupLayout details_Box2Layout = new javax.swing.GroupLayout(details_Box2);
         details_Box2.setLayout(details_Box2Layout);
@@ -349,16 +357,16 @@ public class Supplier_Interface extends javax.swing.JPanel {
                     .addGroup(details_Box2Layout.createSequentialGroup()
                         .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel21)
-                            .addComponent(txtExpire, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtAcc, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel23)
                             .addComponent(jLabel40)
-                            .addComponent(cmbVehicleType1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cmbBank, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(50, 50, 50)
                         .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel24)
-                            .addComponent(txtCvv, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtHolder, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel25)
-                            .addComponent(txtCardNo1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtBranch, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(60, Short.MAX_VALUE))
         );
         details_Box2Layout.setVerticalGroup(
@@ -374,16 +382,16 @@ public class Supplier_Interface extends javax.swing.JPanel {
                     .addComponent(jLabel24))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCardNo1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbVehicleType1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtBranch, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbBank, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel25)
                     .addComponent(jLabel40))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtExpire, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCvv, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtAcc, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtHolder, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(55, Short.MAX_VALUE))
         );
 
@@ -427,10 +435,15 @@ public class Supplier_Interface extends javax.swing.JPanel {
         jButton3.setText("CANCEL");
         jButton3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jButton4.setBackground(new java.awt.Color(8, 114, 146));
-        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("SAVE");
+        btnSave.setBackground(new java.awt.Color(8, 114, 146));
+        btnSave.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnSave.setForeground(new java.awt.Color(255, 255, 255));
+        btnSave.setText("SAVE");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -438,7 +451,7 @@ public class Supplier_Interface extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -452,7 +465,7 @@ public class Supplier_Interface extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
+                    .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
                 .addGap(10, 10, 10))
         );
 
@@ -512,19 +525,47 @@ public class Supplier_Interface extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtExpireActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtExpireActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtExpireActionPerformed
+    private void txtAccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAccActionPerformed
+
+    }//GEN-LAST:event_txtAccActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+
+        Company = txtCompany.getText();
+        Supplier_Name = txtSupplier.getText();
+        Title = txtTitle.getText();
+        Address = txtAddress.getText();
+        Email = txtEmail.getText();
+        Website = txtWebsie.getText();
+        Branch = txtBranch.getText();
+        Holder = txtHolder.getText();
+        Bank = cmbBank.getSelectedItem().toString();
+        Mobile = Integer.valueOf(txtMobile.getText());
+        Acc = Integer.valueOf(txtAcc.getText());
+        Landline = Integer.valueOf(txtLand.getText());
+        Fax = Integer.valueOf(txtFax.getText());
+        Opening_Amount = Double.valueOf(txtOpening.getText());
+        Limit_Amount = Double.valueOf(txtLimit.getText());
+
+        try {
+            Supplier supplier = new Supplier(Company, Supplier_Name, Title, Address, Mobile, Landline, Fax, Email, Website, Bank, Branch, Acc, Holder, Opening_Amount, Limit_Amount);
+            supplierController.saveSupplier(supplier);
+
+        } catch (Exception e) {
+        }
+
+
+    }//GEN-LAST:event_btnSaveActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cmbVehicleType1;
+    private javax.swing.JButton btnSave;
+    private javax.swing.JComboBox<String> cmbBank;
     private Components.Details_Box details_Box1;
     private Components.Details_Box details_Box2;
     private Components.Details_Box details_Box4;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -557,19 +598,19 @@ public class Supplier_Interface extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private Components.Line line7;
     private Components.Screen screen1;
+    private javax.swing.JTextField txtAcc;
     private javax.swing.JTextField txtAddress;
-    private javax.swing.JTextField txtCardNo1;
-    private javax.swing.JTextField txtCusname;
-    private javax.swing.JTextField txtCvv;
+    private javax.swing.JTextField txtBranch;
+    private javax.swing.JTextField txtCompany;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtExpire;
     private javax.swing.JTextField txtFax;
-    private javax.swing.JTextField txtFax1;
+    private javax.swing.JTextField txtHolder;
     private javax.swing.JTextField txtLand;
+    private javax.swing.JTextField txtLimit;
     private javax.swing.JTextField txtMobile;
-    private javax.swing.JTextField txtNic;
-    private javax.swing.JTextField txtNic1;
-    private javax.swing.JTextField txtVehicleRegi;
-    private javax.swing.JTextField txtVehicleRegi1;
+    private javax.swing.JTextField txtOpening;
+    private javax.swing.JTextField txtSupplier;
+    private javax.swing.JTextField txtTitle;
+    private javax.swing.JTextField txtWebsie;
     // End of variables declaration//GEN-END:variables
 }
