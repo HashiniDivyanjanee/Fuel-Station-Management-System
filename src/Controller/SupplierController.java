@@ -11,7 +11,7 @@ public class SupplierController {
 
     public void saveSupplier(Supplier supplier) throws Exception {
         String sql = "INSERT INTO supplier(Company, Supplier_Name, Title, Address, Mobile, Landline, Fax, Email, Website, Bank, Branch, Acc, Holder, Opening_Amount, Limit_Amount) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
-
+        
         try (Connection connection = Mysql_Connection.getInstance().getConnection(); PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, supplier.getCompany());
             pstmt.setString(2, supplier.getSupplier_Name());
@@ -28,7 +28,6 @@ public class SupplierController {
             pstmt.setString(13, supplier.getHolder());
             pstmt.setDouble(14, supplier.getOpening_Amount());
             pstmt.setDouble(15, supplier.getLimit_Amount());
-
             int rowInserted = pstmt.executeUpdate();
 
             if (rowInserted > 0) {
