@@ -4,7 +4,11 @@ import Model.Mysql_Connection;
 import Model.Fuel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.Icon;
 import javax.swing.JOptionPane;
 
@@ -29,10 +33,33 @@ public class FuelController {
                 }else{
                     Icon icon = new javax.swing.ImageIcon(getClass().getResource("/Icon/error.png"));
                     JOptionPane.showMessageDialog(null, "A new Fuel was inserted Failed!", "Failed", JOptionPane.INFORMATION_MESSAGE, icon);
-                }
-
-              
-        }
-      
+                }     
+        }   
     }
+    
+    
+    
+ public List<Fuel> getAllFuel() throws SQLException {
+    String sql = "SELECT * FROM fuel";
+    List<Fuel> fuelList = new ArrayList<>();
+    
+    try (Connection connection = Mysql_Connection.getInstance().getConnection(); 
+         Statement statement = connection.createStatement(); 
+         ResultSet resultSet = statement.executeQuery(sql)) {
+        
+        while (resultSet.next()) {
+            Fuel fuel = new Fuel(resultSet.getString("FuelName"), 
+                                 resultSet.getDouble("CostPrice"), 
+                                 resultSet.getDouble("SalePrice"), 
+                                 resultSet.getString("TankID"), 
+                                 resultSet.getDouble("Liter"));
+            fuel.setFuelID(resultSet.getInt("FuelID"));
+            fuelList.add(fuel);
+        }
+    }
+    
+    return fuelList;
+}
+
+
 }

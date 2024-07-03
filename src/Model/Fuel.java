@@ -4,16 +4,16 @@ public class Fuel {
 
     private String FluelName;
     private String TankID;
-    private Double CostPrice;
-    private Double SalePrice;
-    private Double Liter;
+    private double CostPrice;
+    private double SalePrice;
+    private double Liter;
     int FuelID;
 
-    public Fuel(String FluelName, String TankID, Double CostPrice, Double SalePrice, Double Liter) {
+    public Fuel(String FluelName, double CostPrice, double SalePrice, String TankID, double Liter) {
         this.FluelName = FluelName;
-        this.TankID = TankID;
         this.CostPrice = CostPrice;
         this.SalePrice = SalePrice;
+        this.TankID = TankID;
         this.Liter = Liter;
     }
 

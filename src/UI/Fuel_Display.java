@@ -1,17 +1,18 @@
 package UI;
 
-import Controller.Schedule_Controller;
+import Controller.FuelController;
+import Model.Fuel;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
-import Model.Mysql_Connection;
-import Model.Shedule;
 import java.util.List;
+import javax.swing.RowFilter;
+import javax.swing.table.TableRowSorter;
 
-public class Shedule_Display extends javax.swing.JPanel {
+public class Fuel_Display extends javax.swing.JPanel {
 
-    public Shedule_Display() {
+    public Fuel_Display() {
         initComponents();
-         display() ;
+        Tabledisplay();
     }
 
     @SuppressWarnings("unchecked")
@@ -21,8 +22,8 @@ public class Shedule_Display extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        sheduleTable = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
+        tblFuel = new javax.swing.JTable();
+        txtSearch = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         btnclear = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
@@ -40,15 +41,21 @@ public class Shedule_Display extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(239, 250, 250));
         jPanel1.setPreferredSize(new java.awt.Dimension(1646, 860));
 
-        sheduleTable.setModel(new javax.swing.table.DefaultTableModel(
+        tblFuel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Schedule ID", "Pumper", "Pump", "Fuel Type", "Start Meter", "Tank ID", "Date", "Time", "Status", "End Meter"
+                "Fuel ID", "Fuel Name", "Cost Price", "Sales Price", "Tank ID", "Liter"
             }
         ));
-        jScrollPane2.setViewportView(sheduleTable);
+        jScrollPane2.setViewportView(tblFuel);
+
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -57,7 +64,7 @@ public class Shedule_Display extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1568, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(56, Short.MAX_VALUE))
         );
@@ -65,10 +72,10 @@ public class Shedule_Display extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(359, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(483, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -120,7 +127,7 @@ public class Shedule_Display extends javax.swing.JPanel {
         );
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText("SHEDULE");
+        jLabel1.setText("STOCK");
 
         line7.setPreferredSize(new java.awt.Dimension(1110, 4));
 
@@ -174,24 +181,22 @@ public class Shedule_Display extends javax.swing.JPanel {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
- public void display() {
+
+    public void Tabledisplay() {
         try {
-            Schedule_Controller controller = new Schedule_Controller();
-            List<Shedule> schedules = controller.getAllSchedule();
-            DefaultTableModel model = (DefaultTableModel) sheduleTable.getModel();
+            FuelController controller = new FuelController();
+            List<Fuel> fueles = controller.getAllFuel();
+            DefaultTableModel model = (DefaultTableModel) tblFuel.getModel();
             model.setRowCount(0);
-            for (Shedule schedule : schedules) {
+            for (Fuel fuel : fueles) {
                 model.addRow(new Object[]{
-                    schedule.getScheduleID(),
-                    schedule.getPumper(),
-                    schedule.getPump(),
-                    schedule.getFuelType(),
-                    schedule.getStartMeter(),
-                    schedule.getTankID(),
-                    schedule.getDate(),
-                    schedule.getTime(),
-                    schedule.getStatus(),
-                    schedule.getEndMeter()
+                    fuel.getFuelID(),
+                    fuel.getFluelName(),
+                    fuel.getCostPrice(),
+                    fuel.getSalePrice(),
+                    fuel.getTankID(),
+                    fuel.getLiter(),
+                  
                 });
             }
         } catch (SQLException e) {
@@ -204,8 +209,17 @@ public class Shedule_Display extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnSaveActionPerformed
 
-    private void showPumpDropDown() {
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+        DefaultTableModel obj = (DefaultTableModel) tblFuel.getModel();
+        TableRowSorter<DefaultTableModel> obj1 = new TableRowSorter<>(obj);
+        tblFuel.setRowSorter(obj1);
+        String searchText = "(?i)" + txtSearch.getText();
+        obj1.setRowFilter(RowFilter.regexFilter(searchText));       
+    }//GEN-LAST:event_txtSearchKeyReleased
 
+    private void showPumpDropDown() {
+        
+        
     }
 
 
@@ -218,9 +232,9 @@ public class Shedule_Display extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
     private Components.Line line7;
     private Components.Screen screen1;
-    private javax.swing.JTable sheduleTable;
+    private javax.swing.JTable tblFuel;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }

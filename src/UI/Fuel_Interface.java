@@ -284,7 +284,6 @@ public class Fuel_Interface extends javax.swing.JPanel {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
-  
 
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
@@ -294,9 +293,8 @@ public class Fuel_Interface extends javax.swing.JPanel {
         costPrice = Double.valueOf(txtCostPrice.getText()) ;
         SalePrice = Double.valueOf(txtSalesPrice.getText());
         Liter = Double.valueOf(txtLiter.getText());
-        try{
-            
-            Fuel fuel = new Fuel(fuelName,TankID,costPrice,SalePrice,Liter);
+        try{           
+            Fuel fuel = new Fuel(fuelName,costPrice,SalePrice,TankID,Liter);
             fuelController.saveFuel(fuel);
         }catch(Exception e){
              e.printStackTrace();
@@ -304,8 +302,8 @@ public class Fuel_Interface extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSaveActionPerformed
 
 
-    private void showPumpDropDown() {
-
+    private void showPumpDropDown() {       
+        
     }
 
 

@@ -30,6 +30,7 @@ public class Footer extends javax.swing.JPanel {
     
     public Footer() {
         initComponents();
+         setOpaque(false);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -50,7 +51,7 @@ public class Footer extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
     protected void paintComponent(Graphics grphcs){
         Graphics2D g2 = (Graphics2D) grphcs;
-        GradientPaint gra = new GradientPaint(0, 0, color1,getWidth(), getHeight(),color2);
+        GradientPaint gra = new GradientPaint(0, 0, Color.decode("#089BAB"),0, getWidth(),Color.decode("#087292"));
         g2.setPaint(gra);
         g2.fillRect(0, 0, getWidth(), getHeight());
         super.paintComponent(grphcs);
