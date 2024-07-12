@@ -13,6 +13,7 @@ import java.util.Date;
 import javax.swing.Icon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 public class Daily_Sheet extends javax.swing.JPanel {
 
@@ -33,6 +34,7 @@ public class Daily_Sheet extends javax.swing.JPanel {
 
     public Daily_Sheet() {
         initComponents();
+
         showPumperDropDown();
         showPumperDetails();
         showCustomerDropDown();
@@ -42,6 +44,7 @@ public class Daily_Sheet extends javax.swing.JPanel {
         txtAmount.setEditable(false);
         txtOutstanding.setEditable(false);
         cmbCustomer.setEditable(false);
+     
     }
 
     // Start Show Pumb name show Drop down list
@@ -86,7 +89,7 @@ public class Daily_Sheet extends javax.swing.JPanel {
     // Start Capture Pump Details
     public void showPumperDetails() {
         String selectedPumper = (String) cmbPumper.getSelectedItem();
-
+  
         if (selectedPumper != null) {
             try {
                 PreparedStatement p = Mysql_Connection.getInstance().getConnection().prepareStatement("SELECT scheduleID, pump, fuelType, StartMeter, TankID FROM schedule  WHERE pumper = ?;");
@@ -102,6 +105,7 @@ public class Daily_Sheet extends javax.swing.JPanel {
                     txtTank.setEditable(false);
                     txtFuel.setEditable(false);
                     txtStartMeter.setEditable(false);
+                    txtOut_Liters.setEditable(false);
                 } else {
                     txtTank.setText("No matching Tank found.");
                     txtFuel.setText(r.getString("No matching Fuel found."));
@@ -145,7 +149,8 @@ public class Daily_Sheet extends javax.swing.JPanel {
         jLabel29 = new javax.swing.JLabel();
         txtFuel = new javax.swing.JTextField();
         btnFinalize = new javax.swing.JButton();
-        lblliter = new javax.swing.JLabel();
+        jLabel48 = new javax.swing.JLabel();
+        txtOut_Liters = new javax.swing.JTextField();
         details_Box2 = new Components.Details_Box();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
@@ -161,6 +166,7 @@ public class Daily_Sheet extends javax.swing.JPanel {
         txtNote = new javax.swing.JTextArea();
         lblCusID = new javax.swing.JLabel();
         btncusRemove = new javax.swing.JButton();
+        lblliter = new javax.swing.JLabel();
         cmbPumper = new javax.swing.JComboBox<>();
         jLabel22 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -255,6 +261,11 @@ public class Daily_Sheet extends javax.swing.JPanel {
             }
         });
 
+        jLabel48.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        jLabel48.setText("OUTSTANDING LITERS");
+
+        txtOut_Liters.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout details_Box1Layout = new javax.swing.GroupLayout(details_Box1);
         details_Box1.setLayout(details_Box1Layout);
         details_Box1Layout.setHorizontalGroup(
@@ -290,26 +301,27 @@ public class Daily_Sheet extends javax.swing.JPanel {
                                     .addComponent(txtEndMeter, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtOutstanding, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel47))
-                                .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGap(48, 48, 48)
+                                .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(details_Box1Layout.createSequentialGroup()
+                                                .addGap(1, 1, 1)
+                                                .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(txtStartMeter, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jLabel16)
+                                                    .addGroup(details_Box1Layout.createSequentialGroup()
+                                                        .addComponent(jLabel46)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(jLabel7))))
+                                            .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.LEADING))
+                                        .addComponent(txtCash, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(details_Box1Layout.createSequentialGroup()
-                                        .addGap(49, 49, 49)
                                         .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addGroup(details_Box1Layout.createSequentialGroup()
-                                                    .addGap(1, 1, 1)
-                                                    .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(txtStartMeter, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(jLabel16)
-                                                        .addGroup(details_Box1Layout.createSequentialGroup()
-                                                            .addComponent(jLabel46)
-                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                            .addComponent(jLabel7))))
-                                                .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.LEADING))
-                                            .addComponent(txtCash, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(details_Box1Layout.createSequentialGroup()
-                                        .addGap(38, 38, 38)
-                                        .addComponent(lblliter, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                            .addComponent(txtOut_Liters, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel48))
+                                        .addGap(2, 2, 2)))))
                         .addGap(0, 60, Short.MAX_VALUE))))
         );
         details_Box1Layout.setVerticalGroup(
@@ -345,10 +357,10 @@ public class Daily_Sheet extends javax.swing.JPanel {
                 .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtEndMeter, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCash, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(details_Box1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(btnFinalize, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnFinalize, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
                         .addGap(30, 30, 30)
                         .addGroup(details_Box1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel17)
@@ -361,9 +373,11 @@ public class Daily_Sheet extends javax.swing.JPanel {
                         .addComponent(jLabel47)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtOutstanding, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, details_Box1Layout.createSequentialGroup()
-                        .addGap(186, 186, 186)
-                        .addComponent(lblliter, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(details_Box1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel48)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtOut_Liters, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(87, 87, 87))
         );
 
@@ -433,34 +447,39 @@ public class Daily_Sheet extends javax.swing.JPanel {
         details_Box2Layout.setHorizontalGroup(
             details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(details_Box2Layout.createSequentialGroup()
-                .addGap(60, 60, 60)
                 .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel20)
-                    .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(details_Box2Layout.createSequentialGroup()
-                            .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel21)
-                                .addComponent(jLabel23)
-                                .addComponent(cmbCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel24)
-                                .addComponent(txtCusAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(details_Box2Layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel20)
+                            .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(details_Box2Layout.createSequentialGroup()
-                                    .addGap(50, 50, 50)
                                     .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel25)))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, details_Box2Layout.createSequentialGroup()
-                                    .addGap(38, 38, 38)
+                                        .addComponent(jLabel21)
+                                        .addComponent(jLabel23)
+                                        .addComponent(cmbCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel24)
+                                        .addComponent(txtCusAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(details_Box2Layout.createSequentialGroup()
+                                            .addGap(50, 50, 50)
+                                            .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jLabel25)))
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, details_Box2Layout.createSequentialGroup()
-                                            .addComponent(lblCusID, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(255, 255, 255))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, details_Box2Layout.createSequentialGroup()
-                                            .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(btncusRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)))
+                                            .addGap(38, 38, 38)
+                                            .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, details_Box2Layout.createSequentialGroup()
+                                                    .addComponent(lblCusID, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGap(255, 255, 255))
+                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, details_Box2Layout.createSequentialGroup()
+                                                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(btncusRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING))))
+                    .addGroup(details_Box2Layout.createSequentialGroup()
+                        .addGap(73, 73, 73)
+                        .addComponent(lblliter, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(60, Short.MAX_VALUE))
         );
         details_Box2Layout.setVerticalGroup(
@@ -493,7 +512,9 @@ public class Daily_Sheet extends javax.swing.JPanel {
                     .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(124, 124, 124))
+                .addGap(47, 47, 47)
+                .addComponent(lblliter, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30))
         );
 
         cmbPumper.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -666,7 +687,7 @@ public class Daily_Sheet extends javax.swing.JPanel {
                     txtLiter.setText(String.valueOf(x[0]));
                     txtAmount.setText(String.valueOf(x[1]));
                     txtOutstanding.setText(String.valueOf(x[2]));
-                    lblliter.setText(String.valueOf(x[3]));
+                    txtOut_Liters.setText(String.format("%.2f", x[3]));
 
                     if (x[3] >= 0) {
                         txtCusAmount.setEditable(true);
@@ -843,6 +864,7 @@ public class Daily_Sheet extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
@@ -862,6 +884,7 @@ public class Daily_Sheet extends javax.swing.JPanel {
     private javax.swing.JTextField txtFuel;
     private javax.swing.JTextField txtLiter;
     private javax.swing.JTextArea txtNote;
+    private javax.swing.JTextField txtOut_Liters;
     private javax.swing.JTextField txtOutstanding;
     private javax.swing.JTextField txtPump;
     private javax.swing.JTextField txtStartMeter;

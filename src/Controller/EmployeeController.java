@@ -4,6 +4,11 @@ import Model.Employee;
 import Model.Mysql_Connection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.Icon;
 import javax.swing.JOptionPane;
 
@@ -43,9 +48,40 @@ public class EmployeeController {
             }
 
         } catch (Exception e) {
-             e.printStackTrace();
+            e.printStackTrace();
         }
 
     }
 
+    public List<Employee> getAllEmployee() throws SQLException {
+        String sql = "SELECT * FROM employee";
+        List<Employee> employees = new ArrayList<>();
+
+        try (Connection connection = Mysql_Connection.getInstance().getConnection(); Statement statment = connection.createStatement(); ResultSet resultSet = statment.executeQuery(sql)) {
+
+            while (resultSet.next()) {
+
+                Employee employee = new Employee();
+                employee.setEmployeeID(resultSet.getInt("EmployeeID"));
+                employee.setLname(resultSet.getString("LastName"));
+                employee.setFname(resultSet.getString("FirstName"));
+                employee.setAddress(resultSet.getString("Address"));
+                employee.setNic(resultSet.getString("Nic"));          
+                employee.setDob(resultSet.getString("Dob"));
+                employee.setMobile(resultSet.getInt("Mobile"));
+                employee.setPosition(resultSet.getString("Position"));
+                employee.setHire(resultSet.getString("HireDate"));
+                employee.setEmpType(resultSet.getString("EmployeeType"));
+                employee.setSchedule(resultSet.getString("Schedule"));
+                employees.add(employee);
+
+//                Employee employees = new Employee(resultSet.getString("FirstName"), resultSet.getString("LastName"), resultSet.getString("Address"), resultSet.getString("Nic"), resultSet.getString("Gender"), resultSet.getString("Dob"),
+//                        resultSet.getInt("Mobile"), resultSet.getInt("LandlineNumber"), resultSet.getString("Email"), resultSet.getString("Bank"), resultSet.getString("Branch"), resultSet.getInt("AccNumber"), resultSet.getString("HolderName"), resultSet.getDouble("Salary"), resultSet.getString("Position"), resultSet.getString("HireDate"),
+//                        resultSet.getString("EmployeeType"), resultSet.getString("Schedule"));
+//                employees.setEmployeeID(resultSet.getInt("EmployeeID"));
+//                employee.add(employees);
+            }
+        }
+        return employees;
+    }
 }

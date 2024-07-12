@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import raven.swing.shadow.ShadowRenderer;
+import Swing.ShadowRenderer;
 
 public class MenuItem extends JButton {
 

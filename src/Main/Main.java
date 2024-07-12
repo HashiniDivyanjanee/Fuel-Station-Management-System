@@ -4,9 +4,11 @@ import Menu.MenuEvent;
 import UI.CustomerInterface1;
 import UI.Daily_Sheet;
 import UI.Dashboard;
+import UI.Employee_Display;
 import UI.Employee_Interface;
 import UI.Fuel_Display;
 import UI.Fuel_Interface;
+import UI.Purchase_Order;
 import UI.Shedule_Display;
 import UI.Start_Job_Interface;
 import UI.Supplier_Interface;
@@ -26,8 +28,10 @@ public class Main extends javax.swing.JFrame {
                 if(index == 0){
                     showForm(new Dashboard());
                 }  else if(index == 1 && subIndex == 1){
+                    showForm(new Purchase_Order());
+                }  else if(index == 1 && subIndex == 2){
                     showForm(new Supplier_Interface());
-                }else if(index == 1 && subIndex == 2){
+                }else if(index == 1 && subIndex == 3){
                     showForm(new Fuel_Interface());
                 }else if(index == 2 && subIndex == 1){
                     showForm(new Fuel_Display());
@@ -40,7 +44,7 @@ public class Main extends javax.swing.JFrame {
                 }else if(index == 4 && subIndex == 1){
                     showForm(new Employee_Interface());
                 }else if(index == 4 && subIndex == 2){
-                    showForm(new CustomerInterface1());
+                    showForm(new Employee_Display());
                 }else if(index == 5 && subIndex == 1){
                     showForm(new Start_Job_Interface());
                 }else if(index == 5 && subIndex == 2){

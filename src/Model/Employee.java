@@ -2,6 +2,10 @@ package Model;
 
 public class Employee {
 
+    public Employee(){
+        
+    }
+    
     public Employee(String fname, String lname, String address, String nic, String gender, String dob, int mobile, int land, String email, String bank, String branch, int acc, String holder, double salary, String position, String hire, String empType, String schedule) {
         this.lname = lname;
         this.fname = fname;
@@ -167,7 +171,18 @@ public class Employee {
         this.acc = acc;
     }
 
+    int employeeID;
+
+    public int getEmployeeID() {
+        return employeeID;
+    }
+
+    public void setEmployeeID(int employeeID) {
+        this.employeeID = employeeID;
+    }
     private String lname, fname, dob, address, nic, gender, email, bank, branch, holder, position, hire, schedule, empType;
     private Double salary;
     private int mobile, land, acc;
+
+    
 }

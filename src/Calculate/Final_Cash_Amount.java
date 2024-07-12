@@ -12,7 +12,7 @@ public class Final_Cash_Amount {
         double[] literAmount = new double[4];
 
         literAmount[0] = end - start;
-        literAmount[1] = (end - start) * price;
+        literAmount[1] = literAmount[0] * price;
         literAmount[2] = literAmount[1] - cash;
         literAmount[3] = literAmount[2] / price;
         return literAmount;

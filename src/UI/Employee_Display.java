@@ -1,16 +1,16 @@
 package UI;
 
-import Controller.Schedule_Controller;
+import Controller.EmployeeController;
+import Model.Employee;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
-import Model.Shedule;
 import java.util.List;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
 
-public class Shedule_Display extends javax.swing.JPanel {
+public class Employee_Display extends javax.swing.JPanel {
 
-    public Shedule_Display() {
+    public Employee_Display() {
         initComponents();
         Tabledisplay();
     }
@@ -22,12 +22,9 @@ public class Shedule_Display extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        sheduleTable = new javax.swing.JTable();
+        employeeTable = new javax.swing.JTable();
         txtSearch = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
-        btnclear = new javax.swing.JButton();
-        btnCancel = new javax.swing.JButton();
-        btnSave = new javax.swing.JButton();
         screen1 = new Components.Screen();
         jLabel1 = new javax.swing.JLabel();
         line7 = new Components.Line();
@@ -41,15 +38,23 @@ public class Shedule_Display extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(239, 250, 250));
         jPanel1.setPreferredSize(new java.awt.Dimension(1646, 860));
 
-        sheduleTable.setModel(new javax.swing.table.DefaultTableModel(
+        employeeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Schedule ID", "Pumper", "Pump", "Fuel Type", "Start Meter", "Tank ID", "Start Date", "Start Time", "Status", "End Meter"
+                "Employee ID", "First Name", "Last Name", "Address", "NIC", "DOB", "Mobile", "Position", "Hire Date", "Employee Type", "Schedule"
             }
-        ));
-        jScrollPane2.setViewportView(sheduleTable);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(employeeTable);
 
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -82,52 +87,19 @@ public class Shedule_Display extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(8, 114, 146));
 
-        btnclear.setBackground(new java.awt.Color(9, 161, 207));
-        btnclear.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnclear.setForeground(new java.awt.Color(255, 255, 255));
-        btnclear.setText("CLEAR");
-
-        btnCancel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnCancel.setForeground(new java.awt.Color(51, 51, 51));
-        btnCancel.setText("CANCEL");
-        btnCancel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        btnSave.setBackground(new java.awt.Color(8, 114, 146));
-        btnSave.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnSave.setForeground(new java.awt.Color(255, 255, 255));
-        btnSave.setText("SAVE");
-        btnSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnclear, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
+            .addGap(0, 1612, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnclear, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
-                    .addComponent(btnCancel, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
-                    .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
-                .addGap(10, 10, 10))
+            .addGap(0, 57, Short.MAX_VALUE)
         );
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText("SHEDULE");
+        jLabel1.setText("EMPLOYEE");
 
         line7.setPreferredSize(new java.awt.Dimension(1110, 4));
 
@@ -183,22 +155,23 @@ public class Shedule_Display extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
  public void Tabledisplay() {
         try {
-            Schedule_Controller controller = new Schedule_Controller();
-            List<Shedule> schedules = controller.getAllSchedule();
-            DefaultTableModel model = (DefaultTableModel) sheduleTable.getModel();
+            EmployeeController controller = new EmployeeController();
+            List<Employee> employees = controller.getAllEmployee();
+            DefaultTableModel model = (DefaultTableModel) employeeTable.getModel();
             model.setRowCount(0);
-            for (Shedule schedule : schedules) {
+            for (Employee employee : employees) {
                 model.addRow(new Object[]{
-                    schedule.getScheduleID(),
-                    schedule.getPumper(),
-                    schedule.getPump(),
-                    schedule.getFuelType(),
-                    schedule.getStartMeter(),
-                    schedule.getTankID(),
-                    schedule.getDate(),
-                    schedule.getTime(),
-                    schedule.getStatus(),
-                    schedule.getEndMeter()
+                    employee.getEmployeeID(),
+                    employee.getFname(),
+                    employee.getLname(),
+                    employee.getAddress(),
+                    employee.getNic(),                  
+                    employee.getDob(),
+                    employee.getMobile(),
+                    employee.getPosition(),
+                    employee.getHire(),
+                    employee.getEmpType(),
+                    employee.getSchedule()
                 });
             }
         } catch (SQLException e) {
@@ -207,15 +180,11 @@ public class Shedule_Display extends javax.swing.JPanel {
     }
 
 
-    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-
-    }//GEN-LAST:event_btnSaveActionPerformed
-
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
 
-        DefaultTableModel obj = (DefaultTableModel) sheduleTable.getModel();
+        DefaultTableModel obj = (DefaultTableModel) employeeTable.getModel();
         TableRowSorter<DefaultTableModel> obj1 = new TableRowSorter<>(obj);
-        sheduleTable.setRowSorter(obj1);
+        employeeTable.setRowSorter(obj1);
         String searchText = "(?i)" + txtSearch.getText();
         obj1.setRowFilter(RowFilter.regexFilter(searchText));
     }//GEN-LAST:event_txtSearchKeyReleased
@@ -226,9 +195,7 @@ public class Shedule_Display extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancel;
-    private javax.swing.JButton btnSave;
-    private javax.swing.JButton btnclear;
+    private javax.swing.JTable employeeTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -236,7 +203,6 @@ public class Shedule_Display extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private Components.Line line7;
     private Components.Screen screen1;
-    private javax.swing.JTable sheduleTable;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }

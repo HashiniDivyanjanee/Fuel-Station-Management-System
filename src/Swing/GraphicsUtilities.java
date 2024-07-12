@@ -1,4 +1,4 @@
-package raven.swing.shadow;
+package Swing;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;

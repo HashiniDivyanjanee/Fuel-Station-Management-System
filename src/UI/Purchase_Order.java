@@ -2,19 +2,97 @@ package UI;
 
 import Controller.FuelController;
 import Model.Fuel;
+import Swing.DataSearch;
+import Swing.EventClick;
+import Swing.PanelSearch;
+import java.awt.Color;
+import java.awt.Component;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.BorderFactory;
+import javax.swing.JPopupMenu;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
 
-public class Fuel_Display extends javax.swing.JPanel {
+public class Purchase_Order extends javax.swing.JPanel {
 
-    public Fuel_Display() {
+    private JPopupMenu menu;
+    private PanelSearch search;
+
+    public Purchase_Order() {
         initComponents();
-        Tabledisplay();
+        connectToDatabase();
+        menu = new JPopupMenu();
+        search = new PanelSearch();
+        menu.setBorder(BorderFactory.createLineBorder(new Color(164, 164, 164)));
+        menu.add(search);
+        menu.setFocusable(false);
+        search.addEventClick(new EventClick() {
+            @Override
+            public void itemClick(DataSearch data) {
+                menu.setVisible(false);
+                txtSearch.setText(data.getText());
+                addProduct(data.getText());
+                System.out.println("Click Item: " + data.getText());
+            }
+
+            @Override
+            public void itemRemove(Component com, DataSearch data) {
+                search.remove(com);
+                removeHistory(data.getText());
+                menu.setPopupSize(menu.getWidth(), (search.getItemSize() * 35) + 2);
+                if (search.getItemSize() == 0) {
+                    menu.setVisible(false);
+                }
+                System.out.println("Remove Item: " + data.getText());
+            }
+        });
     }
 
+    private Connection con;
+
+    private void connectToDatabase() {
+        try {
+         String url = "jdbc:mysql://localhost:3307/fuel";
+        String username = "root";
+        String password = "Lhd1234";
+        
+        con = java.sql.DriverManager.getConnection(url, username, password);
+           
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }
+
+    
+    
+    private void addProduct(String text){
+        try {
+            boolean add = true;
+            PreparedStatement p = con.prepareStatement("SELECT FuelName FROM fuel WHERE FuelName = ? limit 1; ");
+            p.setString(1, text);
+            ResultSet r = p.executeQuery();
+            if(r.first()){
+                add = false;
+            }
+            r.close();
+            p.close();
+            if(add){
+                p=con.prepareStatement("insert into fuel(FuelName) value (?)");
+                p.setString(1, text);
+                p.execute();
+                p.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -22,8 +100,8 @@ public class Fuel_Display extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblFuel = new javax.swing.JTable();
-        txtSearch = new javax.swing.JTextField();
+        tbl_purchase = new javax.swing.JTable();
+        txtSearch = new Components.TextField();
         jPanel2 = new javax.swing.JPanel();
         btnclear = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
@@ -41,7 +119,7 @@ public class Fuel_Display extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(239, 250, 250));
         jPanel1.setPreferredSize(new java.awt.Dimension(1646, 860));
 
-        tblFuel.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_purchase.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -49,8 +127,19 @@ public class Fuel_Display extends javax.swing.JPanel {
                 "Fuel ID", "Fuel Name", "Cost Price", "Sales Price", "Tank ID", "Liter"
             }
         ));
-        jScrollPane2.setViewportView(tblFuel);
+        jScrollPane2.setViewportView(tbl_purchase);
 
+        txtSearch.setPrefixIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-search-34.png"))); // NOI18N
+        txtSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtSearchMouseClicked(evt);
+            }
+        });
+        txtSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchActionPerformed(evt);
+            }
+        });
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtSearchKeyReleased(evt);
@@ -64,18 +153,18 @@ public class Fuel_Display extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1568, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1568, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(56, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(19, 19, 19)
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(483, Short.MAX_VALUE))
+                .addContainerGap(464, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -127,7 +216,7 @@ public class Fuel_Display extends javax.swing.JPanel {
         );
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText("STOCK");
+        jLabel1.setText("PURCHASE ORDER");
 
         line7.setPreferredSize(new java.awt.Dimension(1110, 4));
 
@@ -182,44 +271,73 @@ public class Fuel_Display extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    public void Tabledisplay() {
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
+
+    }//GEN-LAST:event_txtSearchActionPerformed
+
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+        if (txtSearch.getText().equals("")) {
+            txtSearch.setSuffixIcon(null);
+        } else {
+            txtSearch.setSuffixIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/loading.gif")));
+        }
+        String text = txtSearch.getText().trim().toLowerCase();
+        search.setData(search(text));
+        if (search.getItemSize() > 0) {
+
+            menu.show(txtSearch, 0, txtSearch.getHeight());
+            menu.setPopupSize(menu.getWidth(), (search.getItemSize() * 35) + 2);
+        } else {
+            menu.setVisible(false);
+        }
+    }//GEN-LAST:event_txtSearchKeyReleased
+
+private List<DataSearch> search(String search) {
+    List<DataSearch> list = new ArrayList<>();
+    try {
+        PreparedStatement p = con.prepareStatement("SELECT DISTINCT FuelName FROM fuel WHERE FuelName LIKE ?;");
+        p.setString(1, "%" + search + "%");
+        ResultSet r = p.executeQuery();
+        while (r.next()) {  
+            String text = r.getString(1);
+            boolean story = !text.equals("");
+            list.add(new DataSearch(text, story));
+        }
+        r.close();
+        p.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return list;
+}
+
+
+    private void removeHistory(String text) {
         try {
-            FuelController controller = new FuelController();
-            List<Fuel> fueles = controller.getAllFuel();
-            DefaultTableModel model = (DefaultTableModel) tblFuel.getModel();
-            model.setRowCount(0);
-            for (Fuel fuel : fueles) {
-                model.addRow(new Object[]{
-                    fuel.getFuelID(),
-                    fuel.getFluelName(),
-                    fuel.getCostPrice(),
-                    fuel.getSalePrice(),
-                    fuel.getTankID(),
-                    fuel.getLiter(),
-                  
-                });
-            }
+            PreparedStatement p = con.prepareStatement("delete from fuel where FuelName=?");
+            p.setString(1, text);
+            p.execute();
+            p.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
 
-    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
 
-    }//GEN-LAST:event_btnSaveActionPerformed
-
-    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
-        DefaultTableModel obj = (DefaultTableModel) tblFuel.getModel();
-        TableRowSorter<DefaultTableModel> obj1 = new TableRowSorter<>(obj);
-        tblFuel.setRowSorter(obj1);
-        String searchText = "(?i)" + txtSearch.getText();
-        obj1.setRowFilter(RowFilter.regexFilter(searchText));       
-    }//GEN-LAST:event_txtSearchKeyReleased
+    private void txtSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchMouseClicked
+        if (search.getItemSize() > 0) {
+            menu.show(txtSearch, 0, txtSearch.getHeight());
+        }
+    }//GEN-LAST:event_txtSearchMouseClicked
 
     private void showPumpDropDown() {
-        
-        
+
     }
 
 
@@ -234,7 +352,7 @@ public class Fuel_Display extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private Components.Line line7;
     private Components.Screen screen1;
-    private javax.swing.JTable tblFuel;
-    private javax.swing.JTextField txtSearch;
+    private javax.swing.JTable tbl_purchase;
+    private Components.TextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }
