@@ -114,7 +114,7 @@ public class LineChart extends javax.swing.JPanel {
                     int py[] = {(int) (size.getY() + size.getHeight() - seriesValues), (int) (size.getY() + size.getHeight() - seriesValues - sy), (int) (size.getY() + size.getHeight() - seriesValues), (int) (size.getY() + size.getHeight()), (int) (size.getY() + size.getHeight() + sy), (int) (size.getY() + size.getHeight())};
                     if (new Polygon(px, py, px.length).contains(evt.getPoint())) {
                         double data = model.get(index).getValues()[i];
-//                        showLabel = df.format(data);
+                        showLabel = df.format(data);
                         labelLocation.setLocation((int) (size.getX() + x + s), (int) (size.getY() + size.getHeight() - seriesValues - sy));
                         chart.repaint();
                         return true;

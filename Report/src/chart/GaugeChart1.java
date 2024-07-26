@@ -16,7 +16,7 @@ import java.awt.geom.Rectangle2D;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 
-public class GaugeChart extends JComponent {
+public class GaugeChart1 extends JComponent {
 
     private int gaugeSize = 15;
 
@@ -67,13 +67,13 @@ public class GaugeChart extends JComponent {
         this.maximum = maximum;
         repaint();
     }
-    private Color color1 = new Color(51, 71, 216);
-    private Color color2 = new Color(237, 63, 63);
+    private Color color1 = new Color(5,117,230);
+    private Color color2 = new Color(0, 242, 96);
     private int value;
     private int maximum;
    
 
-    public GaugeChart() {
+    public GaugeChart1() {
         setFont(new JLabel().getFont().deriveFont(0,20));
         setPreferredSize (new Dimension(250, 220));
         setForeground(new Color(60, 60, 60));
