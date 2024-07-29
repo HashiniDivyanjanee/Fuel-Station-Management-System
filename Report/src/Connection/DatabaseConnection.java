@@ -19,7 +19,7 @@ public class DatabaseConnection {
     public void connecToDatabase() throws SQLException {
 
         String server = "localhost";
-        String database = "data";
+        String database = "fsms-data";
         String username = "root";
         String password = "Lhd1234";
         String Port = "3307";

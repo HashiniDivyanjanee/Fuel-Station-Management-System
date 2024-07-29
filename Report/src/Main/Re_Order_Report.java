@@ -123,6 +123,8 @@ public class Re_Order_Report extends javax.swing.JFrame {
 
     private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
 
+        
+        
         try {
             Map<String, Object> parameters = new HashMap<>();
             String jasperFilePath = "JasperReport/LowStock_Data.jrxml";
@@ -189,7 +191,7 @@ public class Re_Order_Report extends javax.swing.JFrame {
 
     private void showCategory() {
         try {
-            PreparedStatement p = DatabaseConnection.getInstance().getConnection().prepareStatement("SELECT DISTINCT `Cat_Name` FROM `items` ORDER BY `Cat_Name` ASC;;");
+            PreparedStatement p = DatabaseConnection.getInstance().getConnection().prepareStatement("SELECT DISTINCT `Cat_Name` FROM `items` ORDER BY `Cat_Name` ASC;");
             ResultSet r = p.executeQuery();
 
             while (r.next()) {
