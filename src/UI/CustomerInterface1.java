@@ -124,6 +124,11 @@ public class CustomerInterface1 extends javax.swing.JPanel {
 
         cmbPrefix.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cmbPrefix.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mr.", "Miss.", "Mrs.", "Ms.", "Prof.", "Rev." }));
+        cmbPrefix.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbPrefixActionPerformed(evt);
+            }
+        });
 
         jLabel37.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel37.setForeground(new java.awt.Color(12, 89, 118));
@@ -606,6 +611,10 @@ public class CustomerInterface1 extends javax.swing.JPanel {
       Calc calculator = new Calc();
       calculator.setVisible(true);
     }//GEN-LAST:event_btn_calActionPerformed
+
+    private void cmbPrefixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPrefixActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbPrefixActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

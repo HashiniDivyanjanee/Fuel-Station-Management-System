@@ -7,7 +7,6 @@ import Model.Shedule;
 import java.util.List;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
-import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 public class Dashboard extends javax.swing.JPanel {
 

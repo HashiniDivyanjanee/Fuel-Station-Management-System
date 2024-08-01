@@ -9,6 +9,7 @@ import UI.Employee_Interface;
 import UI.Fuel_Display;
 import UI.Fuel_Interface;
 import UI.Purchase_Order;
+import UI.Purchase_Order_Interface;
 import UI.Shedule_Display;
 import UI.Start_Job_Interface;
 import UI.Supplier_Interface;
@@ -28,7 +29,7 @@ public class Main extends javax.swing.JFrame {
                 if(index == 0){
                     showForm(new Dashboard());
                 }  else if(index == 1 && subIndex == 1){
-                    showForm(new Purchase_Order());
+                    showForm(new Purchase_Order_Interface());
                 }  else if(index == 1 && subIndex == 2){
                     showForm(new Supplier_Interface());
                 }else if(index == 1 && subIndex == 3){

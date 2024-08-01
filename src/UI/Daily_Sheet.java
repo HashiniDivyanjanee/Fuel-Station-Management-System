@@ -13,7 +13,6 @@ import java.util.Date;
 import javax.swing.Icon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 public class Daily_Sheet extends javax.swing.JPanel {
 
@@ -55,7 +54,6 @@ public class Daily_Sheet extends javax.swing.JPanel {
 
             while (r.next()) {
                 String pumpdis = r.getString("pumper");
-
                 cmbPumper.addItem(pumpdis);
             }
             r.close();
@@ -517,6 +515,7 @@ public class Daily_Sheet extends javax.swing.JPanel {
                 .addGap(30, 30, 30))
         );
 
+        cmbPumper.setEditable(true);
         cmbPumper.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cmbPumper.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
