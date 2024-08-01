@@ -3,14 +3,9 @@ package Main;
 import java.awt.BorderLayout;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
-import java.security.Policy;
 import java.util.HashMap;
 import java.util.Map;
-import javax.swing.JOptionPane;
-import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -18,22 +13,23 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.swing.JRViewer;
-import net.sf.jasperreports.view.JasperViewer;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import net.sf.jasperreports.engine.*;
-import net.sf.jasperreports.view.JasperViewer;
 import Connection.DatabaseConnection;
+import Controller.Item_Controller;
+import Controller.Supplier_Controller;
+import Model.Item;
 import com.formdev.flatlaf.FlatLightLaf;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.List;
 import javax.swing.SwingUtilities;
+import Model.Supplier;
+import java.io.FileNotFoundException;
+import javax.swing.JOptionPane;
 
 public class Re_Order_Report extends javax.swing.JFrame {
 
     public Re_Order_Report() {
         initComponents();
+        showSupp();
+        showCategory();
     }
 
     @SuppressWarnings("unchecked")
@@ -122,88 +118,107 @@ public class Re_Order_Report extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
+         try {
+        Map<String, Object> parameters = new HashMap<>();
+        String jasperFilePath = "JasperReport/LowStock_Data.jrxml";
 
-        
-        
-        try {
-            Map<String, Object> parameters = new HashMap<>();
-            String jasperFilePath = "JasperReport/LowStock_Data.jrxml";
+        String supplier = cmbSupp.getSelectedItem().toString();
+        String category = cmbCategory.getSelectedItem().toString();
 
-            String supplier = cmbSupp.getSelectedItem().toString();
-            String category = cmbCategory.getSelectedItem().toString();
+        parameters.put("ParameterSupplier", supplier);
+        parameters.put("ParameterCategory", category);
 
-            parameters.put("ParameterSupplier", supplier);
-            parameters.put("ParameterCategory", category);
-
-            // Debugging output
-            System.out.println("File path: " + new File(jasperFilePath).getAbsolutePath());
-            System.out.println("File exists: " + new File(jasperFilePath).exists());
-
-            InputStream input = new FileInputStream(new File(jasperFilePath));
-            JasperDesign myJasperDesign = JRXmlLoader.load(input);
-
-            // Check if connection is closed
-            System.out.println("Connection is closed: " + DatabaseConnection.getInstance().getConnection().isClosed());
-
-            JasperReport myJasperReport = JasperCompileManager.compileReport(myJasperDesign);
-            JasperPrint myJasperPrint = JasperFillManager.fillReport(myJasperReport, parameters, DatabaseConnection.getInstance().getConnection());
-
-            JRViewer jr = new JRViewer(myJasperPrint);
-
-            // Ensure GUI updates are on the EDT
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    Preview.removeAll();  // Remove any existing content
-                    Preview.setLayout(new BorderLayout());
-                    Preview.add(jr, BorderLayout.CENTER);
-                    Preview.revalidate();
-                    Preview.repaint();
-                }
-            });
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        // Load the jrxml file from the classpath
+        InputStream input = getClass().getClassLoader().getResourceAsStream(jasperFilePath);
+        if (input == null) {
+            throw new FileNotFoundException("File not found in classpath: " + jasperFilePath);
         }
+
+        JasperDesign myJasperDesign = JRXmlLoader.load(input);
+
+        // Check if connection is closed
+        System.out.println("Connection is closed: " + DatabaseConnection.getInstance().getConnection().isClosed());
+
+        JasperReport myJasperReport = JasperCompileManager.compileReport(myJasperDesign);
+        JasperPrint myJasperPrint = JasperFillManager.fillReport(myJasperReport, parameters, DatabaseConnection.getInstance().getConnection());
+
+        JRViewer jr = new JRViewer(myJasperPrint);
+
+        // Ensure GUI updates are on the EDT
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                Preview.removeAll();  // Remove any existing content
+                Preview.setLayout(new BorderLayout());
+                Preview.add(jr, BorderLayout.CENTER);
+                Preview.revalidate();
+                Preview.repaint();
+            }
+        });
+
+    } catch (Exception e) {
+        e.printStackTrace(); // Print stack trace for more detailed error information
+        JOptionPane.showMessageDialog(null, e);
+    }
     }//GEN-LAST:event_btnFindActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        showSupp();
         showCategory();
     }//GEN-LAST:event_formWindowOpened
 
-    private void showSupp() {
+    public void showSupp() {
         try {
-            PreparedStatement p = DatabaseConnection.getInstance().getConnection().prepareStatement("SELECT DISTINCT `Supp_Name` FROM `supplier` ORDER BY `Supp_Name` ASC;");
-            ResultSet r = p.executeQuery();
-
-            while (r.next()) {
-                String supplier = r.getString("Supp_Name");
-
-                cmbSupp.addItem(supplier);
+            Supplier_Controller controller = new Supplier_Controller();
+            List<Supplier> suppliers = controller.getSupplier();
+            for (Supplier supplier : suppliers) {
+                cmbSupp.addItem(supplier.getSupp_Name());
             }
-            r.close();
-            p.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
     }
+//        try {
+//            PreparedStatement p = DatabaseConnection.getInstance().getConnection().prepareStatement("SELECT DISTINCT `Supp_Name` FROM `supplier` ORDER BY `Supp_Name` ASC;");
+//            ResultSet r = p.executeQuery();
+//
+//            while (r.next()) {
+//                String supplier = r.getString("Supp_Name");
+//
+//                cmbSupp.addItem(supplier);
+//            }
+//            r.close();
+//            p.close();
+//        } catch (SQLException ex) {
+//            ex.printStackTrace();
+//        }
 
-    private void showCategory() {
+    public void showCategory() {
         try {
-            PreparedStatement p = DatabaseConnection.getInstance().getConnection().prepareStatement("SELECT DISTINCT `Cat_Name` FROM `items` ORDER BY `Cat_Name` ASC;");
-            ResultSet r = p.executeQuery();
-
-            while (r.next()) {
-                String category = r.getString("Cat_Name");
-
-                cmbCategory.addItem(category);
+            Item_Controller controller = new Item_Controller();
+            List<Item> categories = controller.getItem();
+            for (Item category : categories) {
+                cmbCategory.addItem(category.getCategory());
             }
-            r.close();
-            p.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error loading categories: " + e.getMessage());
         }
+
+//    try {
+//            PreparedStatement p = DatabaseConnection.getInstance().getConnection().prepareStatement("SELECT DISTINCT `Cat_Name` FROM `items` ORDER BY `Cat_Name` ASC;");
+//            ResultSet r = p.executeQuery();
+//
+//            while (r.next()) {
+//                String category = r.getString("Cat_Name");
+//
+//                cmbCategory.addItem(category);
+//            }
+//            r.close();
+//            p.close();
+//        } catch (SQLException ex) {
+//            ex.printStackTrace();
+//        }
     }
 
     public static void main(String args[]) {

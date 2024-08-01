@@ -161,7 +161,7 @@ public class Sms_Re_Order_Report extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
 //        showSupp();
-//        showCategory();
+        showCategory();
     }//GEN-LAST:event_formWindowOpened
 
     public void showSupp() {
@@ -174,14 +174,28 @@ public class Sms_Re_Order_Report extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+//          try {
+//            PreparedStatement p = DatabaseConnection.getInstance().getConnection().prepareStatement("SELECT DISTINCT `Supp_Name` FROM `supplier` ORDER BY `Supp_Name` ASC;");
+//            ResultSet r = p.executeQuery();
+//
+//            while (r.next()) {
+//                String supplier = r.getString("Supp_Name");
+//
+//                cmbSupp.addItem(supplier);
+//            }
+//            r.close();
+//            p.close();
+//        } catch (SQLException ex) {
+//            ex.printStackTrace();
+//        }
     }
 
     public void showCategory() {
-
         try {
             Item_Controller controller = new Item_Controller();
-            List<Item> categorys = controller.getItem();
-            for (Item category : categorys) {
+            List<Item> categories = controller.getItem();
+            for (Item category : categories) {
                 cmbCategory.addItem(category.getCategory());
             }
         } catch (Exception e) {

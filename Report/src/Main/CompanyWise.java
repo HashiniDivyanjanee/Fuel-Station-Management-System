@@ -13,7 +13,8 @@ public class CompanyWise extends javax.swing.JFrame {
     public CompanyWise() {
         initComponents();
         try {
-            DatabaseConnection.getInstance().connecToDatabase();
+            DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
+            Connection connection = databaseConnection.getConnection();
         } catch (SQLException ex) {
             Logger.getLogger(CompanyWise.class.getName()).log(Level.SEVERE, null, ex);
         }

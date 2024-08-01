@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 import javaswingdev.chart.ModelPieChart;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import java.sql.Connection;
 
 public class SalesReport extends javax.swing.JFrame {
 
@@ -33,7 +34,8 @@ public class SalesReport extends javax.swing.JFrame {
 
         //Start Database Connection
         try {
-            DatabaseConnection.getInstance().connecToDatabase();
+           DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
+            Connection connection = databaseConnection.getConnection();
         } catch (SQLException ex) {
             Logger.getLogger(CompanyWise.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -526,7 +528,8 @@ public class SalesReport extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
 
         try {
-            DatabaseConnection.getInstance().connecToDatabase();
+              DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
+            Connection connection = databaseConnection.getConnection();
             showYear();
             showEmp();
 

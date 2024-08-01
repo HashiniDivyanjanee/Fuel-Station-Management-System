@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="LowStock" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9fa11fdb-353a-4a0d-a128-a7020c3b48c0">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="LowStock" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9fa11fdb-353a-4a0d-a128-a7020c3b48c0">
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
@@ -10,7 +10,7 @@
 	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Data Mysql"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SMS"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<parameter name="ParameterSupplier" class="java.lang.String"/>
 	<parameter name="ParameterCategory" class="java.lang.String"/>
@@ -19,12 +19,12 @@
     i.Item_ID,
     i.Item_Name,
     i.Cat_Name,
-    p.Available_Qty,
+    i.ItemQty,
     i.Reorder_Level,
     i.Reorder_Qty,
     isl.Supp_Name AS Item_Supp_Name,
     s.Supp_Name,
-    (i.Reorder_Level - p.Available_Qty) + i.Reorder_Qty AS Reorder_Amount
+    (i.Reorder_Level - i.ItemQty) + i.Reorder_Qty AS Reorder_Amount
 FROM 
     items i
 JOIN 
@@ -32,21 +32,17 @@ JOIN
 ON 
     i.Item_ID = isl.Item_ID
 JOIN 
-    products_stock_management p
-ON 
-    i.Item_ID = p.Product_ID
-JOIN 
     supplier s
 ON 
     isl.Supp_Name = s.Supp_CustomID
 WHERE 
-    i.Reorder_Qty > p.Available_Qty
-    AND (s.Supp_Name =  $P{ParameterSupplier} OR i.Cat_Name = $P{ParameterCategory})]]>
+    i.Reorder_Qty > i.ItemQty
+    AND (s.Supp_Name = $P{ParameterSupplier} and i.Cat_Name = $P{ParameterCategory});]]>
 	</queryString>
 	<field name="Item_ID" class="java.lang.String"/>
 	<field name="Item_Name" class="java.lang.String"/>
 	<field name="Cat_Name" class="java.lang.String"/>
-	<field name="Available_Qty" class="java.lang.Double"/>
+	<field name="ItemQty" class="java.lang.Double"/>
 	<field name="Reorder_Qty" class="java.lang.Double"/>
 	<field name="Reorder_Amount" class="java.lang.Double"/>
 	<background>
@@ -67,7 +63,7 @@ WHERE
 		</band>
 	</title>
 	<columnHeader>
-		<band height="54" splitType="Stretch">
+		<band height="51" splitType="Stretch">
 			<staticText>
 				<reportElement x="1" y="27" width="90" height="18" uuid="2af081a3-bb15-41aa-a8ee-8ae8eab5727c">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
@@ -176,7 +172,7 @@ WHERE
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="22" splitType="Stretch">
+		<band height="42" splitType="Stretch">
 			<textField>
 				<reportElement x="1" y="0" width="90" height="20" uuid="f2147d9a-80ab-4756-aba7-12fb7e0ca81b">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="423cff0c-4f7b-47e5-b2ce-e0a0d45ada45"/>
@@ -199,7 +195,7 @@ WHERE
 				<reportElement x="396" y="-3" width="73" height="23" uuid="7b9ae092-93cc-413c-8f76-eac3caa03479">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="68bccfd2-f768-4fd2-a372-c7205a949ad6"/>
 				</reportElement>
-				<textFieldExpression><![CDATA[$F{Available_Qty}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{ItemQty}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="469" y="-3" width="48" height="23" uuid="76826fd4-69a3-409c-be76-c16e41d06c22">
@@ -208,7 +204,7 @@ WHERE
 				<textFieldExpression><![CDATA[$F{Reorder_Qty}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="517" y="-3" width="47" height="23" uuid="955b54ab-067e-406c-8856-71f45d6f2651">
+				<reportElement x="517" y="0" width="47" height="20" uuid="955b54ab-067e-406c-8856-71f45d6f2651">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="003d6925-7a1a-44e7-ae2b-41d11f297960"/>
 				</reportElement>
 				<textFieldExpression><![CDATA[$F{Reorder_Amount}]]></textFieldExpression>
