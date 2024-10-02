@@ -54,6 +54,7 @@ public class Purchase_Order_Interface extends javax.swing.JPanel {
 
     public void showFuelDetails() {
         String selectedPumper = (String) cmbPumper.getSelectedItem();
+<<<<<<< HEAD
         if (selectedPumper != null) {
             try {
                 PreparedStatement p = Mysql_Connection.getInstance().getConnection().prepareStatement("SELECT fid, FuelName, CostPrice, SalePrice, TankID, Liter FROM fuel  WHERE FuelName = ? ;");
@@ -61,14 +62,32 @@ public class Purchase_Order_Interface extends javax.swing.JPanel {
                 ResultSet r = p.executeQuery();
                 if (r.next()) {
                     txtFuelID.setText(r.getString("fid"));
+=======
+
+        if (selectedPumper != null) {
+            try {
+                PreparedStatement p = Mysql_Connection.getInstance().getConnection().prepareStatement("SELECT FuelID, FuelName, CostPrice, SalePrice, TankID, Liter FROM fuel  WHERE FuelName = ? ;");
+                p.setString(1, selectedPumper);
+                ResultSet r = p.executeQuery();
+                if (r.next()) {
+                    txtFuelID.setText(r.getString("FuelID"));
+>>>>>>> bc50b1e8e7a75b6ddd1d9a9aa52fec733caac591
                     txtFeul.setText(r.getString("FuelName"));
                     txtCost.setText(r.getString("CostPrice"));
                     txtSale.setText(r.getString("SalePrice"));
                     txtTankID.setText(r.getString("TankID"));
+<<<<<<< HEAD
 
                     txtFuelID.setEditable(false);
                     txtFeul.setEditable(false);
                     txtTankID.setEditable(false);
+=======
+
+                    txtFuelID.setEditable(false);
+                    txtFeul.setEditable(false);
+                    txtTankID.setEditable(false);
+
+>>>>>>> bc50b1e8e7a75b6ddd1d9a9aa52fec733caac591
                 } else {
                     txtFeul.setText("No matching Tank found.");
                     txtCost.setText(r.getString("No matching Fuel found."));
@@ -596,6 +615,10 @@ public class Purchase_Order_Interface extends javax.swing.JPanel {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/Icon/red_warning.png"));
             JOptionPane.showMessageDialog(null, "Please enter a Amount.", "Warning", JOptionPane.INFORMATION_MESSAGE, icon);
         } else {
+<<<<<<< HEAD
+=======
+
+>>>>>>> bc50b1e8e7a75b6ddd1d9a9aa52fec733caac591
             String fuel = txtFeul.getText();
             Double cost = Double.valueOf(txtCost.getText());
             Double qty = Double.valueOf(txtQty.getText());
@@ -624,6 +647,10 @@ public class Purchase_Order_Interface extends javax.swing.JPanel {
     }//GEN-LAST:event_cmbSupplierActionPerformed
 
     private void btncusRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncusRemoveActionPerformed
+<<<<<<< HEAD
+=======
+
+>>>>>>> bc50b1e8e7a75b6ddd1d9a9aa52fec733caac591
         DefaultTableModel tblModel = (DefaultTableModel) tblPurchase.getModel();
 
         if (tblPurchase.getSelectedRowCount() == 1) {

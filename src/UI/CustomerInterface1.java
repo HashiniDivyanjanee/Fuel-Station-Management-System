@@ -614,6 +614,10 @@ public class CustomerInterface1 extends javax.swing.JPanel {
     private void cmbPrefixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPrefixActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbPrefixActionPerformed
+<<<<<<< HEAD
+=======
+
+>>>>>>> bc50b1e8e7a75b6ddd1d9a9aa52fec733caac591
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser DateEx;

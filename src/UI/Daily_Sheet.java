@@ -13,7 +13,11 @@ import java.util.Date;
 import javax.swing.Icon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> bc50b1e8e7a75b6ddd1d9a9aa52fec733caac591
 public class Daily_Sheet extends javax.swing.JPanel {
 
     double startMeter, endMeter, salesPrice, cash;
