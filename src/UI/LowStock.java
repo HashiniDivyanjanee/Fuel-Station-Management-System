@@ -8,9 +8,9 @@ import java.util.List;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
 
-public class Fuel_Display extends javax.swing.JPanel {
+public class LowStock extends javax.swing.JPanel {
 
-    public Fuel_Display() {
+    public LowStock() {
         initComponents();
         Tabledisplay();
     }
