@@ -13,10 +13,9 @@ import javax.swing.Icon;
 import javax.swing.JOptionPane;
 
 public class Start_Job_Interface extends javax.swing.JPanel {
-
     String pumper, pump, tankId, fuel, status;
     Double startMeter, endmeter;
-
+    
     // Start Current Date
     Date date = new Date();
     SimpleDateFormat formatDate = new SimpleDateFormat("YYYY-MMM-dd");
@@ -345,7 +344,6 @@ public class Start_Job_Interface extends javax.swing.JPanel {
             } else if (countPumper > 0) {
                 Icon icon = new javax.swing.ImageIcon(getClass().getResource("/Icon/red_warning.png"));
                 JOptionPane.showMessageDialog(null, "The Pumper is already registered. Please enter a different Pumper.", "Warning", JOptionPane.INFORMATION_MESSAGE, icon);
-
             } else {
                 pstmt.setString(1, pumper);
                 pstmt.setString(2, pump);
@@ -364,15 +362,12 @@ public class Start_Job_Interface extends javax.swing.JPanel {
                     clear();
                 }
             }
-
         } catch (Exception e) {
             e.printStackTrace();
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/Icon/error.png"));
             JOptionPane.showMessageDialog(null, "A new Schedule was inserted Failed!", "Error", JOptionPane.INFORMATION_MESSAGE, icon);
             System.out.println("Error:" + e.getMessage());
         }
-
-
     }//GEN-LAST:event_btnSaveActionPerformed
 
     // Start Show Pumb name show Drop down list
@@ -383,7 +378,6 @@ public class Start_Job_Interface extends javax.swing.JPanel {
 
             while (r.next()) {
                 String pumpdis = r.getString("PumpID");
-
                 cmbPump.addItem(pumpdis);
             }
             r.close();

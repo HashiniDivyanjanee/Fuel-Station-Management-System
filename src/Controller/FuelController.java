@@ -53,7 +53,7 @@ public class FuelController {
                                  resultSet.getDouble("SalePrice"), 
                                  resultSet.getString("TankID"), 
                                  resultSet.getDouble("Liter"));
-            fuel.setFuelID(resultSet.getInt("FuelID"));
+            fuel.setFuelID(resultSet.getInt("fid"));
             fuelList.add(fuel);
         }
     }

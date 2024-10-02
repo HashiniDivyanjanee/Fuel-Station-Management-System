@@ -6,17 +6,14 @@ import Model.Employee;
 
 
 public class Employee_Interface extends javax.swing.JPanel {
-
     String lname, fname, dob, address, nic, gender, email, bank, branch, holder, position, hire, schedule, empType;
     Double salary;
     int mobile, land, acc;
-
-    EmployeeController EmployeeController = new EmployeeController();
+    EmployeeController EmployeeController = new EmployeeController();    
     
     
     public Employee_Interface() {
         initComponents();
-
     }
 
     @SuppressWarnings("unchecked")
@@ -650,7 +647,6 @@ public class Employee_Interface extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void clear() {
-
         txtFName.setText("");
         txtLname.setText("");
         txtAddress.setText("");
@@ -669,8 +665,8 @@ public class Employee_Interface extends javax.swing.JPanel {
         txtSalary.setText("");
         DateBod.setDate(null);
         DateHire.setDate(null);
-
     }
+    
     private void txtAccNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAccNoActionPerformed
 
     }//GEN-LAST:event_txtAccNoActionPerformed
@@ -700,9 +696,8 @@ public class Employee_Interface extends javax.swing.JPanel {
         hire = ((JTextField) DateHire.getDateEditor().getUiComponent()).getText();   
         
         try {
-            Employee employee = new Employee(fname, lname, address, nic, gender, dob, mobile, land, email, bank, branch, acc, holder, salary, position, hire, empType, schedule);
-            
-            EmployeeController.saveEmployee(employee);
+            Employee employee = new Employee(fname, lname, address, nic, gender, dob, mobile, land, email, bank, branch, acc, holder, salary, position, hire, empType, schedule);           
+            EmployeeController.saveEmployee(employee); 
             
         } catch (Exception e) {
              e.printStackTrace();
@@ -711,7 +706,6 @@ public class Employee_Interface extends javax.swing.JPanel {
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         clear();
-
     }//GEN-LAST:event_btnClearActionPerformed
 
 

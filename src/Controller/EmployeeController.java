@@ -60,9 +60,8 @@ public class EmployeeController {
         try (Connection connection = Mysql_Connection.getInstance().getConnection(); Statement statment = connection.createStatement(); ResultSet resultSet = statment.executeQuery(sql)) {
 
             while (resultSet.next()) {
-
                 Employee employee = new Employee();
-                employee.setEmployeeID(resultSet.getInt("EmployeeID"));
+                employee.setEmployeeID(resultSet.getInt("eid"));
                 employee.setLname(resultSet.getString("LastName"));
                 employee.setFname(resultSet.getString("FirstName"));
                 employee.setAddress(resultSet.getString("Address"));
@@ -74,12 +73,6 @@ public class EmployeeController {
                 employee.setEmpType(resultSet.getString("EmployeeType"));
                 employee.setSchedule(resultSet.getString("Schedule"));
                 employees.add(employee);
-
-//                Employee employees = new Employee(resultSet.getString("FirstName"), resultSet.getString("LastName"), resultSet.getString("Address"), resultSet.getString("Nic"), resultSet.getString("Gender"), resultSet.getString("Dob"),
-//                        resultSet.getInt("Mobile"), resultSet.getInt("LandlineNumber"), resultSet.getString("Email"), resultSet.getString("Bank"), resultSet.getString("Branch"), resultSet.getInt("AccNumber"), resultSet.getString("HolderName"), resultSet.getDouble("Salary"), resultSet.getString("Position"), resultSet.getString("HireDate"),
-//                        resultSet.getString("EmployeeType"), resultSet.getString("Schedule"));
-//                employees.setEmployeeID(resultSet.getInt("EmployeeID"));
-//                employee.add(employees);
             }
         }
         return employees;

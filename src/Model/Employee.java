@@ -171,14 +171,14 @@ public class Employee {
         this.acc = acc;
     }
 
-    int employeeID;
+    int eid;
 
     public int getEmployeeID() {
-        return employeeID;
+        return eid;
     }
 
-    public void setEmployeeID(int employeeID) {
-        this.employeeID = employeeID;
+    public void setEmployeeID(int eid) {
+        this.eid = eid;
     }
     private String lname, fname, dob, address, nic, gender, email, bank, branch, holder, position, hire, schedule, empType;
     private Double salary;

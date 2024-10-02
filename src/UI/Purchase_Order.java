@@ -1,20 +1,15 @@
 package UI;
 
-import Controller.FuelController;
-import Model.Fuel;
 import Swing.DataSearch;
 import Swing.EventClick;
 import Swing.PanelSearch;
 import java.awt.Color;
 import java.awt.Component;
-import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JPopupMenu;
-import javax.swing.RowFilter;
-import javax.swing.table.TableRowSorter;
 
 public class Purchase_Order extends javax.swing.JPanel {
 

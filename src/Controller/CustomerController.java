@@ -38,6 +38,7 @@ public class CustomerController {
             }
 
         } catch (Exception e) {
+            System.out.println(e);
         }
     }
 

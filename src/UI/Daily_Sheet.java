@@ -13,12 +13,11 @@ import java.util.Date;
 import javax.swing.Icon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
-
+    
 public class Daily_Sheet extends javax.swing.JPanel {
 
     double startMeter, endMeter, salesPrice, cash;
-    String startMeterText, endMeterText, Tank_ID;
+    String startMeterText, endMeterText, Tank_ID;               
 
     // Start Current Date
     Date date = new Date();
@@ -55,7 +54,6 @@ public class Daily_Sheet extends javax.swing.JPanel {
 
             while (r.next()) {
                 String pumpdis = r.getString("pumper");
-
                 cmbPumper.addItem(pumpdis);
             }
             r.close();
@@ -69,12 +67,12 @@ public class Daily_Sheet extends javax.swing.JPanel {
     // Start Show Customer name show Drop down list
     private void showCustomerDropDown() {
         try {
-            PreparedStatement p = Mysql_Connection.getInstance().getConnection().prepareStatement("SELECT DISTINCT `Name`, `CustID` FROM `customer`;");
+            PreparedStatement p = Mysql_Connection.getInstance().getConnection().prepareStatement("SELECT DISTINCT `Name`, `cid` FROM `customer`;");
             ResultSet r = p.executeQuery();
 
             while (r.next()) {
                 String cus = r.getString("Name");
-                String cusID = r.getString("CustID");
+                String cusID = r.getString("cid");
                 cmbCustomer.addItem(cus);
                 lblCusID.setText(cusID);
             }
@@ -85,7 +83,8 @@ public class Daily_Sheet extends javax.swing.JPanel {
         }
     }
     // End Show Customer name show Drop down list
-
+    
+    
     // Start Capture Pump Details
     public void showPumperDetails() {
         String selectedPumper = (String) cmbPumper.getSelectedItem();
@@ -517,6 +516,7 @@ public class Daily_Sheet extends javax.swing.JPanel {
                 .addGap(30, 30, 30))
         );
 
+        cmbPumper.setEditable(true);
         cmbPumper.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cmbPumper.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
