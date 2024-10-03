@@ -5,7 +5,7 @@ public class Employee {
     public Employee(){
         
     }
-    
+    int eid;
     public Employee(String fname, String lname, String address, String nic, String gender, String dob, int mobile, int land, String email, String bank, String branch, int acc, String holder, double salary, String position, String hire, String empType, String schedule) {
         this.lname = lname;
         this.fname = fname;
@@ -171,7 +171,7 @@ public class Employee {
         this.acc = acc;
     }
 
-    int eid;
+
 
     public int getEmployeeID() {
         return eid;

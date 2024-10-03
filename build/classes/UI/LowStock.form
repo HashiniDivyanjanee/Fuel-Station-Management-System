@@ -275,7 +275,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="24" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="CURRENT STOCK"/>
+            <Property name="text" type="java.lang.String" value="LOW STOCK"/>
           </Properties>
         </Component>
         <Container class="Components.Line" name="line7">

@@ -24,7 +24,7 @@ public class Purchase_Order_Interface extends javax.swing.JPanel {
             PreparedStatement p = Mysql_Connection.getInstance().getConnection().prepareStatement("SELECT DISTINCT `Supplier_Name` FROM `supplier`;");
             ResultSet r = p.executeQuery();
 
-            while (r.next()) {
+            while (r.next()) { 
                 String SupplierName = r.getString("Supplier_Name");
                 cmbSupplier.addItem(SupplierName);
             }
@@ -52,53 +52,49 @@ public class Purchase_Order_Interface extends javax.swing.JPanel {
         }
     }
 
-    public void showFuelDetails() {
-        String selectedPumper = (String) cmbPumper.getSelectedItem();
-<<<<<<< HEAD
-        if (selectedPumper != null) {
-            try {
-                PreparedStatement p = Mysql_Connection.getInstance().getConnection().prepareStatement("SELECT fid, FuelName, CostPrice, SalePrice, TankID, Liter FROM fuel  WHERE FuelName = ? ;");
-                p.setString(1, selectedPumper);
-                ResultSet r = p.executeQuery();
-                if (r.next()) {
-                    txtFuelID.setText(r.getString("fid"));
-=======
+public void showFuelDetails() {
+    String selectedPumper = (String) cmbPumper.getSelectedItem();  // Get the selected pumper
+    if (selectedPumper != null) {  // Check if a valid pumper is selected
+        try {
+            // Prepare SQL query to fetch fuel details
+            PreparedStatement p = Mysql_Connection.getInstance().getConnection().prepareStatement(
+                "SELECT fid, FuelName, CostPrice, SalePrice, TankID, Liter FROM fuel WHERE FuelName = ?;"
+            );
+            p.setString(1, selectedPumper);
+            ResultSet r = p.executeQuery();
 
-        if (selectedPumper != null) {
-            try {
-                PreparedStatement p = Mysql_Connection.getInstance().getConnection().prepareStatement("SELECT FuelID, FuelName, CostPrice, SalePrice, TankID, Liter FROM fuel  WHERE FuelName = ? ;");
-                p.setString(1, selectedPumper);
-                ResultSet r = p.executeQuery();
-                if (r.next()) {
-                    txtFuelID.setText(r.getString("FuelID"));
->>>>>>> bc50b1e8e7a75b6ddd1d9a9aa52fec733caac591
-                    txtFeul.setText(r.getString("FuelName"));
-                    txtCost.setText(r.getString("CostPrice"));
-                    txtSale.setText(r.getString("SalePrice"));
-                    txtTankID.setText(r.getString("TankID"));
-<<<<<<< HEAD
+            if (r.next()) {
+                // Populate text fields with data from result set
+                txtFuelID.setText(r.getString("fid"));
+                txtFeul.setText(r.getString("FuelName"));
+                txtCost.setText(r.getString("CostPrice"));
+                txtSale.setText(r.getString("SalePrice"));
+                txtTankID.setText(r.getString("TankID"));
 
-                    txtFuelID.setEditable(false);
-                    txtFeul.setEditable(false);
-                    txtTankID.setEditable(false);
-=======
-
-                    txtFuelID.setEditable(false);
-                    txtFeul.setEditable(false);
-                    txtTankID.setEditable(false);
-
->>>>>>> bc50b1e8e7a75b6ddd1d9a9aa52fec733caac591
-                } else {
-                    txtFeul.setText("No matching Tank found.");
-                    txtCost.setText(r.getString("No matching Fuel found."));
-                }
-                r.close();
-                p.close();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
+                // Make fields non-editable
+                txtFuelID.setEditable(false);
+                txtFeul.setEditable(false);
+                txtTankID.setEditable(false);
+            } else {
+                // If no matching fuel is found, display appropriate messages
+                txtFeul.setText("No matching fuel found.");
+                txtCost.setText("");  // Clear cost field
+                txtSale.setText("");  // Clear sale price field
+                txtTankID.setText("");  // Clear tank ID field
             }
+
+            // Close resources
+            r.close();
+            p.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();  // Handle SQL exceptions
         }
+    } else {
+        // Handle case when no pumper is selected
+        txtFeul.setText("Please select a pumper.");
     }
+}
+
 
     public void Clear() {
         txtDisco.setText("");
@@ -615,10 +611,6 @@ public class Purchase_Order_Interface extends javax.swing.JPanel {
             Icon icon = new javax.swing.ImageIcon(getClass().getResource("/Icon/red_warning.png"));
             JOptionPane.showMessageDialog(null, "Please enter a Amount.", "Warning", JOptionPane.INFORMATION_MESSAGE, icon);
         } else {
-<<<<<<< HEAD
-=======
-
->>>>>>> bc50b1e8e7a75b6ddd1d9a9aa52fec733caac591
             String fuel = txtFeul.getText();
             Double cost = Double.valueOf(txtCost.getText());
             Double qty = Double.valueOf(txtQty.getText());
@@ -647,10 +639,7 @@ public class Purchase_Order_Interface extends javax.swing.JPanel {
     }//GEN-LAST:event_cmbSupplierActionPerformed
 
     private void btncusRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncusRemoveActionPerformed
-<<<<<<< HEAD
-=======
 
->>>>>>> bc50b1e8e7a75b6ddd1d9a9aa52fec733caac591
         DefaultTableModel tblModel = (DefaultTableModel) tblPurchase.getModel();
 
         if (tblPurchase.getSelectedRowCount() == 1) {
