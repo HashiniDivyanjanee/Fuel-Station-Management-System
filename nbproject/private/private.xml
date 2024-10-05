@@ -3,19 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Projects/Java/Fuel%20Shed%20Project/FuelShed/src/Model/Fuel.java</file>
+            <file>file:/D:/Projects/Java/Fuel%20Shed%20Project/FuelShed/src/Menu/Menu.java</file>
+            <file>file:/D:/Projects/Java/Fuel%20Shed%20Project/FuelShed/src/Menu/MenuEvent.java</file>
             <file>file:/D:/Projects/Java/Fuel%20Shed%20Project/FuelShed/src/Main/Main.java</file>
-            <file>file:/D:/Projects/Java/Fuel%20Shed%20Project/FuelShed/src/UI/Employee_Display.java</file>
-            <file>file:/D:/Projects/Java/Fuel%20Shed%20Project/FuelShed/src/UI/Fuel_Display.java</file>
-            <file>file:/D:/Projects/Java/Fuel%20Shed%20Project/FuelShed/src/UI/Purchase_Order_Interface.java</file>
-            <file>file:/D:/Projects/Java/Fuel%20Shed%20Project/FuelShed/src/UI/Purchase_Order.java</file>
-            <file>file:/D:/Projects/Java/Fuel%20Shed%20Project/FuelShed/src/UI/Daily_Sheet.java</file>
-            <file>file:/D:/Projects/Java/Fuel%20Shed%20Project/FuelShed/src/UI/Calc.java</file>
-            <file>file:/D:/Projects/Java/Fuel%20Shed%20Project/FuelShed/src/UI/Start_Job_Interface.java</file>
-            <file>file:/D:/Projects/Java/Fuel%20Shed%20Project/FuelShed/src/UI/LowStock.java</file>
-            <file>file:/D:/Projects/Java/Fuel%20Shed%20Project/FuelShed/src/Controller/FuelController.java</file>
-            <file>file:/D:/Projects/Java/Fuel%20Shed%20Project/FuelShed/src/UI/CustomerInterface1.java</file>
-            <file>file:/D:/Projects/Java/Fuel%20Shed%20Project/FuelShed/src/Components/Head.java</file>
+            <file>file:/D:/Projects/Java/Fuel%20Shed%20Project/FuelShed/src/Menu/MenuAnimation.java</file>
         </group>
     </open-files>
 </project-private>

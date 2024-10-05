@@ -3,7 +3,8 @@ package UI;
 import javax.swing.JTextField;
 import Controller.CustomerController;
 import Model.Customer;
-import UI.Calc;
+import javax.swing.JOptionPane;
+
 public class CustomerInterface1 extends javax.swing.JPanel {
 
     String name, prefix, address, nic, email, cardType, ExDate, vehicleNo, vehicleType, fuel;
@@ -15,13 +16,12 @@ public class CustomerInterface1 extends javax.swing.JPanel {
     }
 
     CustomerController customerController = new CustomerController();
-    
+
     private void clear() {
         txtName.setText("");
         cmbPrefix.setSelectedIndex(0);
         txtAddress.setText("");
         txtNic.setText("");
-        txtName.setText("");
         txtEmail.setText("");
         cmbCardType.setSelectedIndex(0);
         txtVehicleRegi.setText("");
@@ -591,8 +591,9 @@ public class CustomerInterface1 extends javax.swing.JPanel {
         ExDate = ((JTextField) DateEx.getDateEditor().getUiComponent()).getText();
 
         try {
-            Customer customer = new Customer(name, nic, address, mobile, land, fax, email, cardType, cardNo, ExDate, cvv, vehicleNo, vehicleType,fuel);
+            Customer customer = new Customer(name, nic, address, mobile, land, fax, email, cardType, cardNo, ExDate, cvv, vehicleNo, vehicleType, fuel);
             customerController.saveCustomer(customer);
+            clear();
 
         } catch (Exception e) {
         }
@@ -607,8 +608,8 @@ public class CustomerInterface1 extends javax.swing.JPanel {
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btn_calActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_calActionPerformed
-      Calc calculator = new Calc();
-      calculator.setVisible(true);
+        Calc calculator = new Calc();
+        calculator.setVisible(true);
     }//GEN-LAST:event_btn_calActionPerformed
 
     private void cmbPrefixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPrefixActionPerformed
@@ -672,6 +673,5 @@ public class CustomerInterface1 extends javax.swing.JPanel {
     private javax.swing.JTextField txtNic;
     private javax.swing.JTextField txtVehicleRegi;
     // End of variables declaration//GEN-END:variables
-
 
 }

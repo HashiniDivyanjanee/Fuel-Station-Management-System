@@ -31,10 +31,11 @@ public class Menu extends JComponent {
     private MigLayout layout;
     private String[][] menuItems = new String[][]{
         {"Dashboard"},
-        {"Purchase", "Purchase","Supplier", "Fuel"},
+        {"Purchase", "Purchase", "Supplier", "Fuel"},
         {"Stock", "Current Stock", "Low Stock"},
         {"Customer", "New Customer", "View Customer"},
         {"Employee", "New Employee", "View Employee"},
+        {"Supplier", "New Supplier", "View Supplier"},
         {"Schedule", "Start", "End", "View"}
     };
 
@@ -52,40 +53,38 @@ public class Menu extends JComponent {
 
     }
 
-    private Icon getIcon(int index){
+    private Icon getIcon(int index) {
         URL url = getClass().getResource("/Icon/" + index + ".png");
-        if(url != null){
+        if (url != null) {
             return new ImageIcon(url);
-        }else{
+        } else {
             return null;
         }
     }
-    
-    
+
     private void addMenu(String menuName, int index) {
 
         int length = menuItems[index].length;
         MenuItem item = new MenuItem(menuName, index, length > 1);
-        
+
         Icon icon = getIcon(index);
-        if(icon != null){
+        if (icon != null) {
             item.setIcon(icon);
         }
-        
-        item.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent ae){
-                if (length>1){
-                    if(!item.isSelected()){
+
+        item.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                if (length > 1) {
+                    if (!item.isSelected()) {
                         item.setSelected(true);
                         addSubMenu(item, index, length, getComponentZOrder(item));
-                    }
-                    else{
+                    } else {
                         //hide menu
                         hideMenu(item, index);
                         item.setSelected(false);
                     }
-                }else{
-                    if(event!=null){
+                } else {
+                    if (event != null) {
                         event.selected(index, 0);
                     }
                 }
@@ -96,45 +95,45 @@ public class Menu extends JComponent {
         repaint();
     }
 
-    private void addSubMenu(MenuItem item, int index, int length, int indexZorder){
+    private void addSubMenu(MenuItem item, int index, int length, int indexZorder) {
         JPanel panel = new JPanel(new MigLayout("wrap 1, fillx, inset 0, gapy 0", "fill"));
         panel.setName(index + "");
         panel.setOpaque(false);
-        for(int i=1; i<length; i++){
-            MenuItem subItem = new MenuItem(menuItems[index][i], i, false);          
-            subItem.addActionListener(new ActionListener(){
+        for (int i = 1; i < length; i++) {
+            MenuItem subItem = new MenuItem(menuItems[index][i], i, false);
+            subItem.addActionListener(new ActionListener() {
                 @Override
-                public void actionPerformed(ActionEvent ae){
-                    if(event !=null){
+                public void actionPerformed(ActionEvent ae) {
+                    if (event != null) {
                         event.selected(index, subItem.getIndex());
                     }
                 }
             });
-            subItem.initSubMenu(i, length); 
+            subItem.initSubMenu(i, length);
             panel.add(subItem);
         }
-       add(panel, "h 0!", indexZorder+1);
-       revalidate();
-       repaint();
-       MenuAnimation.showMenu(panel, item, layout, true);
+        add(panel, "h 0!", indexZorder + 1);
+        revalidate();
+        repaint();
+        MenuAnimation.showMenu(panel, item, layout, true);
     }
-    
-    private void hideMenu(MenuItem item, int index){
-        for(Component com:getComponents()){
-            if(com instanceof JPanel&&com.getName()!=null&&com.getName().equals(index+"")){
+
+    private void hideMenu(MenuItem item, int index) {
+        for (Component com : getComponents()) {
+            if (com instanceof JPanel && com.getName() != null && com.getName().equals(index + "")) {
                 com.setName(null);
                 MenuAnimation.showMenu(com, item, layout, false);
                 break;
             }
         }
     }
-    
-    protected void paintComponent(Graphics grphcs){
+
+    protected void paintComponent(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs;
-        GradientPaint gra = new GradientPaint(0, 0, Color.decode("#087292"),0, getWidth(),Color.decode("#089BAB"));
+        GradientPaint gra = new GradientPaint(0, 0, Color.decode("#087292"), 0, getWidth(), Color.decode("#089BAB"));
         g2.setPaint(gra);
         g2.fillRect(0, 0, getWidth(), getHeight());
         super.paintComponent(grphcs);
     }
-    
+
 }

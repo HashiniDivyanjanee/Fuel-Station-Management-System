@@ -22,7 +22,7 @@ public class LowStock extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblFuel = new javax.swing.JTable();
+        LowStocktbl = new javax.swing.JTable();
         txtSearch = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         btnclear = new javax.swing.JButton();
@@ -41,7 +41,7 @@ public class LowStock extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(239, 250, 250));
         jPanel1.setPreferredSize(new java.awt.Dimension(1646, 860));
 
-        tblFuel.setModel(new javax.swing.table.DefaultTableModel(
+        LowStocktbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -49,7 +49,7 @@ public class LowStock extends javax.swing.JPanel {
                 "Fuel ID", "Fuel Name", "Cost Price", "Sales Price", "Tank ID", "Liter"
             }
         ));
-        jScrollPane2.setViewportView(tblFuel);
+        jScrollPane2.setViewportView(LowStocktbl);
 
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -185,8 +185,8 @@ public class LowStock extends javax.swing.JPanel {
     public void Tabledisplay() {
         try {
             FuelController controller = new FuelController();
-            List<Fuel> fueles = controller.getAllFuel();
-            DefaultTableModel model = (DefaultTableModel) tblFuel.getModel();
+            List<Fuel> fueles = controller.getLowFuel();
+            DefaultTableModel model = (DefaultTableModel) LowStocktbl.getModel();
             model.setRowCount(0);
             for (Fuel fuel : fueles) {
                 model.addRow(new Object[]{
@@ -208,9 +208,9 @@ public class LowStock extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
-        DefaultTableModel obj = (DefaultTableModel) tblFuel.getModel();
+        DefaultTableModel obj = (DefaultTableModel) LowStocktbl.getModel();
         TableRowSorter<DefaultTableModel> obj1 = new TableRowSorter<>(obj);
-        tblFuel.setRowSorter(obj1);
+        LowStocktbl.setRowSorter(obj1);
         String searchText = "(?i)" + txtSearch.getText();
         obj1.setRowFilter(RowFilter.regexFilter(searchText));       
     }//GEN-LAST:event_txtSearchKeyReleased
@@ -222,6 +222,7 @@ public class LowStock extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable LowStocktbl;
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnclear;
@@ -232,7 +233,6 @@ public class LowStock extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private Components.Line line7;
     private Components.Screen screen1;
-    private javax.swing.JTable tblFuel;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }

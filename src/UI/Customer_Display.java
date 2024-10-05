@@ -1,7 +1,7 @@
 package UI;
 
-import Controller.EmployeeController;
-import Model.Employee;
+import Controller.CustomerController;
+import Model.Customer;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import java.util.List;
@@ -22,7 +22,7 @@ public class Customer_Display extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        employeeTable = new javax.swing.JTable();
+        CustomerTable = new javax.swing.JTable();
         txtSearch = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         screen1 = new Components.Screen();
@@ -38,12 +38,12 @@ public class Customer_Display extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(239, 250, 250));
         jPanel1.setPreferredSize(new java.awt.Dimension(1646, 860));
 
-        employeeTable.setModel(new javax.swing.table.DefaultTableModel(
+        CustomerTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Employee ID", "First Name", "Last Name", "Address", "NIC", "DOB", "Mobile", "Position", "Hire Date", "Employee Type", "Schedule"
+                "Customer ID", "Name", "NIC", "Address", "Mobile", "Landline", "Fax", "Email", "Vehicle No", "Vehicle type", "Fuel"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -54,7 +54,7 @@ public class Customer_Display extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(employeeTable);
+        jScrollPane2.setViewportView(CustomerTable);
 
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -155,35 +155,36 @@ public class Customer_Display extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
  public void Tabledisplay() {
         try {
-            EmployeeController controller = new EmployeeController();
-            List<Employee> employees = controller.getAllEmployee();
-            DefaultTableModel model = (DefaultTableModel) employeeTable.getModel();
+            CustomerController controller = new CustomerController();
+            List<Customer> customers = controller.getCustomer();
+            DefaultTableModel model = (DefaultTableModel) CustomerTable.getModel();
             model.setRowCount(0);
-            for (Employee employee : employees) {
+            for (Customer customer : customers) {
                 model.addRow(new Object[]{
-                    employee.getEmployeeID(),
-                    employee.getFname(),
-                    employee.getLname(),
-                    employee.getAddress(),
-                    employee.getNic(),                  
-                    employee.getDob(),
-                    employee.getMobile(),
-                    employee.getPosition(),
-                    employee.getHire(),
-                    employee.getEmpType(),
-                    employee.getSchedule()
+                    customer.getCid(),
+                    customer.getName(),
+                    customer.getNic(),
+                    customer.getAddress(),
+                    customer.getMobile(),                  
+                    customer.getLandline(),
+                    customer.getFax(),
+                    customer.getEmail(),                  
+                    customer.getVehicleNo(),
+                    customer.getVehicleType(),
+                    customer.getFuelType()
                 });
             }
         } catch (SQLException e) {
+            System.out.println(e);
             e.printStackTrace();
         }
     }
 
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
 
-        DefaultTableModel obj = (DefaultTableModel) employeeTable.getModel();
+        DefaultTableModel obj = (DefaultTableModel) CustomerTable.getModel();
         TableRowSorter<DefaultTableModel> obj1 = new TableRowSorter<>(obj);
-        employeeTable.setRowSorter(obj1);
+        CustomerTable.setRowSorter(obj1);
         String searchText = "(?i)" + txtSearch.getText();
         obj1.setRowFilter(RowFilter.regexFilter(searchText));
     }//GEN-LAST:event_txtSearchKeyReleased
@@ -194,7 +195,7 @@ public class Customer_Display extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable employeeTable;
+    private javax.swing.JTable CustomerTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

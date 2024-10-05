@@ -6,6 +6,9 @@ public class Supplier {
     private int Mobile, Landline, Fax, Acc;
     private Double Opening_Amount, Limit_Amount;
 
+    public Supplier() {
+    }
+
     public Supplier(String Company, String Supplier_Name, String Title, String Address, int Mobile, int Landline, int Fax, String Email, String Website, String Bank, String Branch, int Acc, String Holder, Double Opening_Amount, Double Limit_Amount) {
         this.Company = Company;
         this.Supplier_Name = Supplier_Name;

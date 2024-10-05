@@ -61,5 +61,26 @@ public class FuelController {
     return fuelList;
 }
 
+ public List<Fuel> getLowFuel() throws SQLException {
+    String sql = "SELECT * FROM fuel where Liter<=0";
+    List<Fuel> fuelList = new ArrayList<>();
+    
+    try (Connection connection = Mysql_Connection.getInstance().getConnection(); 
+         Statement statement = connection.createStatement(); 
+         ResultSet resultSet = statement.executeQuery(sql)) {
+        
+        while (resultSet.next()) {
+            Fuel fuel = new Fuel(resultSet.getString("FuelName"), 
+                                 resultSet.getDouble("CostPrice"), 
+                                 resultSet.getDouble("SalePrice"), 
+                                 resultSet.getString("TankID"), 
+                                 resultSet.getDouble("Liter"));
+            fuel.setFuelID(resultSet.getInt("fid"));
+            fuelList.add(fuel);
+        }
+    }
+    
+    return fuelList;
+}
 
 }

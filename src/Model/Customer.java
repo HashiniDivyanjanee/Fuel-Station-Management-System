@@ -3,8 +3,11 @@ package Model;
 public class Customer {
 
     private String Name, Nic, Address, Email, CardType, VehicleNo, VehicleType, FuelType, ExpireDate;
-    private int Mobile, Landline, Fax, CardNo, Cvv;
+    private int Mobile, Landline, Fax, CardNo, Cvv, cid;
 
+   public Customer(){
+        
+    }
     public Customer(String Name, String Nic, String Address, int Mobile, int Landline, int Fax, String Email, String CardType, int CardNo, String ExpireDate, int Cvv, String VehicleNo, String VehicleType, String FuelType) {
         this.Name = Name;
         this.Nic = Nic;
@@ -134,4 +137,11 @@ public class Customer {
         this.Cvv = Cvv;
     }
 
+    public int getCid() {
+        return cid;
+    }
+
+    public void setCid(int cid) {
+        this.cid = cid;
+    }
 }

@@ -2,12 +2,14 @@ package Main;
 
 import Menu.MenuEvent;
 import UI.CustomerInterface1;
+import UI.Customer_Display;
 import UI.Daily_Sheet;
 import UI.Dashboard;
 import UI.Employee_Display;
 import UI.Employee_Interface;
 import UI.Fuel_Display;
 import UI.Fuel_Interface;
+import UI.LowStock;
 import UI.Purchase_Order;
 import UI.Purchase_Order_Interface;
 import UI.Shedule_Display;
@@ -20,53 +22,56 @@ public class Main extends javax.swing.JFrame {
 
     public Main() {
         initComponents();
-          showForm(new Dashboard());
+        showForm(new Dashboard());
         menu1.setEvent(new MenuEvent() {
             @Override
             public void selected(int index, int subIndex) {
-                System.out.println("Form:" +index);
-                
-                if(index == 0){
+                System.out.println("Form:" + index);
+
+                if (index == 0) {
                     showForm(new Dashboard());
-                }  else if(index == 1 && subIndex == 1){
+                } else if (index == 1 && subIndex == 1) {
                     showForm(new Purchase_Order_Interface());
-                }  else if(index == 1 && subIndex == 2){
+                } else if (index == 1 && subIndex == 2) {
                     showForm(new Supplier_Interface());
-                }else if(index == 1 && subIndex == 3){
+                } else if (index == 1 && subIndex == 3) {
                     showForm(new Fuel_Interface());
-                }else if(index == 2 && subIndex == 1){
+                } else if (index == 2 && subIndex == 1) {
                     showForm(new Fuel_Display());
-                }else if(index == 2 && subIndex == 2){
-                    showForm(new Fuel_Interface());
-                }else if(index == 3 && subIndex == 1){
+                } else if (index == 2 && subIndex == 2) {
+                    showForm(new LowStock());
+                } else if (index == 3 && subIndex == 1) {
                     showForm(new CustomerInterface1());
-                }else if(index == 3 && subIndex == 2){
-                    showForm(new CustomerInterface1());
-                }else if(index == 4 && subIndex == 1){
+                } else if (index == 3 && subIndex == 2) {
+                    showForm(new Customer_Display());
+                } else if (index == 4 && subIndex == 1) {
                     showForm(new Employee_Interface());
-                }else if(index == 4 && subIndex == 2){
+                } else if (index == 4 && subIndex == 2) {
                     showForm(new Employee_Display());
-                }else if(index == 5 && subIndex == 1){
+                } else if (index == 5 && subIndex == 1) {
+                    showForm(new Supplier_Interface());
+                } else if (index == 5 && subIndex == 2) {
+                    showForm(new Employee_Display());
+                } else if (index == 6 && subIndex == 1) {
                     showForm(new Start_Job_Interface());
-                }else if(index == 5 && subIndex == 2){
+                } else if (index == 6 && subIndex == 2) {
                     showForm(new Daily_Sheet());
-                }else if(index == 5 && subIndex == 3){
+                } else if (index == 6 && subIndex == 3) {
                     showForm(new Shedule_Display());
-                }else{
-                    
-                } 
+                } else {
+
+                }
             }
         });
     }
-    
-    
-    private void showForm(Component com){
+
+    private void showForm(Component com) {
         body.removeAll();
         body.add(com);
         body.repaint();
         body.revalidate();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

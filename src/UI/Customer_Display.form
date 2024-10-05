@@ -95,21 +95,21 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="employeeTable">
+                <Component class="javax.swing.JTable" name="CustomerTable">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="11" rowCount="0">
-                        <Column editable="false" title="Employee ID" type="java.lang.Object"/>
-                        <Column editable="false" title="First Name" type="java.lang.Object"/>
-                        <Column editable="false" title="Last Name" type="java.lang.Object"/>
-                        <Column editable="false" title="Address" type="java.lang.Object"/>
+                        <Column editable="false" title="Customer ID" type="java.lang.Object"/>
+                        <Column editable="false" title="Name" type="java.lang.Object"/>
                         <Column editable="false" title="NIC" type="java.lang.Object"/>
-                        <Column editable="false" title="DOB" type="java.lang.Object"/>
+                        <Column editable="false" title="Address" type="java.lang.Object"/>
                         <Column editable="false" title="Mobile" type="java.lang.Object"/>
-                        <Column editable="false" title="Position" type="java.lang.Object"/>
-                        <Column editable="false" title="Hire Date" type="java.lang.Object"/>
-                        <Column editable="false" title="Employee Type" type="java.lang.Object"/>
-                        <Column editable="false" title="Schedule" type="java.lang.Object"/>
+                        <Column editable="false" title="Landline" type="java.lang.Object"/>
+                        <Column editable="false" title="Fax" type="java.lang.Object"/>
+                        <Column editable="false" title="Email" type="java.lang.Object"/>
+                        <Column editable="false" title="Vehicle No" type="java.lang.Object"/>
+                        <Column editable="false" title="Vehicle type" type="java.lang.Object"/>
+                        <Column editable="false" title="Fuel" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

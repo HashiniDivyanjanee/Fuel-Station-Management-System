@@ -75,6 +75,9 @@ public class EmployeeController {
                 employees.add(employee);
             }
         }
+        catch(Exception e){
+            System.out.println(e);
+        }
         return employees;
     }
 }

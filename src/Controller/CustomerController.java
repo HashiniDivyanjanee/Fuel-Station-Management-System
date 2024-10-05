@@ -4,6 +4,11 @@ import Model.Customer;
 import Model.Mysql_Connection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.Icon;
 import javax.swing.JOptionPane;
 
@@ -40,6 +45,34 @@ public class CustomerController {
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
+
+    public List<Customer> getCustomer() throws SQLException {
+        String sql = "SELECT * from customer";
+        List<Customer> customers = new ArrayList<>();
+
+        try (Connection connection = Mysql_Connection.getInstance().getConnection(); Statement statment = connection.createStatement(); ResultSet result = statment.executeQuery(sql)) {
+
+            while (result.next()) {
+                Customer customer = new Customer();
+                customer.setCid(result.getInt("cid"));
+                customer.setName(result.getString("Name"));
+                customer.setNic(result.getString("Nic"));
+                customer.setAddress(result.getString("Address"));
+                customer.setMobile(result.getInt("Mobile"));
+                customer.setFax(result.getInt("Fax"));
+                customer.setEmail(result.getString("Email"));
+                customer.setCardType(result.getString("CardType"));
+                customer.setCardNo(result.getInt("CardNo"));
+                customer.setExpireDate(result.getString("ExpireDate"));
+                customer.setCvv(result.getInt("Cvv"));
+                customer.setVehicleNo(result.getString("VehicleNo"));
+                customer.setVehicleType(result.getString("VehicleType"));
+                customer.setFuelType(result.getString("FuelType"));
+                customers.add(customer);
+            }
+        }
+        return customers;
     }
 
 }

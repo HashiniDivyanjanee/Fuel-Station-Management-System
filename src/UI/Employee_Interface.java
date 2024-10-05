@@ -698,7 +698,7 @@ public class Employee_Interface extends javax.swing.JPanel {
         try {
             Employee employee = new Employee(fname, lname, address, nic, gender, dob, mobile, land, email, bank, branch, acc, holder, salary, position, hire, empType, schedule);           
             EmployeeController.saveEmployee(employee); 
-            
+            clear();
         } catch (Exception e) {
              e.printStackTrace();
         }
