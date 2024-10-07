@@ -1,7 +1,5 @@
 package UI;
 
-//https://chatgpt.com/share/255a893b-ccec-48f2-9719-eb9654b3137f
-
 import Controller.FuelController;
 import Model.Fuel;
 
