@@ -1,7 +1,5 @@
 package Menu;
 
-import com.formdev.flatlaf.FlatLaf;
-import com.sun.java.accessibility.util.SwingEventMonitor;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.GradientPaint;
@@ -9,7 +7,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.geom.Rectangle2D;
 import java.net.URL;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -31,7 +28,7 @@ public class Menu extends JComponent {
     private MigLayout layout;
     private String[][] menuItems = new String[][]{
         {"Dashboard"},
-        {"Purchase", "Purchase", "Supplier", "Fuel"},
+        {"Purchase", "Purchase", "Fuel"},
         {"Stock", "Current Stock", "Low Stock"},
         {"Customer", "New Customer", "View Customer"},
         {"Employee", "New Employee", "View Employee"},
