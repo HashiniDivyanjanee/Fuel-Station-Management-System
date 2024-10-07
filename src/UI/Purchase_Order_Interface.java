@@ -11,6 +11,8 @@ import javax.swing.table.DefaultTableModel;
 public class Purchase_Order_Interface extends javax.swing.JPanel {
 
     double runningTotal = 0.0;
+    Double Additonal_Discount =0.0;
+      Double FinalTotal = 0.00;
 
     public Purchase_Order_Interface() {
         initComponents();
@@ -76,11 +78,10 @@ public void showFuelDetails() {
                 txtFeul.setEditable(false);
                 txtTankID.setEditable(false);
             } else {
-                // If no matching fuel is found, display appropriate messages
                 txtFeul.setText("No matching fuel found.");
-                txtCost.setText("");  // Clear cost field
-                txtSale.setText("");  // Clear sale price field
-                txtTankID.setText("");  // Clear tank ID field
+                txtCost.setText("");  
+                txtSale.setText(""); 
+                txtTankID.setText(""); 
             }
 
             // Close resources
@@ -337,6 +338,7 @@ public void showFuelDetails() {
                 "Fuel ID", "Fuel", "Price", "Discount", "Qty", "Total"
             }
         ));
+        tblPurchase.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tblPurchase);
 
         lblCusID.setForeground(new java.awt.Color(255, 255, 255));
@@ -367,7 +369,13 @@ public void showFuelDetails() {
         lblTotal.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         txtAddi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtAddi.setText("0.00");
         txtAddi.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtAddi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAddiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout details_Box2Layout = new javax.swing.GroupLayout(details_Box2);
         details_Box2.setLayout(details_Box2Layout);
@@ -627,8 +635,8 @@ public void showFuelDetails() {
             runningTotal += total;
             lblTotal.setText(String.format("%.2f", runningTotal));
             String addi = txtAddi.getText();
-            Double Additonal_Discount = Double.valueOf(addi);
-            Double FinalTotal = runningTotal - Additonal_Discount;
+            Additonal_Discount = Double.valueOf(addi);
+            FinalTotal = runningTotal - Additonal_Discount;
             lblFinalTotla.setText(String.format("%.2f", FinalTotal));
             Clear();
         }
@@ -660,6 +668,10 @@ public void showFuelDetails() {
     private void txtDiscoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDiscoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDiscoActionPerformed
+
+    private void txtAddiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAddiActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
