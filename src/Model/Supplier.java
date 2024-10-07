@@ -3,10 +3,12 @@ package Model;
 public class Supplier {
 
     private String Company, Supplier_Name, Title, Address, Email, Website, Bank, Branch, Holder;
-    private int Mobile, Landline, Fax, Acc;
+    private int Mobile, Landline, Fax, Acc, sid;
+
     private Double Opening_Amount, Limit_Amount;
 
     public Supplier() {
+        
     }
 
     public Supplier(String Company, String Supplier_Name, String Title, String Address, int Mobile, int Landline, int Fax, String Email, String Website, String Bank, String Branch, int Acc, String Holder, Double Opening_Amount, Double Limit_Amount) {
@@ -24,7 +26,15 @@ public class Supplier {
         this.Acc = Acc;
         this.Holder = Holder;
         this.Opening_Amount = Opening_Amount;
-        this.Limit_Amount = Limit_Amount;    
+        this.Limit_Amount = Limit_Amount;
+    }
+
+    public int getSid() {
+        return sid;
+    }
+
+    public void setSid(int sid) {
+        this.sid = sid;
     }
 
     public String getCompany() {

@@ -1,6 +1,5 @@
 package Controller;
 
-import Model.Customer;
 import Model.Supplier;
 import Model.Mysql_Connection;
 import java.sql.Connection;
@@ -17,7 +16,7 @@ public class SupplierController {
 
     public void saveSupplier(Supplier supplier) throws Exception {
         String sql = "INSERT INTO supplier(Company, Supplier_Name, Title, Address, Mobile, Landline, Fax, Email, Website, Bank, Branch, Acc, Holder, Opening_Amount, Limit_Amount) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
-        
+
         try (Connection connection = Mysql_Connection.getInstance().getConnection(); PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, supplier.getCompany());
             pstmt.setString(2, supplier.getSupplier_Name());
@@ -46,12 +45,12 @@ public class SupplierController {
             }
 
         } catch (Exception e) {
-              e.printStackTrace();
+            e.printStackTrace();
         }
 
     }
-    
-      public List<Supplier> getSupplier() throws SQLException {
+
+    public List<Supplier> getSupplier() throws SQLException {
         String sql = "SELECT * from supplier";
         List<Supplier> suppliers = new ArrayList<>();
 
@@ -59,25 +58,25 @@ public class SupplierController {
 
             while (result.next()) {
                 Supplier supplier = new Supplier();
-//                supplier.setCid(result.getInt("cid"));
-//                customer.setName(result.getString("Name"));
-//                customer.setNic(result.getString("Nic"));
-//                customer.setAddress(result.getString("Address"));
-//                customer.setMobile(result.getInt("Mobile"));
-//                customer.setFax(result.getInt("Fax"));
-//                customer.setEmail(result.getString("Email"));
-//                customer.setCardType(result.getString("CardType"));
-//                customer.setCardNo(result.getInt("CardNo"));
-//                customer.setExpireDate(result.getString("ExpireDate"));
-//                customer.setCvv(result.getInt("Cvv"));
-//                customer.setVehicleNo(result.getString("VehicleNo"));
-//                customer.setVehicleType(result.getString("VehicleType"));
-//                customer.setFuelType(result.getString("FuelType"));
+                supplier.setSid(result.getInt("sid"));
+                supplier.setCompany(result.getString("Company"));
+                supplier.setSupplier_Name(result.getString("Supplier_Name"));
+                supplier.setTitle(result.getString("Title"));
+                supplier.setAddress(result.getString("Address"));
+                supplier.setMobile(result.getInt("Mobile"));
+                supplier.setLandline(result.getInt("Landline"));
+                supplier.setFax(result.getInt("Fax"));
+                supplier.setEmail(result.getString("Email"));
+                supplier.setWebsite(result.getString("Website"));
+                supplier.setBank(result.getString("Bank"));
+                supplier.setBranch(result.getString("Branch"));
+                supplier.setAcc(result.getInt("Acc"));
+                supplier.setHolder(result.getString("Holder"));
+                supplier.setOpening_Amount(result.getDouble("Opening_Amount"));
+                supplier.setLimit_Amount(result.getDouble("Limit_Amount"));
                 suppliers.add(supplier);
             }
         }
         return suppliers;
     }
-    
-
 }
