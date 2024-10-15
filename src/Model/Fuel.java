@@ -9,6 +9,9 @@ public class Fuel {
     private double Liter;
     int FuelID;
 
+     public Fuel() {
+    }
+    
     public Fuel(String FluelName, double CostPrice, double SalePrice, String TankID, double Liter) {
         this.FluelName = FluelName;
         this.CostPrice = CostPrice;

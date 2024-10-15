@@ -16,7 +16,7 @@ public class Purchase_Order extends javax.swing.JPanel {
     private JPopupMenu menu;
     private PanelSearch search;
 
-    public Purchase_Order() {
+    public Purchase_Order(double sale, double Qty, double disc) {
         initComponents();
         connectToDatabase();
         menu = new JPopupMenu();
@@ -350,4 +350,5 @@ private List<DataSearch> search(String search) {
     private javax.swing.JTable tbl_purchase;
     private Components.TextField txtSearch;
     // End of variables declaration//GEN-END:variables
+
 }

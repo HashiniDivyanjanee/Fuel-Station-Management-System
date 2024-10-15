@@ -1,9 +1,12 @@
 package UI;
 
-import Model.Mysql_Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import Calculate.Purchase_order;
+import Controller.FuelController;
+import Controller.SupplierController;
+import Model.Fuel;
+import Model.Supplier;
 import java.sql.SQLException;
+import java.util.List;
 import javax.swing.Icon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -11,27 +14,28 @@ import javax.swing.table.DefaultTableModel;
 public class Purchase_Order_Interface extends javax.swing.JPanel {
 
     double runningTotal = 0.0;
-    Double Additonal_Discount =0.0;
-      Double FinalTotal = 0.00;
+    double Additonal_Discount = 0.0;
+    double FinalTotal = 0.00;
+
+    double costs, qtys, discs;
 
     public Purchase_Order_Interface() {
         initComponents();
         showFuelDropDown();
         showFuelDetails();
         showSupplierDropDown();
+//        showCal();
+
     }
 
     private void showSupplierDropDown() {
         try {
-            PreparedStatement p = Mysql_Connection.getInstance().getConnection().prepareStatement("SELECT DISTINCT `Supplier_Name` FROM `supplier`;");
-            ResultSet r = p.executeQuery();
-
-            while (r.next()) { 
-                String SupplierName = r.getString("Supplier_Name");
-                cmbSupplier.addItem(SupplierName);
+            SupplierController controller = new SupplierController();
+            List<Supplier> suppliers = controller.getSupplier();
+            cmbSupplier.removeAllItems();
+            for (Supplier supplier : suppliers) {
+                cmbSupplier.addItem(supplier.getCompany());
             }
-            r.close();
-            p.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -39,67 +43,62 @@ public class Purchase_Order_Interface extends javax.swing.JPanel {
 
     private void showFuelDropDown() {
         try {
-            PreparedStatement p = Mysql_Connection.getInstance().getConnection().prepareStatement("SELECT DISTINCT `FuelName` FROM `fuel`;");
-            ResultSet r = p.executeQuery();
-
-            while (r.next()) {
-                String FuelName = r.getString("FuelName");
-//                String FuelID = r.getString("FuelID");
-                cmbPumper.addItem(FuelName);
+            FuelController fuelController = new FuelController();
+            List<Fuel> fuels = fuelController.getAllFuel();
+            cmbFuel.removeAllItems();
+            for (Fuel fuel : fuels) {
+                cmbFuel.addItem(fuel.getFluelName());
             }
-            r.close();
-            p.close();
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
 
-public void showFuelDetails() {
-    String selectedPumper = (String) cmbPumper.getSelectedItem();  // Get the selected pumper
-    if (selectedPumper != null) {  // Check if a valid pumper is selected
-        try {
-            // Prepare SQL query to fetch fuel details
-            PreparedStatement p = Mysql_Connection.getInstance().getConnection().prepareStatement(
-                "SELECT fid, FuelName, CostPrice, SalePrice, TankID, Liter FROM fuel WHERE FuelName = ?;"
-            );
-            p.setString(1, selectedPumper);
-            ResultSet r = p.executeQuery();
+    public void showFuelDetails() {
+        String selectedPumper = (String) cmbFuel.getSelectedItem();
+        if (selectedPumper != null) {
+            try {
+                FuelController fuelController = new FuelController();
+                List<Fuel> fuels = fuelController.getAllFuel();
+                boolean fuelFound = false;
 
-            if (r.next()) {
-                // Populate text fields with data from result set
-                txtFuelID.setText(r.getString("fid"));
-                txtFeul.setText(r.getString("FuelName"));
-                txtCost.setText(r.getString("CostPrice"));
-                txtSale.setText(r.getString("SalePrice"));
-                txtTankID.setText(r.getString("TankID"));
+                for (Fuel fuel : fuels) {
+                    if (fuel.getFluelName().equals(selectedPumper)) {
+                        txtFuelID.setText(Integer.toString(fuel.getFuelID()));
+                        txtFeul.setText(fuel.getFluelName());
+                        txtCost.setText(Double.toString(fuel.getCostPrice()));
+                        txtSale.setText(Double.toString(fuel.getSalePrice()));
+                        txtTankID.setText(fuel.getTankID());
+                        txtFuelID.setEditable(false);
+                        txtFeul.setEditable(false);
+                        txtTankID.setEditable(false);
+                    } else {
 
-                // Make fields non-editable
-                txtFuelID.setEditable(false);
-                txtFeul.setEditable(false);
-                txtTankID.setEditable(false);
-            } else {
-                txtFeul.setText("No matching fuel found.");
-                txtCost.setText("");  
-                txtSale.setText(""); 
-                txtTankID.setText(""); 
+                    }
+                }
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
             }
-
-            // Close resources
-            r.close();
-            p.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();  // Handle SQL exceptions
+        } else {
+            txtFeul.setText("Please select a pumper.");
         }
-    } else {
-        // Handle case when no pumper is selected
-        txtFeul.setText("Please select a pumper.");
     }
-}
-
 
     public void Clear() {
         txtDisco.setText("");
         txtQty.setText("");
+    }
+
+    public void showCal() {
+
+        costs = Double.valueOf(txtCost.getText());
+        qtys = Double.valueOf(txtQty.getText());
+        discs = Double.valueOf(txtDisco.getText());
+
+        double x = Purchase_order.getPerTotal(costs, qtys, discs);
+        lblTest.setText(String.valueOf(x));
     }
 
     @SuppressWarnings("unchecked")
@@ -143,7 +142,8 @@ public void showFuelDetails() {
         lblFinalTotla = new javax.swing.JLabel();
         lblTotal = new javax.swing.JLabel();
         txtAddi = new javax.swing.JTextField();
-        cmbPumper = new javax.swing.JComboBox<>();
+        lblTest = new javax.swing.JLabel();
+        cmbFuel = new javax.swing.JComboBox<>();
         jLabel22 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
@@ -222,6 +222,7 @@ public void showFuelDetails() {
         jLabel19.setText("TANK ID");
 
         txtDisco.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtDisco.setText("0");
         txtDisco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDiscoActionPerformed(evt);
@@ -377,6 +378,8 @@ public void showFuelDetails() {
             }
         });
 
+        lblTest.setBackground(new java.awt.Color(255, 51, 204));
+
         javax.swing.GroupLayout details_Box2Layout = new javax.swing.GroupLayout(details_Box2);
         details_Box2.setLayout(details_Box2Layout);
         details_Box2Layout.setHorizontalGroup(
@@ -395,9 +398,20 @@ public void showFuelDetails() {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(details_Box2Layout.createSequentialGroup()
                         .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btncusRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel23)
+                                .addComponent(cmbSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(details_Box2Layout.createSequentialGroup()
-                                .addGap(54, 54, 54)
-                                .addComponent(lblliter, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(details_Box2Layout.createSequentialGroup()
+                                        .addGap(54, 54, 54)
+                                        .addComponent(lblliter, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(details_Box2Layout.createSequentialGroup()
+                                        .addGap(41, 41, 41)
+                                        .addComponent(lblTest, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(details_Box2Layout.createSequentialGroup()
@@ -410,13 +424,7 @@ public void showFuelDetails() {
                                     .addGroup(details_Box2Layout.createSequentialGroup()
                                         .addComponent(jLabel4)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lblFinalTotla, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(btncusRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel23)
-                                .addComponent(cmbSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(lblFinalTotla, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(0, 60, Short.MAX_VALUE))))
         );
         details_Box2Layout.setVerticalGroup(
@@ -440,7 +448,9 @@ public void showFuelDetails() {
                     .addGroup(details_Box2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblliter, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(167, 167, 167))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblTest, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(130, 130, 130))
                     .addGroup(details_Box2Layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addGroup(details_Box2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -460,11 +470,11 @@ public void showFuelDetails() {
                         .addGap(84, 84, 84))))
         );
 
-        cmbPumper.setEditable(true);
-        cmbPumper.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cmbPumper.addActionListener(new java.awt.event.ActionListener() {
+        cmbFuel.setEditable(true);
+        cmbFuel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cmbFuel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbPumperActionPerformed(evt);
+                cmbFuelActionPerformed(evt);
             }
         });
 
@@ -480,7 +490,7 @@ public void showFuelDetails() {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel22)
-                    .addComponent(cmbPumper, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbFuel, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(details_Box1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -493,7 +503,7 @@ public void showFuelDetails() {
                 .addGap(16, 16, 16)
                 .addComponent(jLabel22)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbPumper, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmbFuel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(details_Box2, javax.swing.GroupLayout.PREFERRED_SIZE, 595, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -606,40 +616,69 @@ public void showFuelDetails() {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmbPumperActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPumperActionPerformed
+    private void cmbFuelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFuelActionPerformed
         showFuelDetails();
-    }//GEN-LAST:event_cmbPumperActionPerformed
+    }//GEN-LAST:event_cmbFuelActionPerformed
 
     private void txtTankIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTankIDActionPerformed
 
     }//GEN-LAST:event_txtTankIDActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        if (txtFeul.getText().equals("")) {
-            Icon icon = new javax.swing.ImageIcon(getClass().getResource("/Icon/red_warning.png"));
-            JOptionPane.showMessageDialog(null, "Please enter a Amount.", "Warning", JOptionPane.INFORMATION_MESSAGE, icon);
-        } else {
-            String fuel = txtFeul.getText();
-            Double cost = Double.valueOf(txtCost.getText());
-            Double qty = Double.valueOf(txtQty.getText());
-            String id = txtFuelID.getText();
-            Double Disc = Double.valueOf(txtDisco.getText());
-            Double total = ((cost * qty) - Disc);
-            String totalStr = total.toString();
-            String costStr = cost.toString();
-            String DiscStr = Disc.toString();
-            String qtyStr = qty.toString();
-            String[] data = {id, fuel, costStr, DiscStr, qtyStr, totalStr};
-            DefaultTableModel tblModel = (DefaultTableModel) tblPurchase.getModel();
-            tblModel.addRow(data);
-            runningTotal += total;
-            lblTotal.setText(String.format("%.2f", runningTotal));
-            String addi = txtAddi.getText();
-            Additonal_Discount = Double.valueOf(addi);
-            FinalTotal = runningTotal - Additonal_Discount;
-            lblFinalTotla.setText(String.format("%.2f", FinalTotal));
-            Clear();
-        }
+//        if (txtQty.getText().equals("")) {
+//            Icon icon = new javax.swing.ImageIcon(getClass().getResource("/Icon/red_warning.png"));
+//            JOptionPane.showMessageDialog(null, "Please enter Quantity.", "Warning", JOptionPane.INFORMATION_MESSAGE, icon);
+//        } else {
+//            Double cost = Double.valueOf(txtCost.getText());
+//            Double qty = Double.valueOf(txtQty.getText());
+//            String fuel = txtFeul.getText();
+//            String id = txtFuelID.getText();
+//            Double Disc = Double.valueOf(txtDisco.getText());
+//            Double total = ((cost * qty) - Disc);
+//            String totalStr = total.toString();
+//            String costStr = cost.toString();
+//            String DiscStr = Disc.toString();
+//            String qtyStr = qty.toString();
+//            String[] data = {id, fuel, costStr, DiscStr, qtyStr, totalStr};
+//            DefaultTableModel tblModel = (DefaultTableModel) tblPurchase.getModel();
+//            tblModel.addRow(data);
+//            runningTotal += total;
+//            lblTotal.setText(String.format("%.2f", runningTotal));
+//            String addi = txtAddi.getText();
+//            Additonal_Discount = Double.valueOf(addi);
+//            FinalTotal = runningTotal - Additonal_Discount;
+//            lblFinalTotla.setText(String.format("%.2f", FinalTotal));
+//
+//            Clear();
+//        }
+//         if (txtQty.getText().equals("")) {
+//            Icon icon = new javax.swing.ImageIcon(getClass().getResource("/Icon/red_warning.png"));
+//            JOptionPane.showMessageDialog(null, "Please enter Quantity.", "Warning", JOptionPane.INFORMATION_MESSAGE, icon);
+//        } else {
+//            String fuel = txtFeul.getText();
+//            Double cost = Double.valueOf(txtCost.getText());
+//            Double qty = Double.valueOf(txtQty.getText());
+//            String id = txtFuelID.getText();
+//            Double Disc = Double.valueOf(txtDisco.getText());
+//            Double total = ((cost * qty) - Disc);
+//            String totalStr = total.toString();
+//            String costStr = cost.toString();
+//            String DiscStr = Disc.toString();
+//            String qtyStr = qty.toString();
+//            String[] data = {id, fuel, costStr, DiscStr, qtyStr, totalStr};
+//            DefaultTableModel tblModel = (DefaultTableModel) tblPurchase.getModel();
+//            tblModel.addRow(data);
+//            runningTotal += total;
+//            lblTotal.setText(String.format("%.2f", runningTotal));
+//            String addi = txtAddi.getText();
+//            Additonal_Discount = Double.valueOf(addi);
+//            FinalTotal = runningTotal - Additonal_Discount;
+//            lblFinalTotla.setText(String.format("%.2f", FinalTotal));
+////            lblTest.setText(p1.getPerTotal());
+//            Clear();
+//        }
+        showCal();
+
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void cmbSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSupplierActionPerformed
@@ -677,7 +716,7 @@ public void showFuelDetails() {
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btncusRemove;
-    private javax.swing.JComboBox<String> cmbPumper;
+    private javax.swing.JComboBox<String> cmbFuel;
     private javax.swing.JComboBox<String> cmbSupplier;
     private Components.Details_Box details_Box1;
     private Components.Details_Box details_Box2;
@@ -707,6 +746,7 @@ public void showFuelDetails() {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblCusID;
     private javax.swing.JLabel lblFinalTotla;
+    private javax.swing.JLabel lblTest;
     private javax.swing.JLabel lblTotal;
     private javax.swing.JLabel lblliter;
     private Components.Line line7;
