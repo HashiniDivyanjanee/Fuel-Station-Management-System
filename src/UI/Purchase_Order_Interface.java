@@ -2,10 +2,14 @@ package UI;
 
 import Calculate.Purchase_order;
 import Controller.FuelController;
+import Controller.PurchaseController;
 import Controller.SupplierController;
 import Model.Fuel;
+import Model.Purchase;
 import Model.Supplier;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import javax.swing.Icon;
 import javax.swing.JOptionPane;
@@ -17,17 +21,22 @@ public class Purchase_Order_Interface extends javax.swing.JPanel {
     double Additonal_Discount = 0.0;
     double FinalTotal = 0.00;
 
-    double costs, qtys, discs;
+    double costs, qtys, discs, sub, tot;
+    LocalDate Date;
+    LocalTime Time;
+    String fuel, id, addi, supp;
+
+    PurchaseController purchaseController = new PurchaseController();
 
     public Purchase_Order_Interface() {
         initComponents();
         showFuelDropDown();
         showFuelDetails();
         showSupplierDropDown();
-//        showCal();
 
     }
 
+    //Display Supplier in Combo Box
     private void showSupplierDropDown() {
         try {
             SupplierController controller = new SupplierController();
@@ -41,6 +50,7 @@ public class Purchase_Order_Interface extends javax.swing.JPanel {
         }
     }
 
+    //Display Fuel in TextField
     private void showFuelDropDown() {
         try {
             FuelController fuelController = new FuelController();
@@ -55,6 +65,7 @@ public class Purchase_Order_Interface extends javax.swing.JPanel {
         }
     }
 
+    //Show Fueil Details in TextField
     public void showFuelDetails() {
         String selectedPumper = (String) cmbFuel.getSelectedItem();
         if (selectedPumper != null) {
@@ -86,19 +97,58 @@ public class Purchase_Order_Interface extends javax.swing.JPanel {
         }
     }
 
-    public void Clear() {
-        txtDisco.setText("");
-        txtQty.setText("");
+    // Add Button Code
+    public void AddPurchaseDetails() {
+        if (txtQty.getText().equals("")) {
+            Icon icon = new javax.swing.ImageIcon(getClass().getResource("/Icon/red_warning.png"));
+            JOptionPane.showMessageDialog(null, "Please enter Quantity.", "Warning", JOptionPane.INFORMATION_MESSAGE, icon);
+        } else {
+            fuel = txtFeul.getText();
+            costs = Double.valueOf(txtCost.getText());
+            qtys = Double.valueOf(txtQty.getText());
+            discs = Double.valueOf(txtDisco.getText());
+            id = txtFuelID.getText();
+            addi = txtAddi.getText();
+            double[] x = Purchase_order.getPerTotal(costs, qtys, discs);
+
+            String[] data = {id, fuel, String.valueOf(costs), String.valueOf(discs), String.valueOf(qtys), String.valueOf(x[0])};
+            DefaultTableModel tblModel = (DefaultTableModel) tblPurchase.getModel();
+            tblModel.addRow(data);
+            runningTotal += x[0];
+            lblTotal.setText(String.format("%.2f", runningTotal));
+            Additonal_Discount = Double.valueOf(addi);
+            FinalTotal = runningTotal - Additonal_Discount;
+            lblFinalTotla.setText(String.format("%.2f", FinalTotal));
+            Clear();
+        }
     }
 
-    public void showCal() {
+    //Remove Table Row
+    public void RemoveTableRow() {
+        DefaultTableModel tblModel = (DefaultTableModel) tblPurchase.getModel();
+        if (tblPurchase.getSelectedRowCount() == 1) {
+            int selectedRow = tblPurchase.getSelectedRow();
+            double rowValue = Double.parseDouble(tblModel.getValueAt(selectedRow, 5).toString());
+            tblModel.removeRow(selectedRow);
+            runningTotal -= rowValue;
 
-        costs = Double.valueOf(txtCost.getText());
-        qtys = Double.valueOf(txtQty.getText());
-        discs = Double.valueOf(txtDisco.getText());
+            lblTotal.setText(String.format("%.2f", runningTotal));
 
-        double x = Purchase_order.getPerTotal(costs, qtys, discs);
-        lblTest.setText(String.valueOf(x));
+            FinalTotal = runningTotal - Additonal_Discount;
+            lblFinalTotla.setText(String.format("%.2f", FinalTotal));
+        } else {
+            if (tblPurchase.getRowCount() == 0) {
+                JOptionPane.showMessageDialog(this, "Table is Empty");
+            } else {
+                JOptionPane.showMessageDialog(this, "Please Select Single Row for Delete");
+            }
+        }
+    }
+
+    //Clear TextField
+    public void Clear() {
+        txtDisco.setText("0.00");
+        txtQty.setText(" ");
     }
 
     @SuppressWarnings("unchecked")
@@ -625,91 +675,40 @@ public class Purchase_Order_Interface extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTankIDActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-//        if (txtQty.getText().equals("")) {
-//            Icon icon = new javax.swing.ImageIcon(getClass().getResource("/Icon/red_warning.png"));
-//            JOptionPane.showMessageDialog(null, "Please enter Quantity.", "Warning", JOptionPane.INFORMATION_MESSAGE, icon);
-//        } else {
-//            Double cost = Double.valueOf(txtCost.getText());
-//            Double qty = Double.valueOf(txtQty.getText());
-//            String fuel = txtFeul.getText();
-//            String id = txtFuelID.getText();
-//            Double Disc = Double.valueOf(txtDisco.getText());
-//            Double total = ((cost * qty) - Disc);
-//            String totalStr = total.toString();
-//            String costStr = cost.toString();
-//            String DiscStr = Disc.toString();
-//            String qtyStr = qty.toString();
-//            String[] data = {id, fuel, costStr, DiscStr, qtyStr, totalStr};
-//            DefaultTableModel tblModel = (DefaultTableModel) tblPurchase.getModel();
-//            tblModel.addRow(data);
-//            runningTotal += total;
-//            lblTotal.setText(String.format("%.2f", runningTotal));
-//            String addi = txtAddi.getText();
-//            Additonal_Discount = Double.valueOf(addi);
-//            FinalTotal = runningTotal - Additonal_Discount;
-//            lblFinalTotla.setText(String.format("%.2f", FinalTotal));
-//
-//            Clear();
-//        }
-//         if (txtQty.getText().equals("")) {
-//            Icon icon = new javax.swing.ImageIcon(getClass().getResource("/Icon/red_warning.png"));
-//            JOptionPane.showMessageDialog(null, "Please enter Quantity.", "Warning", JOptionPane.INFORMATION_MESSAGE, icon);
-//        } else {
-//            String fuel = txtFeul.getText();
-//            Double cost = Double.valueOf(txtCost.getText());
-//            Double qty = Double.valueOf(txtQty.getText());
-//            String id = txtFuelID.getText();
-//            Double Disc = Double.valueOf(txtDisco.getText());
-//            Double total = ((cost * qty) - Disc);
-//            String totalStr = total.toString();
-//            String costStr = cost.toString();
-//            String DiscStr = Disc.toString();
-//            String qtyStr = qty.toString();
-//            String[] data = {id, fuel, costStr, DiscStr, qtyStr, totalStr};
-//            DefaultTableModel tblModel = (DefaultTableModel) tblPurchase.getModel();
-//            tblModel.addRow(data);
-//            runningTotal += total;
-//            lblTotal.setText(String.format("%.2f", runningTotal));
-//            String addi = txtAddi.getText();
-//            Additonal_Discount = Double.valueOf(addi);
-//            FinalTotal = runningTotal - Additonal_Discount;
-//            lblFinalTotla.setText(String.format("%.2f", FinalTotal));
-////            lblTest.setText(p1.getPerTotal());
-//            Clear();
-//        }
-        showCal();
-
+        AddPurchaseDetails();
     }//GEN-LAST:event_btnAddActionPerformed
+
 
     private void cmbSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSupplierActionPerformed
 
     }//GEN-LAST:event_cmbSupplierActionPerformed
 
     private void btncusRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncusRemoveActionPerformed
-
-        DefaultTableModel tblModel = (DefaultTableModel) tblPurchase.getModel();
-
-        if (tblPurchase.getSelectedRowCount() == 1) {
-            tblModel.removeRow(tblPurchase.getSelectedRow());
-        } else {
-            if (tblPurchase.getRowCount() == 0) {
-                JOptionPane.showMessageDialog(this, "Table is Empty");
-            } else {
-                JOptionPane.showMessageDialog(this, "Please Select Single Row for Delete");
-            }
-        }
+        RemoveTableRow();
     }//GEN-LAST:event_btncusRemoveActionPerformed
 
-    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
 
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        supp = cmbSupplier.getSelectedItem().toString();
+        sub = Double.valueOf(lblTotal.getText());
+        discs = Double.valueOf(txtDisco.getText());
+        tot = Double.valueOf(lblFinalTotla.getText());
+        Date = LocalDate.now();
+        Time = LocalTime.now();
+
+        try {
+            Purchase purchase = new Purchase();
+            purchaseController.savePurchase(purchase);
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void txtDiscoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDiscoActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtDiscoActionPerformed
 
     private void txtAddiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddiActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtAddiActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
