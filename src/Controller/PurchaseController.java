@@ -25,10 +25,10 @@ public class PurchaseController {
 
             if (insertedRow > 0) {
                 Icon icon = new javax.swing.ImageIcon(getClass().getResource("/Icon/success.png"));
-                JOptionPane.showMessageDialog(null, "A new Fuel was inserted successfully!", "Success", JOptionPane.INFORMATION_MESSAGE, icon);
+                JOptionPane.showMessageDialog(null, "Purchase successful!", "Success", JOptionPane.INFORMATION_MESSAGE, icon);
             } else {
                 Icon icon = new javax.swing.ImageIcon(getClass().getResource("/Icon/error.png"));
-                JOptionPane.showMessageDialog(null, "A new Fuel was inserted Failed!", "Failed", JOptionPane.INFORMATION_MESSAGE, icon);
+                JOptionPane.showMessageDialog(null, "Purchase Failed!", "Failed", JOptionPane.INFORMATION_MESSAGE, icon);
             }
         } catch (Exception e) {
         }

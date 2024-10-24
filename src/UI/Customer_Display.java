@@ -2,10 +2,12 @@ package UI;
 
 import Controller.CustomerController;
 import Model.Customer;
+import java.awt.Color;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import java.util.List;
 import javax.swing.RowFilter;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableRowSorter;
 
 public class Customer_Display extends javax.swing.JPanel {
@@ -13,6 +15,11 @@ public class Customer_Display extends javax.swing.JPanel {
     public Customer_Display() {
         initComponents();
         Tabledisplay();
+
+        JTableHeader Theader = CustomerTable.getTableHeader();
+        Theader.setBackground(new Color(8, 114, 146));
+        Theader.setForeground(Color.WHITE);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -54,6 +61,8 @@ public class Customer_Display extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        CustomerTable.setSelectionBackground(new java.awt.Color(228, 239, 242));
+        CustomerTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(CustomerTable);
 
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -165,10 +174,10 @@ public class Customer_Display extends javax.swing.JPanel {
                     customer.getName(),
                     customer.getNic(),
                     customer.getAddress(),
-                    customer.getMobile(),                  
+                    customer.getMobile(),
                     customer.getLandline(),
                     customer.getFax(),
-                    customer.getEmail(),                  
+                    customer.getEmail(),
                     customer.getVehicleNo(),
                     customer.getVehicleType(),
                     customer.getFuelType()

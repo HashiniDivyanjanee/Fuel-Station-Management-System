@@ -2,6 +2,7 @@ package Menu;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -68,7 +69,7 @@ public class Menu extends JComponent {
         if (icon != null) {
             item.setIcon(icon);
         }
-
+      setFont(new Font("", Font.PLAIN, 14)); 
         item.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                 if (length > 1) {

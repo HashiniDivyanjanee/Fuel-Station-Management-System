@@ -7,6 +7,7 @@ import Controller.SupplierController;
 import Model.Fuel;
 import Model.Purchase;
 import Model.Supplier;
+import java.awt.Color;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -14,6 +15,7 @@ import java.util.List;
 import javax.swing.Icon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 public class Purchase_Order_Interface extends javax.swing.JPanel {
 
@@ -34,6 +36,10 @@ public class Purchase_Order_Interface extends javax.swing.JPanel {
         showFuelDetails();
         showSupplierDropDown();
 
+        
+        JTableHeader Theader = tblPurchase.getTableHeader();
+        Theader.setBackground(new Color(8, 114, 146));
+        Theader.setForeground(Color.WHITE);
     }
 
     //Display Supplier in Combo Box
@@ -381,6 +387,7 @@ public class Purchase_Order_Interface extends javax.swing.JPanel {
             }
         });
 
+        tblPurchase.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         tblPurchase.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -388,7 +395,18 @@ public class Purchase_Order_Interface extends javax.swing.JPanel {
             new String [] {
                 "Fuel ID", "Fuel", "Price", "Discount", "Qty", "Total"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblPurchase.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tblPurchase.setRowHeight(30);
+        tblPurchase.setSelectionBackground(new java.awt.Color(228, 239, 242));
         tblPurchase.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tblPurchase);
 
@@ -558,7 +576,7 @@ public class Purchase_Order_Interface extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(details_Box2, javax.swing.GroupLayout.PREFERRED_SIZE, 595, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(details_Box1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(167, Short.MAX_VALUE))
+                .addContainerGap(149, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -691,15 +709,16 @@ public class Purchase_Order_Interface extends javax.swing.JPanel {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         supp = cmbSupplier.getSelectedItem().toString();
         sub = Double.valueOf(lblTotal.getText());
-        discs = Double.valueOf(txtDisco.getText());
+        discs = Double.valueOf(txtAddi.getText());
         tot = Double.valueOf(lblFinalTotla.getText());
         Date = LocalDate.now();
         Time = LocalTime.now();
 
         try {
-            Purchase purchase = new Purchase();
+            Purchase purchase = new Purchase(supp,sub,discs,tot,Date,Time);
             purchaseController.savePurchase(purchase);
         } catch (Exception e) {
+              e.printStackTrace();
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 

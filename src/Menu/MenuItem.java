@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import Swing.ShadowRenderer;
+import java.awt.Font;
 
 public class MenuItem extends JButton {
 
@@ -71,15 +72,16 @@ public class MenuItem extends JButton {
         setContentAreaFilled(false);
         setForeground(new Color(230, 230, 230));
         setHorizontalAlignment(SwingConstants.LEFT);
-        setBorder(new EmptyBorder(9, 10, 9, 10));
-        setIconTextGap(15);
+        setBorder(new EmptyBorder(15, 10, 15, 10));
+        setIconTextGap(25);
         rippleEffect = new RippleEffect(this);
         rippleEffect.setRippleColor(new Color(220, 220, 220));
+        setFont(new Font("", Font.PLAIN, 14)); 
     }
 
     private void createShadowImage() {
         int width = getWidth();
-        int height = 5;
+        int height = 15;
         BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = img.createGraphics();
         g2.setColor(Color.BLACK);
@@ -91,7 +93,7 @@ public class MenuItem extends JButton {
     public void initSubMenu(int subMenuIndex, int length) {
         this.subMenuIndex = subMenuIndex;
         this.length = length;
-        setBorder(new EmptyBorder(9, 33, 9, 10));
+        setBorder(new EmptyBorder(12, 33, 12, 10));
         setBackground(new Color(0, 0, 0));
         setOpaque(false);
     }

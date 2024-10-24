@@ -2,10 +2,12 @@ package UI;
 
 import Controller.FuelController;
 import Model.Fuel;
+import java.awt.Color;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import java.util.List;
 import javax.swing.RowFilter;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableRowSorter;
 
 public class Fuel_Display extends javax.swing.JPanel {
@@ -13,6 +15,12 @@ public class Fuel_Display extends javax.swing.JPanel {
     public Fuel_Display() {
         initComponents();
         Tabledisplay();
+        
+          JTableHeader Theader = tblFuel.getTableHeader();
+        Theader.setBackground(new Color(8, 114, 146));
+        Theader.setForeground(Color.WHITE);
+
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -49,6 +57,10 @@ public class Fuel_Display extends javax.swing.JPanel {
                 "Fuel ID", "Fuel Name", "Cost Price", "Sales Price", "Tank ID", "Liter"
             }
         ));
+        tblFuel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tblFuel.setDragEnabled(true);
+        tblFuel.setSelectionBackground(new java.awt.Color(228, 239, 242));
+        tblFuel.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tblFuel);
 
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {

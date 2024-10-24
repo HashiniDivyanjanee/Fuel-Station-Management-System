@@ -2,10 +2,12 @@ package UI;
 
 import Controller.FuelController;
 import Model.Fuel;
+import java.awt.Color;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import java.util.List;
 import javax.swing.RowFilter;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableRowSorter;
 
 public class LowStock extends javax.swing.JPanel {
@@ -13,6 +15,11 @@ public class LowStock extends javax.swing.JPanel {
     public LowStock() {
         initComponents();
         Tabledisplay();
+
+        JTableHeader Theader = LowStocktbl.getTableHeader();
+        Theader.setBackground(new Color(8, 114, 146));
+        Theader.setForeground(Color.WHITE);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -49,6 +56,9 @@ public class LowStock extends javax.swing.JPanel {
                 "Fuel ID", "Fuel Name", "Cost Price", "Sales Price", "Tank ID", "Liter"
             }
         ));
+        LowStocktbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        LowStocktbl.setSelectionBackground(new java.awt.Color(228, 239, 242));
+        LowStocktbl.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(LowStocktbl);
 
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -195,8 +205,7 @@ public class LowStock extends javax.swing.JPanel {
                     fuel.getCostPrice(),
                     fuel.getSalePrice(),
                     fuel.getTankID(),
-                    fuel.getLiter(),                 
-                });
+                    fuel.getLiter(),});
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -212,12 +221,11 @@ public class LowStock extends javax.swing.JPanel {
         TableRowSorter<DefaultTableModel> obj1 = new TableRowSorter<>(obj);
         LowStocktbl.setRowSorter(obj1);
         String searchText = "(?i)" + txtSearch.getText();
-        obj1.setRowFilter(RowFilter.regexFilter(searchText));       
+        obj1.setRowFilter(RowFilter.regexFilter(searchText));
     }//GEN-LAST:event_txtSearchKeyReleased
 
     private void showPumpDropDown() {
-        
-        
+
     }
 
 

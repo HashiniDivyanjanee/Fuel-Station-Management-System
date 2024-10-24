@@ -2,10 +2,12 @@ package UI;
 
 import Controller.EmployeeController;
 import Model.Employee;
+import java.awt.Color;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import java.util.List;
 import javax.swing.RowFilter;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableRowSorter;
 
 public class Employee_Display extends javax.swing.JPanel {
@@ -13,6 +15,11 @@ public class Employee_Display extends javax.swing.JPanel {
     public Employee_Display() {
         initComponents();
         Tabledisplay();
+
+        JTableHeader Theader = employeeTable.getTableHeader();
+        Theader.setBackground(new Color(8, 114, 146));
+        Theader.setForeground(Color.WHITE);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -54,6 +61,8 @@ public class Employee_Display extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        employeeTable.setSelectionBackground(new java.awt.Color(228, 239, 242));
+        employeeTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(employeeTable);
 
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -165,7 +174,7 @@ public class Employee_Display extends javax.swing.JPanel {
                     employee.getFname(),
                     employee.getLname(),
                     employee.getAddress(),
-                    employee.getNic(),                  
+                    employee.getNic(),
                     employee.getDob(),
                     employee.getMobile(),
                     employee.getPosition(),
